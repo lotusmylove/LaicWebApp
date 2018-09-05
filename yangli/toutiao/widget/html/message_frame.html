@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <title>title</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style>
+            html,
+            body {
+                height: 100%;
+            }
+            
+            .title {
+                height: 43px;
+                line-height: 43px;
+                width: 100%;
+                text-align: center;
+                font-size: 16px;
+                color: #222;
+                background-color: #fefefe;
+                border-bottom: 1px solid #d8d8d8;
+                box-sizing: border-box;
+                position: relative;
+            }
+            
+            .title .arrow {
+                width: 43px;
+                height: 43px;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                background-image: url(../image/gambit/arrow.png);
+                background-repeat: no-repeat;
+                background-size: 10px 18px;
+                background-position: center center;
+            }
+            
+            .cnt {
+                box-sizing: border-box;
+                padding-left: 46px;
+                padding-right: 12px;
+                background-image: url(../image/gambit/x_p1.png);
+                background-repeat: no-repeat;
+                background-size: 29px 29px;
+                background-position: 9px 7px;
+                position: relative;
+            }
+            
+            .name {
+                font-size: 13px;
+                color: #898989;
+                line-height: 22px;
+                padding-top: 4px;
+            }
+            
+            .time {
+                font-size: 8px;
+                color: #919191;
+                line-height: 13px
+            }
+            
+            .call {
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                top: 6px;
+                right: 6px;
+                background-image: url(../image/gambit/call.png);
+                background-repeat: no-repeat;
+                background-size: 12px 3px;
+                background-position: center center;
+            }
+            
+            .text {
+                font-size: 16px;
+                color: #060606;
+                line-height: 22px;
+            }
+            
+            .act {
+                height: 41px;
+                background-color: #f4f5f6;
+                box-sizing: border-box;
+                padding-left: 53px;
+                line-height: 41px;
+                font-size: 14px;
+                color: #060606;
+                background-image: url(../image/gambit/x_p2.png);
+                background-repeat: no-repeat;
+                background-size: 41px 41px;
+                background-position: left center;
+            }
+            
+            .zan {
+                height: 39px;
+                display: flex;
+                display: -webkit-flex;
+                display: -webkit-box;
+                flex-flow: row;
+                -webkit-flex-flow: row;
+                -webkit-box-orient: horizontal;
+            }
+            
+            .f {
+                flex: 1;
+                -webkit-flex: 1;
+                -webkit-box-flex: 1;
+                height: 39px;
+                box-sizing: border-box;
+                line-height: 39px;
+                color: #8f8f8f;
+                font-size: 10px;
+                background-repeat: no-repeat;
+            }
+            
+            .zan .x_p3 {
+                background-size: 15px 15px;
+                background-image: url(../image/gambit/x_p3.png);
+                background-position: left center;
+                padding-left: 20px;
+            }
+            
+            .zan .icn1 img {
+                width: 18px;
+                height: 16px;
+                vertical-align: middle;
+            }
+            
+            .zan .icn2 {
+                text-align: center;
+            }
+            
+            .zan .icn2 img {
+                width: 18px;
+                height: 16px;
+                vertical-align: middle;
+            }
+            
+            .pic {
+                height: 42px;
+                background-color: #f4f5f6;
+                box-sizing: border-box;
+                padding-left: 33px;
+                padding-top: 7px;
+                background-image: url(../image/gambit/x_p5.png);
+                background-repeat: no-repeat;
+                background-size: 12px 12px;
+                background-position: 7px center;
+                position: relative;
+            }
+            
+            .pic .x_p4 {
+                width: 42px;
+                height: 42px;
+                background-image: url(../image/gambit/x_p4.png);
+                background-repeat: no-repeat;
+                background-size: 7px 12px;
+                background-position: center center;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+            }
+            
+            .pic img {
+                width: 29px;
+                height: 29px;
+            }
+            
+            .foot {
+                width: 100%;
+                height: 44px;
+                background-color: #f4f5f6;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                border-top: 1px solid #dcdcdd;
+                box-sizing: border-box;
+                padding: 5px 13px 0;
+            }
+            
+            .foot .txt {
+                width: 100%;
+                height: 31px;
+                line-height: 31px;
+                font-size: 11px;
+                color: #8a8a8a;
+                box-sizing: border-box;
+                padding-left: 12px;
+                border: 1px solid #dcdcdd;
+                border-radius: 15px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="title">
+            <div class="arrow"></div>详情</div>
+        <div class="cnt">
+            <div class="name">李总15355</div>
+            <div class="time">05-20 18:15</div>
+            <div class="call"></div>
+            <div class="text">这么大的反应呢，什么口香糖啊？</div>
+            <div class="act">先喝可乐 在吃薄荷糖</div>
+            <div class="zan">
+                <div class="f x_p3">分享</div>
+                <div class="f icn1"><img src="../image/gambit/icn1.png" alt=""> 1</div>
+                <div class="f icn2"><img src="../image/gambit/icn2.png" alt=""> 评论</div>
+            </div>
+            <div class="pic">
+                <div class="x_p4"></div>
+                <img src="../image/gambit/x_p6.png" alt="">
+            </div>
+        </div>
+        <div class="foot">
+            <div class="txt">写评论...</div>
+        </div>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+
+        };
+    </script>
+
+</html>

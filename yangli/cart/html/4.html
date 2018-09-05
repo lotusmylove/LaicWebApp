@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../css/ui.css"/>
+		<style>
+			.bg {
+				background: #009B4E;
+				width: 100%;
+				height: 9.6rem;
+				position: relative;
+                background: linear-gradient(130deg, #FFBA46 30%, #ff5200 0%, #ff5200 0%);
+			}
+			.my-car-shortcut {
+				background: #FFFFFF;
+			}
+			.daoh {
+				background: #FFFFFF;
+				margin-top: 0.8rem;
+			}
+			.aui-list-cell {
+				position: relative;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+				line-height: 3.2rem;
+				padding: 0 1rem 0 0.3rem;
+			}
+			.aui-list-cell-fl {
+				margin-left: 0.8rem;
+				width: 2.3rem;
+				height: 2.3rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="scroll-content" >
+			<div class="">
+				<div class="my-info" onclick="login()">
+					<div class="bg"></div>
+					<img class="my-avatar" src="../res/cgg.jpg">
+					<span class="name"><a style="color:#fff">川哥哥</a></span>
+					<span class="my-vip" style="background:none">超级会员&nbsp;&nbsp;&nbsp;&nbsp;积分:5190&nbsp;&nbsp;</span>
+				</div>
+				<div class="my-car-shortcut">
+					<div class="layout-column" style="padding:10px 0">
+						<a class="col" tapmode onclick="dd()"> <span class="img-icon "> <img class="img-icon-home" src="../res/me-1.png" /> </span> <span class="img-icon-name">待付款</span> </a>
+						<a class="col" tapmode onclick="dd()"> <span class="img-icon "> <img class="img-icon-home" src="../res/me-2.png" /> </span> <span class="img-icon-name">待收货</span> </a>
+						<a class="col" tapmode onclick="dd()"> <span class="img-icon "> <img class="img-icon-home" src="../res/me-3.png" /> </span> <span class="img-icon-name">全部订单</span> </a>
+					</div>
+				</div>
+				<div class="daoh">
+					<div class="aui-list-cells">
+						<div class="aui-list-cell" tapmode onclick="qb()">
+							<div class="aui-list-cell-fl"><img src="../res/me-4.png">
+							</div>
+							<div class="aui-list-cell-cn">
+								我的钱包
+							</div>
+							<div class="aui-list-cell-fr">
+								3999
+							</div>
+						</div>
+						<div class="aui-list-cell" tapmode onclick="sc()">
+							<div class="aui-list-cell-fl"><img src="../res/me-13.png">
+							</div>
+							<div class="aui-list-cell-cn">
+								我的收藏
+							</div>
+							<div class="aui-list-cell-fr"></div>
+						</div>
+						<div class="aui-list-cell" tapmode onclick="dz()">
+							<div class="aui-list-cell-fl"><img src="../res/me-6.png">
+							</div>
+							<div class="aui-list-cell-cn">
+								地址管理
+							</div>
+							<div class="aui-list-cell-fr"></div>
+						</div>
+						<div class="aui-list-cell" tapmode onclick="zj()">
+							<div class="aui-list-cell-fl"><img src="../res/me-5.png">
+							</div>
+							<div class="aui-list-cell-cn">
+								我的足迹
+							</div>
+							<div class="aui-list-cell-fr">
+								8450
+							</div>
+						</div>
+						<div class="devider"></div>
+						<div class="aui-list-cell" tapmode onclick="bank()">
+							<div class="aui-list-cell-fl"><img src="../res/me-7.png">
+							</div>
+							<div class="aui-list-cell-cn">
+								我的银行 
+							</div>
+							<div class="aui-list-cell-fr"></div>
+						</div>
+						<div class="aui-list-cell" tapmode onclick="pj()">
+							<div class="aui-list-cell-fl"><img src="../res/me-9.png">
+							</div>
+							<div class="aui-list-cell-cn">
+								我的评价
+							</div>
+							<div class="aui-list-cell-fr"></div>
+						</div>
+						<div class="devider"></div>
+						<div class="aui-list-cell">
+							<div class="aui-list-cell-fl"><img src="../res/me-11.png">
+							</div>
+							<div class="aui-list-cell-cn" onclick="tuichu()">
+								退出账号
+							</div>
+							<div class="aui-list-cell-fr"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="height:48px"></div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+		api.parseTapmode();
+		};
+		function login() {
+			api.openWin({
+				bounces : false,
+				name : 'login',
+				url : 'login.html',
+				vScrollBarEnabled : false,
+				hScrollBarEnabled : false
+			});
+		}
+		function qb() {
+			api.openWin({
+				bounces : false,
+				name : 'qb',
+				url : 'qianbao.html',
+				vScrollBarEnabled : false,
+				hScrollBarEnabled : false
+			});
+		}
+		function dz() {
+			api.openWin({
+				bounces : false,
+				name : 'dz',
+				url : 'dizhi.html',
+				vScrollBarEnabled : false,
+				hScrollBarEnabled : false
+			});
+		}
+		function pj() {
+			api.openWin({
+				bounces : false,
+				name : 'pj',
+				url : 'pj.html',
+				vScrollBarEnabled : false,
+				hScrollBarEnabled : false
+			});
+		}
+		function zj() {
+			api.openWin({
+				bounces : false,
+				name : 'zj',
+				url : 'zj.html',
+				vScrollBarEnabled : false,
+				hScrollBarEnabled : false
+			});
+		}
+		function sc() {
+			api.openWin({
+				bounces : false,
+				name : 'sc',
+				url : 'sc.html',
+				vScrollBarEnabled : false,
+				hScrollBarEnabled : false
+			});
+		}
+		function bank() {
+			api.openWin({
+				bounces : false,
+				name : 'bank',
+				url : 'bank.html',
+				vScrollBarEnabled : false,
+				hScrollBarEnabled : false
+			});
+		}
+		function dd() {
+			api.openWin({
+				bounces : false,
+				name : 'order',
+				url : 'order.html',
+				vScrollBarEnabled : false,
+				hScrollBarEnabled : false
+			});
+		}
+		function tuichu() {
+			$api.clearStorage();
+			api.toast({
+				msg : '退出成功',
+				duration : 3000,
+				location : 'bottom'
+			});
+			setTimeout(function() {
+				api.openWin({
+					bounces : false,
+					name : 'login',
+					url : 'login.html',
+					vScrollBarEnabled : false,
+					hScrollBarEnabled : false
+				});
+			}, 1000)
+		}
+	</script>
+</html>

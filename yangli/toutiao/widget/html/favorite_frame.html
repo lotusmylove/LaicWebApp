@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+        <title>我的收藏</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style type="text/css">
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                background-color: #FFFFFF;
+                box-sizing: border-box;
+                padding: 5px 10px 10px 10px;
+            }
+            
+            .item {
+                padding: 8px;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-orient: horizontal;
+                -webkit-flex-flow: row;
+                flex-flow: row;
+                border-bottom: 1px solid #E9E9E9;
+            }
+            
+            .item .text {
+                -webkit-box-flex: 1;
+                -webkit-flex: 1;
+                flex: 1;
+                margin-right: 5px;
+            }
+            
+            .name,
+            .num,
+            .time {
+                display: inline-block;
+                font-size: 12px;
+                margin: 8px 3px 0;
+                color: #919191;
+            }
+            
+            .pic {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-orient: horizontal;
+                -webkit-flex-flow: row;
+                flex-flow: row;
+                margin-top: 5px;
+            }
+            
+            .item_pic {
+                padding: 8px;
+                border-bottom: 1px solid #E9E9E9;
+            }
+            
+            .pic>div {
+                -webkit-box-flex: 1;
+                -webkit-flex: 1;
+                flex: 1;
+                margin: 1px;
+            }
+            
+            .pic>div img {
+                width: 100%;
+                display: block;
+            }
+            
+            .item_pic .name,
+            .item_pic .num,
+            .item_pic .time {
+                margin: 0 3px 0 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="item">
+            <div class="text">
+                <div class="title">马云坐私人飞机去日本，花1000万买下的盆栽到底是个什么东西</div>
+                <div class="">
+                    <div class="name">时尚先生价值</div>
+                    <div class="num">619评论</div>
+                    <div class="time">3小时前</div>
+                </div>
+                <div><img src="../image/favorite/favorite_1.png"></div>
+            </div>
+        </div>
+        <div class="item_pic">
+            <div class="text">
+                <div class="title">恭喜华为荣获最高荣誉质量奖！</div>
+                <div class="pic">
+                    <div><img src="../image/favorite/favorite_2.png"></div>
+                    <div><img src="../image/favorite/favorite_4.png"></div>
+                    <div><img src="../image/favorite/favorite_3.png"></div>
+                </div>
+                <div>
+                    <div class="name">鸣金网</div>
+                    <div class="num">477评论</div>
+                    <div class="time">3小时前</div>
+                </div>
+            </div>
+        </div>
+        <div class="item_pic">
+            <div class="text">
+                <div class="title">小米5已跌破原价，黄牛心在滴血</div>
+                <div class="pic">
+                    <div><img src="../image/favorite/favorite_5.png"></div>
+                    <div><img src="../image/favorite/favorite_6.png"></div>
+                    <div><img src="../image/favorite/favorite_7.png"></div>
+                </div>
+                <div>
+                    <div class="name">小贱贱</div>
+                    <div class="num">2195评论</div>
+                    <div class="time">4小时前</div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/common.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+            fnReady();
+
+        };
+    </script>
+
+</html>

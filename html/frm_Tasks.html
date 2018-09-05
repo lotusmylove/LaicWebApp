@@ -1,0 +1,338 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <style type="text/css">
+        .aui-list-item.wechat-top {
+            background-color: #f3f3f7;
+        }
+        .aui-list .wechat-avatar {
+            width:3rem;
+        }
+        .wechat-avatar .aui-row-padded {
+            background-color: #dddee0;
+            padding: 0.1rem;
+            border-radius: 0.2rem;
+            margin-left: -0.05rem;
+            margin-right: -0.05rem;
+        }
+        .wechat-avatar .aui-row-padded [class*=aui-col-xs-] {
+            padding: 0.05rem;
+        }
+        .wechat-avatar,
+        .wechat-avatar > img {
+            border-radius:0.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="aui-content aui-margin-b-15">
+        <ul id="ulTasks-bak" class="aui-list aui-list-in">
+        </ul>
+        <script id="tasks-template" type="text/template">
+          {{ if(it && it.length > 0){ }}
+            {{ for(var i=0; i<it.length;i++){ }}
+            <li class="aui-list-item aui-list-item-middle" tapmode onclick="fnChangeTask('{{=it[i].id}}');">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-media wechat-avatar">
+                        <div class="aui-badge">9</div>
+                        {{ if(it[i].taskLevel == '重要且紧急'){ }}
+                          <img src="../image/demo6.png" />
+                        {{ }else if(it[i].taskLevel == '重要不紧急'){ }}
+                          <img src="../image/demo5.png" />
+                        {{ }else if(it[i].taskLevel == '紧急不重要'){ }}
+                          <img src="../image/demo3.png" />
+                        {{ }else{ }}
+                          <img src="../image/demo2.png" />
+                        {{ } }}
+                    </div>
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">{{=it[i].taskName}}</div>
+                            <div class="aui-list-item-right"><div class="aui-label aui-label-info">{{=it[i].taskTag}}</div></div>
+                        </div>
+                        <div class="aui-list-item-text aui-font-size-12">
+                            <div class="aui-progress aui-progress" style="width: 60% !important;">
+                                <div class="aui-progress-bar" style="width: {{=it[i].taskRate}}%;">{{=it[i].taskRate}}%</div>
+                            </div>
+                            {{=fnGetDateDiff(it[i].lineTime,it[i].doneTime)}}
+                            <div class="aui-list-item-right">{{=it[i].taskDealer}}</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {{ } }}
+          {{ } }}
+        </script>
+    </div>
+
+    <div class="aui-content aui-margin-b-15">
+        <ul id="ulTasks" class="aui-list aui-media-list">
+        </ul>
+    </div>
+
+</body>
+<script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript" src="../script/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript">
+function fnGetDateDiff(startDate,endDate)
+{
+    //startDate 截至日期    endDate 办结日期或当前日期
+    var startTime = new Date(Date.parse(startDate.replace(/-/g,   "/"))).getTime();
+    var strdoneDate = endDate;
+    if(endDate == ""){
+	    endDate = getNowFormatDate();
+    }
+    var endTime = new Date(Date.parse(endDate.replace(/-/g,   "/"))).getTime();
+    var dates = (startTime - endTime)/(1000*60*60*24);
+    if(dates > 0){
+    	dates = '<div class="aui-label aui-label-info">余'+Math.abs(dates.toFixed(0))+'天</div>';
+    }else if(dates == 0 && strdoneDate != ""){
+      dates = "";
+    }else{
+    	dates = '<div class="aui-label aui-label-danger">超'+Math.abs(dates.toFixed(0))+'天</div>';
+    }
+    return  dates;
+}
+function getNowFormatDate(dateType) {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+	var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+	if(dateType == "Time"){
+		currentdate = currentdate + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+	}
+    return currentdate;
+}
+
+
+apiready = function(){
+  fnLoadTasks();
+  fnInitPull();
+
+  var fs = api.require('fs');
+  fs.exist({
+    path: 'fs://res/LaicWebData.db3'
+  }, function(ret, err) {
+      if (ret.exist) {
+          if (ret.directory) {
+              //alert('文件夹');
+          } else {
+              //alert('文件');
+          }
+      } else {
+          alert(JSON.stringify(err));
+          fs.copyTo({
+              oldPath: 'widget://res/LaicWebData.db3',
+              newPath: 'fs://res'
+          },function(ret,err){
+              if (ret.status) {
+                  api.alert({msg:'拷贝文件成功'});
+              }else {
+                  api.alert({msg:err.msg});
+              }
+          });
+      }
+  });
+/*
+   fs.remove({
+       path: 'fs://res/LaicWebData.db3'
+   }, function(ret, err){
+       if( ret.status ){
+           alert( JSON.stringify( ret )+"1" );
+       }else{
+           alert( JSON.stringify( err )+"2" );
+       }
+   });
+*/
+};
+function fnLoadTasks() {
+  db = api.require('db');
+   db.openDatabase({
+           name : "LaicWebData",
+           path : 'fs://res/LaicWebData.db3'
+   }, function(ret, err) {
+           //api.alert({msg:JSON.stringify(ret)});
+           if (ret.status) {
+                  //数据库可以打开
+                  var pageParam = api.pageParam;
+                  var strDbType = pageParam.childType;
+                  var strSQLCustom;
+                  if(strDbType == "全部"){
+                    strSQLCustom = "";
+                  }else if(strDbType == "待办"){
+                    strSQLCustom = " WHERE taskStatus = '未开始' or taskStatus = '进行中' ";
+                  }else if(strDbType == "已办"){
+                    strSQLCustom = " WHERE taskStatus = '已完成' ";
+                  }else{
+                    strSQLCustom = "";
+                  }
+                  db.selectSql({
+                           name : "LaicWebData",
+                           sql : "select * FROM fr_TaskInfo" + strSQLCustom
+                   }, function(ret, err) {
+                           //api.alert({msg:JSON.stringify(ret)});
+                           console.log( JSON.stringify( ret ) );
+                           if (ret.status) {
+                               var tmpl = document.getElementById("tasks-template").innerHTML;
+                               var doTtmpl = doT.template(tmpl);
+                               //console.log(doTtmpl(ret));
+                               $api.html($api.byId("ulTasks"), doTtmpl(ret.data));
+                               api.refreshHeaderLoadDone();
+                               api.toast({
+                                   msg : '查询成功',
+                                   duration: 2000,
+                                   location: 'bottom'
+                               });
+                           } else {
+                               api.toast({
+                                   msg : '查询失败',
+                                   duration: 2000,
+                                   location: 'bottom'
+                               });
+                           }
+                   });
+
+           } else {
+                   api.alert({
+                      msg : '数据库不存在'
+                   });
+                   //没有找到数据库 就拷贝一份到fs 目录
+                  var fs = api.require('fs');
+                   fs.copyTo({
+                       oldPath: 'widget://res/db/LaicWebData.db3',
+                       newPath: 'fs://res'
+                   },function(ret,err){
+                       if (ret.status) {
+                           api.alert({msg:'拷贝文件成功'});
+                       }else {
+                           api.alert({msg:err.msg});
+                       }
+                   });
+
+           }
+   });
+}
+// 刷新
+function fnInitPull() {
+  api.setRefreshHeaderInfo({
+    visible: true,
+    loadingImg: 'widget://image/refresh.png',
+    bgColor: '#f0f0f0',
+    textColor: '#888',
+    textDown: '下拉刷新...',
+    textUp: '松开刷新...',
+    showTime: true
+  }, function(ret, err) {
+    api.refreshHeaderLoading();
+    setTimeout(fnLoadTasks,2000);
+    //headList(progress, true);
+  });
+};
+function fnChangeTask(id) {
+  api.openWin({
+    bounces : false,
+    name : 'taskInfo',
+    url : 'frm_TaskInfo.html',
+    pageParam: {
+        id: id,
+        frmName: api.frameName
+    },
+    vScrollBarEnabled : false,
+    hScrollBarEnabled : false
+  });
+}
+
+
+
+//filter data
+function getDataByFilter(filter, sType) {
+    if (!sType || !filter) {
+        return;
+    }
+    api.showProgress({
+        title: '加载中...',
+        modal: false
+    });
+    db = api.require('db');
+     db.openDatabase({
+             name : "LaicWebData",
+             path : 'fs://res/LaicWebData.db3'
+     }, function(ret, err) {
+             //api.alert({msg:JSON.stringify(ret)});
+             if (ret.status) {
+                    //数据库可以打开
+                    var strSQLCustom = "";
+                    if(sType != "" && sType != "All"){
+                      strSQLCustom = " WHERE "+ filter +" = '"+ sType  +"' ";
+                    }
+                    /*
+                    if(strDbType == "全部"){
+                      strSQLCustom = "";
+                    }else if(strDbType == "待办"){
+                      strSQLCustom = " WHERE taskStatus = '未开始' or taskStatus = '进行中' ";
+                    }else if(strDbType == "已办"){
+                      strSQLCustom = " WHERE taskStatus = '已完成' ";
+                    }else{
+                      strSQLCustom = "";
+                    }
+                    */
+                    console.log(strSQLCustom);
+                    db.selectSql({
+                             name : "LaicWebData",
+                             sql : "select * FROM fr_TaskInfo" + strSQLCustom
+                     }, function(ret, err) {
+                             //api.alert({msg:JSON.stringify(ret)});
+                             console.log( JSON.stringify( ret ) );
+                             if (ret.status) {
+                                 var tmpl = document.getElementById("tasks-template").innerHTML;
+                                 var doTtmpl = doT.template(tmpl);
+                                 //console.log(doTtmpl(ret));
+                                 $api.html($api.byId("ulTasks"), doTtmpl(ret.data));
+                                 api.refreshHeaderLoadDone();
+                             } else {
+                                 api.toast({
+                                     msg : '查询失败',
+                                     duration: 2000,
+                                     location: 'middle'
+                                 });
+                             }
+                             api.hideProgress();
+                     });
+
+             } else {
+                     api.alert({
+                        msg : '数据库不存在'
+                     });
+                     //没有找到数据库 就拷贝一份到fs 目录
+                    var fs = api.require('fs');
+                     fs.copyTo({
+                         oldPath: 'widget://res/db/LaicWebData.db3',
+                         newPath: 'fs://res'
+                     },function(ret,err){
+                         if (ret.status) {
+                             api.alert({msg:'拷贝文件成功'});
+                         }else {
+                             api.alert({msg:err.msg});
+                         }
+                     });
+
+             }
+     });
+}
+</script>
+</html>

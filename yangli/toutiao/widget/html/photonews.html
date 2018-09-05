@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <title>title</title>
+    </head>
+
+    <body>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/SHA1.js"></script>
+    <script type="text/javascript" src="../script/request.js"></script>
+    <script type="text/javascript" src="../script/local.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+            fnInitDB();
+            fnInitPhotoNews();
+        };
+
+        var photoBrowserTouTiao, dialogBox;
+
+        function fnInitPhotoNews() {
+            photoBrowserTouTiao = api.require('photoBrowserTouTiao');
+            dialogBox = api.require('dialogBox');
+            photoBrowserTouTiao.open(function(ret, err) {
+                switch (ret.eventType) {
+                    case 'show':
+                        fnGetPhotoNews();
+                        break;
+                    case 'back':
+                        api.closeWin();
+                        break;
+                    case 'favorite':
+                        fnSetFavorite();
+                        break;
+                    case 'menu':
+                    case 'share':
+                        fnOpenShare();
+                        break;
+                };
+            });
+        };
+
+        function fnOpenShare() {
+            dialogBox.actionMenu({
+                tapClose: true,
+                rect: {
+                    h: 138
+                },
+                texts: {
+                    cancel: '取消'
+                },
+                items: [{
+                    text: '微信朋友圈',
+                    icon: 'widget://image/timeline.png'
+                }, {
+                    text: '微信好友',
+                    icon: 'widget://image/wx.png'
+                }, {
+                    text: 'QQ好友',
+                    icon: 'widget://image/qq.png'
+                }, {
+                    text: 'QQ空间',
+                    icon: 'widget://image/qzone.png'
+                }],
+                styles: {
+                    bg: '#FFF',
+                    column: 4,
+                    itemText: {
+                        color: '#000',
+                        size: 12,
+                        marginT: 8
+                    },
+                    itemIcon: {
+                        size: 60
+                    },
+                    cancel: {
+                        color: '#888',
+                        h: 50,
+                        size: 14
+                    }
+                }
+            }, function(ret) {
+                if (ret.eventType == 'cancel') {
+                    dialogBox.close();
+                }
+            });
+        };
+
+        var favorite;
+
+        function fnSetFavorite() {
+            favorite = !favorite;
+            if (favorite) {
+                fnAddFavorite(api.pageParam.id, function(ret, err) {
+                    if (ret.status) {
+                        api.toast({
+                            msg: '添加收藏',
+                            duration: 2000,
+                            location: 'bottom'
+                        });
+                    }
+                });
+            } else {
+                fnRemoveFavorite(api.pageParam.id, function(ret, err) {
+                    if (ret.status) {
+                        api.toast({
+                            msg: '移除收藏',
+                            duration: 2000,
+                            location: 'bottom'
+                        });
+                    }
+                });
+            }
+        };
+
+        function fnGetPhotoNews() {
+            var filter = {
+                where: {
+                    id: api.pageParam.id
+                },
+                include: ["photoNews", "fromPointer"],
+                skip: 0,
+                limit: 1
+            };
+
+            fnGet('headlist', filter, function(ret, err) {
+                var headlist = ret[0];
+                fnImageCache(headlist.from.icon.url, function(ret, err) {
+                    var publisher = ret.url;
+                    fnGetFavoriteById(api.pageParam.id, function(ret, err) {
+                        favorite = ret.status && ret.data.length > 0;
+
+                        var images = [],
+                            texts = [];
+                        for (var i = 0; i < headlist.photoNews.length; i++) {
+                            images.push(headlist.photoNews[i].photo.url);
+                            texts.push(headlist.photoNews[i].news);
+                        }
+
+                        photoBrowserTouTiao.setData({
+                            images: images,
+                            texts: texts,
+                            publisher: publisher,
+                            comment: 520,
+                            favorite: favorite
+                        });
+                    });
+                });
+            });
+        };
+
+        function fnImageCache(url, callback) {
+            api.imageCache({
+                url: url
+            }, callback);
+        };
+    </script>
+
+</html>

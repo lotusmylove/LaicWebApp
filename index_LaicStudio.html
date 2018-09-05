@@ -1,0 +1,316 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>寸心工作室</title>
+    <link rel="stylesheet" type="text/css" href="./css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/aui.css" />
+    <style>
+        header{ background-color: #f2f2f2; }
+        header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
+        header ul li.active{ display: block; }
+    </style>
+</head>
+<body>
+<div id="wrap" class="flex-wrap flex-vertical">
+  <header class="aui-bar aui-bar-nav" id="aui-header">
+    <a class="aui-btn aui-pull-left" tapmode onclick="closeWin()">
+        <span class="aui-iconfont aui-icon-left"></span>
+    </a>
+    <div class="aui-title">寸心资讯</div>
+    <a class="aui-btn aui-pull-right">
+        <!--<span class="aui-iconfont aui-icon-more" tapmode onclick="fnOpenFrm('frame_News','pages/News_frm.html');"></span>-->
+        <span class="aui-iconfont aui-icon-more" tapmode onclick="openMenu();"></span>
+    </a>
+  </header>
+
+    <div id="main" class="flex-con">
+
+    </div>
+
+
+    <footer id="footer" class="aui-bar aui-bar-tab">
+        <div class="aui-bar-tab-item aui-active" onclick="randomSwitchBtn( this );">
+            <i class="aui-iconfont aui-icon-image"></i>
+            <div class="aui-bar-tab-label">门户</div>
+        </div>
+        <div class="aui-bar-tab-item" onclick="randomSwitchBtn( this );">
+            <i class="aui-iconfont aui-icon-video"></i>
+            <div class="aui-bar-tab-label">视频</div>
+        </div>
+        <div class="aui-bar-tab-item" onclick="randomSwitchBtn( this );">
+            <i class="aui-iconfont aui-icon-paper"></i>
+            <div class="aui-bar-tab-label">寸信</div>
+        </div>
+        <div class="aui-bar-tab-item" onclick="randomSwitchBtn( this );">
+            <i class="aui-iconfont aui-icon-cart"></i>
+            <div class="aui-bar-tab-label">商城</div>
+        </div>
+        <div class="aui-bar-tab-item" onclick="randomSwitchBtn( this );">
+            <i class="aui-iconfont aui-icon-calendar"></i>
+            <div class="aui-bar-tab-label">任务</div>
+        </div>
+    </footer>
+
+</div>
+</body>
+</html>
+<script type="text/javascript" src="script/api.js"></script>
+<script type="text/javascript">
+    apiready = function () {//console.log(22222222222222);
+    //console.log($api.dom('header'));
+      //$api.clearStorage();
+      if ($api.getStorage('token')) {
+          //执行后续操作
+  		} else {
+        //location.href = 'html/win_login.html';
+        //return false;
+        /*
+  			api.openWin({
+  				bounces : false,
+  				name : 'login',
+  				url : 'html/win_login.html',
+  				vScrollBarEnabled : false,
+  				hScrollBarEnabled : false
+  			});
+        */
+  		}
+
+        //$api.setStorage("tx","../mui/images/cyh.jpg");
+        //$api.setStorage("zh","程映辉");
+        $api.fixStatusBar( $api.dom('header') );
+        api.setStatusBarStyle({
+            style: 'dark',
+            color: '#6ab494'
+        });
+        funIniGroup();
+    }
+
+    function funIniGroup(){
+        //var eHeaderLis = $api.domAll('header li'),
+          var frames = [{
+                name: 'frame_News',
+                url: 'pages/IndexNews_frm.html',
+                bgColor : 'rgba(0,0,0,.2)',
+                bounces:true
+            },{
+                name: 'frame_Video',
+                url: 'html/demo_addresslist_frm.html',
+                bgColor : 'rgba(0,0,0,.2)',
+                bounces:true
+            },{
+                name: 'frame_Chat',
+                url: 'html/demo_wechat_circle_frm.html',
+                bgColor : 'rgba(0,0,0,.2)',
+                bounces:true
+            },{
+                name: 'frame_Cart',
+                url: 'html/video_frm.html',
+                bgColor : 'rgba(0,0,0,.2)',
+                bounces:true
+            },{
+                name: 'frame_Task',
+                url: 'pages/win_IndexTask.html',
+                bgColor : 'rgba(0,0,0,.2)',
+                bounces:true
+            }];
+        //动态计算header的高度，因iOS7+和Android4.4+上支持沉浸式效果，
+        //因此header的实际高度可能为css样式中声明的44px加上设备状态栏高度
+        //其中，IOS状态栏高度为20px，Android为25px
+        var headerH = $api.dom('header').offsetHeight;
+        //footer高度为css样式中声明的30px
+        var footerH = 50;
+        //frame的高度为当前window高度减去header和footer的高度
+        var frameH = api.winHeight - headerH - footerH;
+
+        api.openFrameGroup({
+            name: 'group',
+            scrollEnabled: false,
+            rect: {
+                x: 0,
+                y: headerH,
+                w: api.winWidth,
+                h: frameH
+            },
+            index: 0,
+            preload:0,
+            frames: frames
+        }, function (ret, err) {
+          //alert(JSON.stringify(ret));
+          if(ret.name == 'frame_video'){
+            api.setFrameGroupAttr({
+               name : 'video',
+               hidden: false
+            })
+          }else{
+            api.setFrameGroupAttr({
+               name : 'video',
+               hidden: true
+            })
+          }
+        });
+    }
+
+    // 随意切换按钮
+    function randomSwitchBtn( tag ) {
+        if( tag == $api.dom('#footer div.aui-active') )return;
+        var eFootLis = $api.domAll('#footer div.aui-bar-tab-item'),
+            //eHeaderLis = $api.domAll('header li'),
+            index = 0;
+        for (var i = 0,len = eFootLis.length; i < len; i++) {
+            if( tag == eFootLis[i] ){
+                index = i;
+            }else{
+                $api.removeCls(eFootLis[i], 'aui-active');
+                //$api.removeCls(eHeaderLis[i], 'active');
+            }
+        }
+        $api.addCls( eFootLis[index], 'aui-active');
+        //$api.addCls( eHeaderLis[index], 'active');
+        //$api.dom('header div.aui-title').innerText = "通讯录";
+        var vnHeaders = ['<a class="aui-btn aui-pull-left" tapmode onclick="closeWin()"><span class="aui-iconfont aui-icon-left"></span></a><div class="aui-title">寸心资讯</div><a class="aui-btn aui-pull-right"><span class="aui-iconfont aui-icon-plus" tapmode onclick="fnOpenFrm(\'frame_News\',\'pages\/News_frm.html\');"></span></a>',
+      '<a class="aui-btn aui-pull-left" tapmode onclick="closeWin()"><span class="aui-iconfont aui-icon-left"></span></a><div class="aui-title">寸心视频</div><a class="aui-pull-right aui-btn aui-btn-outlined"><span class="aui-iconfont aui-icon-search"></span></a>',
+      '<a class="aui-btn aui-pull-left" tapmode onclick="closeWin()"><span class="aui-iconfont aui-icon-left"></span></a><div class="aui-title">寸信</div><a class="aui-btn aui-pull-right"><span class="aui-iconfont aui-icon-camera"></span></a>',
+      '<a class="aui-btn aui-pull-left" tapmode onclick="closeWin()"><span class="aui-iconfont aui-icon-left"></span></a><div class="aui-title">视频</div><a class="aui-btn aui-pull-right"><span class="aui-iconfont aui-icon-menu"></span></a>',
+      '<a class="aui-btn aui-pull-left" tapmode onclick="closeWin()"><span class="aui-iconfont aui-icon-left"></span></a><div class="aui-title">我的</div><a class="aui-btn aui-pull-right"><span class="aui-iconfont aui-icon-menu"></span></a>'];
+        $api.html($api.byId("aui-header"),  vnHeaders[index]);
+        hideFrames(index);  //fuzm
+        api.setFrameGroupIndex({
+            name: 'group',
+            index: index
+        });
+    }
+
+    function funcGoto() {
+      api.setFrameGroupIndex({
+          name: 'group',
+          index: 2
+      });
+      return false;
+
+      api.setFrameGroupAttr({
+          name: 'group',
+          hidden: true
+      });
+      var headerH = $api.dom('header').offsetHeight;
+      //footer高度为css样式中声明的30px
+      var footerH = 50;
+      //frame的高度为当前window高度减去header和footer的高度
+      var frameH = api.winHeight - headerH - footerH;
+      api.openFrame({
+          name: 'setting',
+          url: 'html/test.html',
+          rect: {
+            x: 0,
+            y: headerH,
+            w: api.winWidth,
+            h: frameH
+          },
+          pageParam: {
+              name: 'test'
+          },
+          bounces: true,
+          bgColor: 'rgba(0,0,0,0)',
+          vScrollBarEnabled: true,
+          hScrollBarEnabled: true
+      });
+    }
+
+    function fnOpenFrm(strFrmName,strUrl) {
+      hideFrames();
+      var headerH = $api.dom('header').offsetHeight;
+      //footer高度为css样式中声明的30px
+      var footerH = 50;
+      //frame的高度为当前window高度减去header和footer的高度
+      var frameH = api.winHeight - headerH - footerH;
+      api.openFrame({
+          name: strFrmName,
+          url: strUrl,
+          rect: {
+            x: 0,
+            y: headerH,
+            w: api.winWidth,
+            h: frameH
+          },
+          pageParam: {
+              name: 'test'
+          },
+          bounces: true,
+          bgColor: 'rgba(0,0,0,0)',
+          vScrollBarEnabled: true,
+          hScrollBarEnabled: true
+      });
+    }
+
+    //隐藏所有frame
+    function hideFrames(index){
+        /*
+        api.setFrameGroupAttr({
+            name: 'group',
+            hidden: true
+        });
+        */
+        if(index == 0){
+          api.setFrameGroupAttr({
+              name: 'frmg_discover',
+              hidden: false
+          });
+        }else{
+          api.setFrameGroupAttr({
+              name: 'frmg_discover',
+              hidden: true
+          });
+        }
+        api.setFrameAttr({
+            name: 'frame_News',
+            hidden: true
+        });
+        api.setFrameAttr({
+            name: 'frame_Video',
+            hidden: true
+        });
+        api.setFrameAttr({
+            name: 'frame_Chat',
+            hidden: true
+        });
+        api.setFrameAttr({
+            name: 'frame_Cart',
+            hidden: true
+        });
+        api.setFrameAttr({
+            name: 'frame_Task',
+            hidden: true
+        });
+        api.setFrameAttr({
+            name: 'frm_discover',
+            hidden: true
+        });
+        api.setFrameAttr({
+            name: 'frm_discover1',
+            hidden: true
+        });
+        api.setFrameAttr({
+            name: 'page1',
+            hidden: true
+        });
+    }
+
+    // 打开菜单
+    var openMenu = function(){
+        api.openFrame({
+            name: 'menu',
+            url: 'pages/menu.html',
+            bounces: false,
+            rect: {
+                x: 0,
+                y: $api.dom('header').offsetHeight,
+                w: 'auto',
+                h: 'auto'
+            },
+            reload: true
+        });
+    };
+</script>

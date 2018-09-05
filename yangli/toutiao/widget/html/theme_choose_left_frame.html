@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+        <title>话题选择页</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style type="text/css">
+            html,
+            body {
+                height: 100%;
+                background-color: #F8F8F8;
+            }
+            
+            .topics>div {
+                height: 67px;
+                width: 72px;
+                text-align: center;
+                color:#222;
+                line-height: 67px;
+                background-color: #F4F5F6;
+                font-size: 15px;
+            }
+            
+            .topics .active {
+                background-color: #FFFFFF;
+                color: #F96969;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="topics" id="topics">
+            <div tapmode onclick="fnChange(0)" class="item">热门</div>
+            <div tapmode onclick="fnChange(1)" class="item">特色</div>
+            <div tapmode onclick="fnChange(2)" class="item">娱乐</div>
+            <div tapmode onclick="fnChange(3)" class="item">生活</div>
+            <div tapmode onclick="fnChange(4)" class="item">影视</div>
+            <div tapmode onclick="fnChange(5)" class="item">科技</div>
+            <div tapmode onclick="fnChange(6)" class="item">财经</div>
+            <div tapmode onclick="fnChange(7)" class="item">汽车</div>
+            <div tapmode onclick="fnChange(8)" class="item">杂谈</div>
+        </div>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+            fnInit();
+            fnChange(0);
+        }
+        var item;
+
+        function fnInit() {
+            item = $api.byId('topics');
+            items = $api.domAll(item, '.item');
+        }
+
+        function fnChange(index) {
+            for (var i = 0; i < items.length; i++) {
+                if (index == i) {
+                    $api.addCls(items[i], 'active');
+
+                    api.execScript({
+                        name: 'theme_choose',
+                        frameName: 'theme_choose_right_frame',
+                        script: 'getTheme(' + index + ')'
+                    });
+
+                } else {
+                    $api.removeCls(items[i], 'active');
+
+                }
+            }
+        }
+    </script>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../css/ui.css"/>
+		<style>
+			body {
+				background: #FFFFFF;
+			}
+			.aui-add-cell{
+			line-height: 2.2rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<div class="header-background"></div>
+			<div class="toolbar statusbar-padding">
+				<button class="bar-button back-button" onclick="back()">
+					<i class="icon icon-back"></i>
+				</button>
+				<div class="header-title">
+					<div class="title">
+						管理收货地址
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="height:5rem"></div>
+		<div>
+			<ul>
+				<li>
+
+					<div class="aui-add-cell">
+						<span class="aui-add-fix">李明轩</span><span>18801066666</span>
+					</div>
+					<div class="b-line aui-add-title">
+						北京市海淀区学院路51号学而国际大厦1层
+					</div>
+					<div class="aui-add-cell">
+						<div class="aui-add-fix" style="color:#ff5200">
+							默认地址
+						</div>
+						<div>
+							<span>编辑</span>
+							<span>删除</span>
+						</div>
+					</div> 
+				</li>
+				<div class="devider"></div>
+				<li>
+
+					<div class="aui-add-cell">
+						<span class="aui-add-fix">李明轩</span><span>18801066666</span>
+					</div>
+					<div class="b-line aui-add-title">
+						北京市海淀区学院路51号学而国际大厦1层
+					</div>
+					<div class="aui-add-cell">
+						<div class="aui-add-fix">
+							默认地址
+						</div>
+						<div>
+							<span>编辑</span>
+							删除
+						</div>
+					</div> 
+				</li>
+				<div class="devider"></div>
+				<li>
+	
+					<div class="aui-add-cell">
+						<span class="aui-add-fix">李明轩</span><span>18801066666</span>
+					</div>
+					<div class="b-line aui-add-title">
+						北京市海淀区学院路51号学而国际大厦1层
+					</div>
+					<div class="aui-add-cell">
+						<div class="aui-add-fix">
+							默认地址
+						</div>
+						<div>
+							<span>编辑</span>
+							删除
+						</div>
+					</div>
+				</li>
+				<div class="devider"></div>
+				<li>
+			
+					<div class="aui-add-cell">
+						<span class="aui-add-fix">李明轩</span><span>18801066666</span>
+					</div>
+					<div class="b-line aui-add-title">
+						北京市海淀区学院路51号学而国际大厦1层
+					</div>
+					<div class="aui-add-cell">
+						<div class="aui-add-fix">
+							默认地址
+						</div>
+						<div>
+							<span>编辑</span>
+							删除
+						</div>
+					</div> 
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			$api.fixStatusBar($api.dom('.header'));
+		};
+		function back() {
+			api.closeWin({
+			});
+		}
+	</script>
+</html>

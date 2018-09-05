@@ -1,0 +1,373 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-indexed-list.css" />
+</head>
+<body>
+
+  <div class="aui-searchbar-wrap fixed" id="group-search" style="display:none;">
+      <div class="aui-searchbar aui-border-radius">
+          <i class="aui-iconfont aui-icon-search"></i>
+          <div class="aui-searchbar-input">
+          	<form action="javascript:search();">
+          	<input type="text" placeholder="输入首字母" id="aui-searchbar-input">
+          	</form>
+          </div>
+          <i class="aui-iconfont aui-icon-roundclosefill" id="aui-searchbar-clear"></i>
+      </div>
+      <div class="aui-searchbar-cancel aui-text-info" id="aui-searchbar-cancel" style="display:none;">取消</div>
+  </div>
+
+
+  <div class="aui-indexed-list">
+        <ul class="aui-list aui-media-list">
+
+          <li class="aui-list-item aui-list-item-middle">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/cbd.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">订阅号</div>
+                          <div class="aui-list-item-right">08:00</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          www.auicss.com
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item aui-list-item-middle">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/fzj.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">公众号</div>
+                          <div class="aui-list-item-right">08:00</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          www.auicss.com
+                      </div>
+                  </div>
+              </div>
+          </li>
+
+          <li class="aui-list-view-cell aui-indexed-list-view-group" id="group-A" data-group="A">A</li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/fzj.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">公众号</div>
+                          <div class="aui-list-item-right">08:00</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          www.auicss.com
+                      </div>
+                  </div>
+              </div>
+          </li>
+
+          <li class="aui-list-view-cell aui-indexed-list-view-group" id="group-B" data-group="B">B</li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/fzj.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">公众号</div>
+                          <div class="aui-list-item-right">08:00</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          www.auicss.com
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/fll.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">公众号</div>
+                          <div class="aui-list-item-right">08:00</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          www.auicss.com
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/dbj.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">公众号</div>
+                          <div class="aui-list-item-right">08:00</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          www.auicss.com
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/cbd.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">公众号</div>
+                          <div class="aui-list-item-right">同事</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          慧点科技 项目总监
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item aui-list-item-middle">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/baby.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">Baby</div>
+                          <div class="aui-list-item-right">好友</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          广州电信 大堂经理
+                      </div>
+                  </div>
+              </div>
+          </li>
+
+          <li class="aui-list-view-cell aui-indexed-list-view-group" id="group-C" data-group="C">C</li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/cyh.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">程映辉</div>
+                          <div class="aui-list-item-right">家人</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          暂无信息
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/cxh.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">程鑫鸿</div>
+                          <div class="aui-list-item-right">家人</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          武汉
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-view-cell aui-indexed-list-view-group" id="group-D" data-group="D">D</li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/cyh.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">程映辉</div>
+                          <div class="aui-list-item-right">家人</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          暂无信息
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/cxh.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">程鑫鸿</div>
+                          <div class="aui-list-item-right">家人</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          武汉
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/cxh.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">程鑫鸿</div>
+                          <div class="aui-list-item-right">家人</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          武汉
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/cxh.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">程鑫鸿</div>
+                          <div class="aui-list-item-right">家人</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          武汉
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/cxh.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">程鑫鸿</div>
+                          <div class="aui-list-item-right">家人</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          武汉
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/cxh.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">程鑫鸿</div>
+                          <div class="aui-list-item-right">家人</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          武汉
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-view-cell aui-indexed-list-view-group" id="group-G" data-group="G">G</li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/cxh.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">程鑫鸿</div>
+                          <div class="aui-list-item-right">家人</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          武汉
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item aui-list-item-middle aui-list-view-cell">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" style="width: 3rem;">
+                      <img src="../mui/images/cxh.jpg" class="aui-list-img-sm">
+                  </div>
+                  <div class="aui-list-item-inner aui-list-item-arrow">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title aui-font-size-14">程鑫鸿</div>
+                          <div class="aui-list-item-right">家人</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          武汉
+                      </div>
+                  </div>
+              </div>
+          </li>
+        </ul>
+  </div>
+  <div class="aui-indexed-list-toast"></div>
+  <div class="aui-indexed-list-bar">
+  	<a>
+  		<i class="aui-iconfont aui-icon-search" data-value="search"></i>
+  	</a>
+  	<a>
+  		<i class="aui-iconfont aui-icon-favorfill" data-value="*"></i>
+  	</a>
+  	<a data-value="A">A</a>
+  	<a data-value="B">B</a>
+  	<a data-value="C">C</a>
+  	<a data-value="D">D</a>
+  	<a data-value="E">E</a>
+  	<a data-value="F">F</a>
+  	<a data-value="G">G</a>
+  	<a data-value="H">H</a>
+  	<a data-value="I">I</a>
+  	<a data-value="J">J</a>
+  	<a data-value="K">K</a>
+  	<a data-value="L">L</a>
+    <a data-value="M">M</a>
+    <a data-value="N">N</a>
+    <a data-value="O">O</a>
+    <a data-value="P">P</a>
+    <a data-value="Q">Q</a>
+    <a data-value="R">R</a>
+    <a data-value="S">S</a>
+    <a data-value="T">T</a>
+    <a data-value="U">U</a>
+    <a data-value="V">V</a>
+    <a data-value="W">W</a>
+    <a data-value="X">X</a>
+    <a data-value="Y">Y</a>
+    <a data-value="Z">Z</a>
+  </div>
+  <script type="text/javascript" src="../script/aui-tap.js" ></script>
+  <script type="text/javascript" src="../script/aui-indexed-list.js" ></script>
+
+
+</body>
+<script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript">
+    apiready = function () {
+    }
+</script>
+</html>

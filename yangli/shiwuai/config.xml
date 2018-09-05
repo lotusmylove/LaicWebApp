@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget id="A6904928073012" version="0.0.1"> 
+  <name>拾吾爱</name>  
+  <description>Example For APICloud.</description>  
+  <author email="liang_chen@aliyun.com" href="http://www.apicloud.com">Developer</author>  
+  <content src="index.html"/>  
+  <preference name="pageBounce" value="true"/>  
+  <preference name="appBackground" value="rgba(0,0,0,0.0)"/>  
+  <preference name="windowBackground" value="rgba(0,0,0,0.0)"/>  
+  <preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>  
+  <preference name="hScrollBarEnabled" value="true"/>  
+  <preference name="vScrollBarEnabled" value="true"/>  
+  <preference name="autoLaunch" value="true"/>  
+  <preference name="fullScreen" value="true"/>  
+  <preference name="autoUpdate" value="true"/>  
+  <preference name="smartUpdate" value="false"/>  
+  <preference name="debug" value="false"/>  
+  <preference name="iOS7StatusBarAppearance" value="true"/>  
+  <permission name="readPhoneState"/>  
+  <permission name="call"/>  
+  <permission name="sms"/>  
+  <permission name="camera"/>  
+  <permission name="record"/>  
+  <permission name="location"/>  
+  <permission name="fileSystem"/>  
+  <permission name="internet"/>  
+  <permission name="bootCompleted"/>  
+  <permission name="hardware"/>  
+  <permission name="contact"/>  
+  <access origin="*"/>  
+  <feature name="Didi"> 
+    <param name="appid" value="didi6469574F6243776F6A326973544D4B42"/>  
+    <param name="secret" value="26e5076ce9d2c8559de5e126147dea2b"/> 
+  </feature>  
+  <feature name="smsVerify"> 
+    <param name="android_app_key" value="14e444b2f1528"/>  
+    <param name="android_app_secret" value="0c076620e65169dc59f2e9024bc6a402"/>  
+    <param name="ios_app_key" value="14e44fad77f98"/>  
+    <param name="ios_app_secret" value="950f96823a07664afed9e1614614094a"/> 
+  </feature> 
+</widget>

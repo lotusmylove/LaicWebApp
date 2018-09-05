@@ -1,0 +1,380 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+</head>
+<body>
+    <div class="aui-content-padded" style="padding-top:30px !important;">
+      <li class="aui-list-header">
+          待办任务
+      </li>
+    </div>
+    <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-form-list">
+            <li class="aui-list-header">任务详情</li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        任务名称
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="任务名称" id="fdTaskName">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        任务详情
+                    </div>
+                    <div class="aui-list-item-input">
+                        <textarea placeholder="任务名称" id="fdTaskInfo"></textarea>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        任务级别
+                    </div>
+                    <div class="aui-list-item-input">
+                        <select id="fdTaskLevel">
+                            <option>重要且紧急</option>
+                            <option>紧急不重要</option>
+                            <option>重要不紧急</option>
+                            <option selected = "selected">普通</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        任务状态
+                    </div>
+                    <div class="aui-list-item-input">
+                        <label><input class="aui-radio" type="radio" name="fdTaskStatus" value="未开始" checked>未开始</label>
+                        <label><input class="aui-radio" type="radio" name="fdTaskStatus" value="进行中">进行中</label>
+                        <label><input class="aui-radio" type="radio" name="fdTaskStatus" value="已完成">已完成</label>
+                        <label><input class="aui-radio" type="radio" name="fdTaskStatus" value="已作废">已作废</label>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        任务进度
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="任务进度百分比，如30" id="fdTaskRate">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        任务标签
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="任务标签" id="fdTaskTag">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        主办人员
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="任务主办人员姓名" id="fdTaskDealer">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        最迟日期
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="最迟完成日期" id="fdLineTime">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        完成日期
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="任务完成日期" id="fdDoneTime">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        批量导入
+                    </div>
+                    <div class="aui-list-item-input">
+                        <input type="file" id="inputFile" onchange="importf(this)"  />
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-center aui-list-item-btn">
+                    <div class="aui-btn aui-btn-info aui-margin-r-5" tapmode onclick="fnSaveTaskInfo('Add');">提交</div>
+                    <div class="aui-btn aui-btn-warning aui-margin-r-5" tapmode onclick="fnSaveTaskInfo('Concel');">取消</div>
+                    <div id= "btnDel" style="display:none;" class="aui-btn aui-btn-danger aui-margin-l-5" tapmode onclick="fnSaveTaskInfo('Del');">删除</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript" src="../script/xlsx.full.min.js" ></script>
+<script type="text/javascript">
+var pageParam;
+
+apiready = function(){
+   pageParam = api.pageParam;
+   console.log( JSON.stringify( pageParam ) );
+   if(pageParam.id == ""){
+     return false;
+   }else {
+     $api.byId('btnDel').style.display = "";
+   }
+   var db = api.require('db');
+   db.openDatabase({
+           name : "LaicWebData",
+           path : 'fs://res/LaicWebData.db3'
+   }, function(ret, err) {
+           //api.alert({msg:JSON.stringify(ret)});
+           if (ret.status) {
+                   //数据库可以打开
+                  db.selectSql({
+                           name : "LaicWebData",
+                           sql : "select * FROM fr_TaskInfo where id='" + pageParam.id +"'"
+                   }, function(ret, err) {
+                           //api.alert({msg:JSON.stringify(ret)});
+                           console.log( "查询结果："+JSON.stringify( ret ) );
+                           if (ret.status) {
+                             $api.byId('fdTaskName').value = ret.data[0].taskName;
+                             $api.byId('fdTaskInfo').value = ret.data[0].taskInfo;
+                             $api.byId('fdTaskLevel').value = ret.data[0].taskLevel;
+                             $api.byId('fdTaskRate').value = ret.data[0].taskRate;
+                             $api.byId('fdTaskDealer').value = ret.data[0].taskDealer;
+                             $api.byId('fdLineTime').value = ret.data[0].lineTime;
+                             $api.byId('fdDoneTime').value = ret.data[0].doneTime;
+                             $api.byId('fdTaskTag').value = ret.data[0].taskTag;
+                             var radio = document.getElementsByName("fdTaskStatus");
+                             for (i=0; i<radio.length; i++) {
+                               if (radio[i].value == ret.data[0].taskStatus) {
+                                 radio[i].checked = true;
+                               }
+                             }
+                               api.toast({
+                                  msg : '查询成功'
+                               });
+                           } else {
+                               api.toast({
+                                  msg : '查询失败'
+                               });
+                           }
+                   });
+
+           } else {
+                   api.alert({
+                           msg : '数据库不存在'
+                   });
+           }
+   });
+};
+function fnBackPage(strAction) {
+  if(pageParam.frmName == ""){
+    pageParam.frmName = "video_group_0";
+  }
+  if(strAction != "Concel"){
+    api.execScript({
+        name: 'page1',
+        frameName: pageParam.frmName,
+        script: 'fnLoadTasks();'
+    });
+  }
+  api.closeWin({
+      name: 'taskInfo'
+  });
+}
+function fnSaveTaskInfo(strAction) {
+  if(strAction == "Concel"){
+    //关闭本页面，刷新父页面
+    fnBackPage(strAction);
+    return false;
+  }
+  var strTaskName = $api.byId('fdTaskName').value;
+  var strTaskInfo = $api.byId('fdTaskInfo').value;
+  var strTaskLevel = $api.byId('fdTaskLevel').value;
+  var strTaskDealer = $api.byId('fdTaskDealer').value;
+  var strTaskLineTime = $api.byId('fdLineTime').value;
+  var strTaskRate = $api.byId('fdTaskRate').value;
+  var strTaskDoneTime = $api.byId('fdDoneTime').value;
+  var strTaskTag = $api.byId('fdTaskTag').value;
+  var strTaskStatus;
+  var radio = document.getElementsByName("fdTaskStatus");
+  for (i=0; i<radio.length; i++) {
+    if (radio[i].checked) {
+      strTaskStatus = radio[i].value;
+    }
+  }
+  //var strTaskLevel = $api.byId('fdTaskLevel').value;
+  //var strTaskStatus = '进行中';$api.byId('fdTaskStatus').value;
+  var strSQL;
+  if(strAction == "Del"){
+    strSQL = "DELETE FROM fr_TaskInfo WHERE id = '"+pageParam.id+"'";
+  }else if(pageParam.id == ""){
+    strSQL = "INSERT INTO fr_TaskInfo (taskName, taskInfo,taskLevel,taskStatus,taskRate,taskDealer,lineTime,doneTime,taskTag) "+
+    "VALUES ('"+strTaskName+"', '"+strTaskInfo+"','"+strTaskLevel+"','"+strTaskStatus+"','"+strTaskRate+"','"+strTaskDealer+"','"+strTaskLineTime+"','"+strTaskDoneTime+"','"+strTaskTag+"')";
+  }else{
+    strSQL = "UPDATE fr_TaskInfo SET taskName = '"+strTaskName+"', taskInfo = '"+strTaskInfo
+    +"', taskLevel = '"+strTaskLevel+"', taskStatus = '"+strTaskStatus
+    +"', taskRate = '"+strTaskRate+"', taskDealer = '"+strTaskDealer+"', lineTime = '"
+    +strTaskLineTime+"', doneTime = '"+strTaskDoneTime+"', taskTag = '"+strTaskTag+"' WHERE id = '"+pageParam.id+"'";
+  }
+  console.log(strSQL);
+  db = api.require('db');
+  db.openDatabase({
+          name : "LaicWebData",
+          path : 'fs://res/LaicWebData.db3'
+  }, function(ret, err) {
+          //api.alert({msg:JSON.stringify(ret)});
+          if (ret.status) {
+                  //数据库可以打开
+                 db.executeSql({
+                          name : "LaicWebData",
+                          //sql  : "INSERT INTO fr_TaskInfo (taskName, taskInfo,taskLevel,taskStatus,createTime,doneTime,taskRemark) "+
+                          sql  : strSQL
+                  }, function(ret, err) {
+                          //api.alert({msg:JSON.stringify(ret)});
+                          console.log( JSON.stringify( ret ) );
+                          if (ret.status) {
+                            api.toast({
+                                    msg : '执行成功'
+                            });
+                            fnBackPage(strAction);
+                            return false;
+                          } else {
+                                api.toast({
+                                  msg : '查询失败'
+                                });
+                          }
+                  });
+
+          } else {
+                  api.alert({
+                    msg : '数据库不存在'
+                  });
+          }
+  });
+}
+
+var rABS = false; //是否将文件读取为二进制字符串
+function importf(obj) {//导入
+    if (!obj.files) { return; }
+    var f = obj.files[0];
+    {
+        var reader = new FileReader();
+        var name = f.name;
+        reader.onload = function (e) {
+            var data = e.target.result;
+            var wb;
+            if (rABS) {
+                wb = XLSX.read(data, { type: 'binary' });
+            } else {
+                var arr = fixdata(data);
+                wb = XLSX.read(btoa(arr), { type: 'base64' });
+            }
+            console.log(JSON.stringify(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]])));;
+
+        };
+        if (rABS) reader.readAsBinaryString(f);
+        else reader.readAsArrayBuffer(f);
+    }
+}
+function fixdata(data) {
+    var o = "", l = 0, w = 10240;
+    for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
+    o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+    return o;
+}
+
+function fnImportTaskInfos(strJson) {
+
+  var strTaskName = $api.byId('fdTaskName').value;
+  var strTaskInfo = $api.byId('fdTaskInfo').value;
+  var strTaskLevel = $api.byId('fdTaskLevel').value;
+  var strTaskDealer = $api.byId('fdTaskDealer').value;
+  var strTaskLineTime = $api.byId('fdLineTime').value;
+  var strTaskRate = $api.byId('fdTaskRate').value;
+  var strTaskDoneTime = $api.byId('fdDoneTime').value;
+  var strTaskTag = $api.byId('fdTaskTag').value;
+  var strTaskStatus;
+  var radio = document.getElementsByName("fdTaskStatus");
+  for (i=0; i<radio.length; i++) {
+    if (radio[i].checked) {
+      strTaskStatus = radio[i].value;
+    }
+  }
+
+  db = api.require('db');
+	db.openDatabase({
+		name : "LaicWebData",
+		path : 'fs://res/LaicWebData.db3'
+	}, function(ret, err) {
+		if (ret.status) {
+			//数据库可以打开
+			var strSQL;
+      var strTaskName = '';
+      var strTaskInfo = '';
+      var strTaskLevel = '';
+      var strTaskDealer = '';
+      var strTaskLineTime = '';
+      var strTaskRate = '';
+      var strTaskDoneTime = '';
+      var strTaskTag = '';
+      var strTaskStatus = '';
+
+			strSQL = "INSERT INTO fr_TaskInfo (taskName, taskInfo,taskLevel,taskStatus,taskRate,taskDealer,lineTime,doneTime,taskTag) "+
+			"VALUES ('"+strTaskName+"', '"+strTaskInfo+"','"+strTaskLevel+"','"+strTaskStatus+"','"+strTaskRate+"','"+strTaskDealer+"','"+strTaskLineTime+"','"+strTaskDoneTime+"','"+strTaskTag+"')";
+
+			db.executeSql({
+				name : "LaicWebData",
+				sql  : strSQL
+			}, function(ret, err) {
+				//api.alert({msg:JSON.stringify(ret)});
+				console.log( JSON.stringify( ret ) );
+				if (ret.status) {
+					api.toast({
+					msg : '执行成功'
+					});
+					fnBackPage(strAction);
+					return false;
+				} else {
+					api.toast({
+					msg : '查询失败'
+					});
+				}
+			});
+		} else {
+			api.alert({
+			msg : '数据库不存在'
+			});
+		}
+	});
+
+}
+
+</script>
+</html>

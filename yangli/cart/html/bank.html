@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../css/ui.css"/>
+		<style>
+			.aui-content-text {
+				background: #FFFFFF;
+				margin-bottom: 0.8rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<div class="header-background"></div>
+			<div class="toolbar statusbar-padding">
+				<button class="bar-button back-button" onclick="back()">
+					<i class="icon icon-back"></i>
+				</button>
+				<div class="header-title">
+					<div class="title">
+						我的银行卡
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="height:4rem"></div>
+		<div class="aui-bank-content">
+
+	<div class="aui-bank-cell">
+		<div class="aui-bank-img">
+			<img src="../res/bank-1.png">
+		</div>
+		<div class="aui-bank-title">
+			<h2>中国农业银行</h2>
+			<h3>储蓄卡</h3>
+			<p>**** **** **** 0980</p>
+		</div>
+	</div>
+
+	<div class="aui-bank-cell aui-bank-cell-bg">
+		<div class="aui-bank-img">
+			<img src="../res/bank-2.png">
+		</div>
+		<div class="aui-bank-title">
+			<h2>中国农业银行</h2>
+			<h3>储蓄卡</h3>
+			<p>**** **** **** 0980</p>
+		</div>
+	</div>
+
+	<div class="aui-bank-cell">
+		<div class="aui-bank-img">
+			<img src="../res/bank-1.png">
+		</div>
+		<div class="aui-bank-title">
+			<h2>中国农业银行</h2>
+			<h3>储蓄卡</h3>
+			<p>**** **** **** 0980</p>
+		</div>
+	</div>
+
+
+</div>
+
+<div class=" t-line aui-wallet-recharge">
+	<a href="#">绑定新卡</a>
+</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/jquery.js"></script>
+	<script type="text/javascript" src="../script/car-js.js"></script>
+	<script type="text/javascript" src="../script/car-mi.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			$api.fixStatusBar($api.dom('.header'));
+		};
+		function back() {
+			api.closeWin({
+			});
+		}
+	</script>
+</html>

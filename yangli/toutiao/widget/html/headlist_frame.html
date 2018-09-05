@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+        <title>Hello APP</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style type="text/css">
+            html,
+            body {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-flex-flow: column;
+                flex-flow: column;
+                height: 100%;
+            }
+            
+            .header {
+                height: 43px;
+                width: 100%;
+                display: none;
+                line-height: 43px;
+            }
+            
+            .header.active {
+                display: block;
+            }
+            
+            .top-menu {
+                padding: 0 43px 0 8px;
+                white-space: nowrap;
+                overflow: scroll;
+            }
+            
+            .top-menu>div {
+                display: inline-block;
+                padding: 0 11px;
+            }
+            /*按钮*/
+            
+            .btn {
+                height: 40px;
+                width: 35px;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            /*首页头部导航*/
+            /*字体颜色*/
+            
+            .header.home>div.active {
+                opacity: 1;
+            }
+            
+            .header.home {
+                background: #d43d3d;
+            }
+            
+            .header.home .top-menu>div {
+                color: #fff;
+                opacity: .8;
+            }
+            
+            .add_btn {
+                background: #d43d3d url('./../image/shouye/add_btn.png')center center no-repeat;
+                -webkit-background-size: 18px;
+                background-size: 18px;
+            }
+            /*视频头部导航*/
+            
+            .header.video,
+            .header.topic {
+                background-color: #fff;
+                color: #333;
+            }
+            
+            .header.topic {}
+            
+            .content {
+                -webkit-box-flex: 1;
+                -webkit-flex: 1;
+                flex: 1;
+            }
+            
+            .search-video-btn {
+                background: #fff url('./../image/shouye/search.png')center center no-repeat;
+                -webkit-background-size: 20px;
+                background-size: 20px;
+            }
+            
+            .search-topic-btn {
+                background: #fff url('./../image/shouye/search.png')center center no-repeat;
+                -webkit-background-size: 20px;
+                background-size: 20px;
+            }
+            
+            footer {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-orient: horizontal;
+                -webkit-flex-flow: row;
+                flex-flow: row;
+                height: 45px;
+                background-color: #fff;
+            }
+            
+            footer .menu {
+                text-align: center;
+                -webkit-box-flex: 1;
+                -webkit-flex: 1;
+                flex: 1;
+            }
+            
+            footer .home .foot-pic {
+                background: url('../image/footer/b_newhome_tabbar.png')center no-repeat;
+            }
+            
+            footer .video .foot-pic {
+                background: url('../image/footer/b_newvideo_tabbar.png')center no-repeat;
+            }
+            
+            footer .topics .foot-pic {
+                background: url('../image/footer/b_newtopic_tabbar.png')center no-repeat;
+            }
+            
+            footer .my .foot-pic {
+                background: url('../image/footer/b_newmine_tabbar.png')center no-repeat;
+            }
+            
+            footer .home.active .foot-pic {
+                background: url('../image/footer/b_newhome_tabbar_press.png')center no-repeat;
+            }
+            
+            footer .video.active .foot-pic {
+                background: url('../image/footer/b_newvideo_tabbar_press.png')center no-repeat;
+            }
+            
+            footer .topics.active .foot-pic {
+                background: url('../image/footer/b_newtopic_tabbar_press.png')center no-repeat;
+            }
+            
+            footer .my.active .foot-pic {
+                background: url('../image/footer/b_newmine_tabbar_press.png.')center no-repeat;
+            }
+            
+            footer .menu .foot-pic,
+            footer .menu.active .foot-pic {
+                padding-top: 3px;
+                height: 25px;
+                width: 25px;
+                margin: 0 auto;
+                -webkit-background-size: 23px 23px;
+                background-size: 23px 23px;
+            }
+            
+            footer .menu .foot-text {
+                height: 18px;
+                line-height: 18px;
+                font-size: 12px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header id="header">
+            <div class="header home active">
+                <div class="add_btn btn"></div>
+                <div class="top-menu">
+                    <div>推荐</div>
+                    <div>热点</div>
+                    <div>北京</div>
+                    <div>视频</div>
+                    <div>社会</div>
+                    <div>订阅</div>
+                    <div>图片</div>
+                    <div>娱乐</div>
+                    <div>科技</div>
+                    <div>汽车</div>
+                    <div>体育</div>
+                    <div>财经</div>
+                    <div>军事</div>
+                    <div>国际</div>
+                    <div>时尚</div>
+                </div>
+            </div>
+            <div class="header video">
+                <div class="search-video-btn btn"></div>
+                <div class="top-menu">
+                    <div>推荐</div>
+                    <div>逗比剧</div>
+                    <div>音乐台</div>
+                    <div>看天下</div>
+                    <div>小品</div>
+                    <div>萌萌哒</div>
+                    <div>最娱乐</div>
+                    <div>爱生活</div>
+                    <div>妹纸</div>
+                    <div>掠影</div>
+                    <div>开眼</div>
+                    <div>原创精选</div>
+                </div>
+            </div>
+            <div class="header topic">
+                <div class="btn search-topic-btn"></div>
+                <div class="top-menu">
+                    <div>推荐</div>
+                    <div>热点</div>
+                </div>
+            </div>
+        </header>
+        <section class="content"></section>
+        <footer id="footer">
+            <div class=" menu home" onclick="fnChange(0)">
+                <div class="foot-pic"></div>
+                <div class="foot-text">首页</div>
+            </div>
+            <div class=" menu video" onclick="fnChange(1)">
+                <div class="foot-pic"></div>
+                <div class="foot-text">视频</div>
+            </div>
+            <div class=" menu topics" onclick="fnChange(2)">
+                <div class="foot-pic"></div>
+                <div class="foot-text">话题</div>
+            </div>
+            <div class=" menu my" onclick="fnChange(3)">
+                <div class="foot-pic"></div>
+                <div class="foot-text">我的</div>
+            </div>
+        </footer>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+
+            var head = $api.byId('header');
+            fnInit();
+            fnChange(0);
+        };
+        var menus, headers, headerHeight, footerHeight, frames;
+        var frameNames = ['home_frame', 'video_frame', 'topics_frame', 'my_frame'];
+
+        function fnInit() {
+            var header = $api.byId('header');
+
+            footer = $api.byId('footer');
+            menus = $api.domAll(footer, '.menu');
+            headers = $api.domAll(header, '.header');
+            footerHeight = $api.offset(footer).h;
+            for (var i = 0; i < headers.length; i++) {
+                $api.fixStatusBar(headers[i]);
+            }
+            headerHeight = $api.offset(header).h;
+        }
+
+        function fnChange(index) {
+            for (var i = 0; i < menus.length; i++) {
+                if (index == i) {
+                    if (i == 3) {
+                        y = 0;
+                    } else {
+                        y = headerHeight;
+                    }
+                    $api.addCls(menus[i], 'active');
+                    $api.addCls(headers[i], 'active');
+                    api.openFrame({
+                        name: frameNames[i],
+                        url: './' + frameNames[i] + '.html',
+                        bounces: true,
+                        rect: {
+                            x: 0,
+                            y: y,
+                            w: 'auto',
+                            h: api.winHeight - y - footerHeight
+                        },
+                        vScrollBarEnabled:false
+                    });
+                } else {
+                    $api.removeCls(menus[i], 'active');
+                    $api.removeCls(headers[i], 'active');
+                    api.setFrameAttr({
+                        name: frameNames[i],
+                        hidden: true
+                    });
+                }
+            }
+        };
+    </script>
+
+</html>

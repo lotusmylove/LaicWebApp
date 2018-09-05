@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+        <title>话题选择页</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style type="text/css">
+            html,
+            body {
+                height: 100%;
+                background-color: #F8F8F8;
+            }
+            
+            #nav {
+                height: 45px;
+                border-bottom: 1px solid #C9C9C9;
+            }
+            
+            .back {
+                height: 45px;
+                width: 45px;
+                background: url('../image/shouye/back-black.png') no-repeat;
+                -webkit-background-size: 18px 18px;
+                background-size: 18px 18px;
+                background-position: center center;
+                display: inline-block;
+                float: left;
+            }
+            
+            .more {
+                height: 45px;
+                width: 45px;
+                display: inline-block;
+                position: absolute;
+                right: 0;
+                background: url('../image/shouye/more.png') 20px no-repeat;
+                background-position: center center;
+            }
+            
+            .content {
+                -webkit-box-flex: 1;
+                -webkit-flex: 1;
+                flex: 1;
+            }
+            
+            footer {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-orient: horizontal;
+                -webkit-flex-flow: row;
+                flex-flow: row;
+                height: 40px;
+                background-color: #F4F5F6;
+                padding: 5px;
+                border-top: 1px solid #DEDEDE;
+            }
+            
+            footer .comment {
+                height: 35px;
+                width: 100px;
+                border: 1px solid #DEDEDE;
+                color: #DEDEDE;
+                background-color: #fff;
+                border-radius: 17px;
+                padding: 0 20px;
+                line-height: 35px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="nav">
+            <div class="back" onclick="api.closeWin();"></div>
+            <div>详情</div>
+        </div>
+        <div class="content">
+        </div>
+        <footer id=footer>
+            <div class="comment">写评论...</div>
+        </footer>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+            fnInit();
+            skipContent();
+        };
+        var nav, navHeight, footHeight, foot;
+
+        function fnInit() {
+            nav = $api.byId('nav');
+            $api.fixStatusBar(nav);
+            foot = $api.byId('footer')
+            navHeight = $api.offset(nav).h;
+            footHeight = $api.offset(foot).h;
+        }
+
+        function skipContent() {
+
+            api.openFram({
+                name: 'head_content_frame',
+                url: './head_content_frame.html',
+                bounces: true,
+                rect: {
+                    x: 0,
+                    y: navHeight,
+                    w: 'auto',
+                    h: api.winHeight - navHeight - footHeight
+                },
+                vScrollBarEnabled:false
+            });
+            api.openFrameGroup({
+                name: 'theme_choosegroup',
+                scrollEnabled: true,
+                rect: {
+                    x: 0,
+                    y: navHeight,
+                    w: 'auto',
+                    h: api.winHeight - navHeight - footHeight
+                },
+                index: 0,
+                frames: [{
+                    name: 'frame1_name',
+                    url: 'frame1_url'
+                }, {
+                    name: 'frame2_name',
+                    url: 'frame2_url'
+                }]
+            }, function(ret, err) {
+                var name = ret.name;
+                var index = ret.index;
+            });
+
+        }
+    </script>
+
+</html>

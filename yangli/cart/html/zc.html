@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../css/ui.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/login.css"/>
+	</head>
+	<body>
+		<div class="header">
+			<div class="" style="background:none"></div>
+			<div class="toolbar statusbar-padding">
+				<button class="bar-button back-button" style="left:-10px" onclick="back()">
+					<i class="icon icon-back-s"></i>
+				</button>
+				<div class="header-title">
+					<div class="title"></div>
+				</div>
+			</div>
+		</div>
+		<div class="login_head">
+			<div class="logo">
+				<img src="../res/logo.png">
+			</div>
+			<div id="canvas"></div>
+		</div>
+		<div class="aui-logon-con">
+			<div class="b-line">
+				<input type="text" placeholder="手机号/邮箱/用户名">
+			</div>
+			<div class="b-line">
+				<input type="password" placeholder="密码">
+			</div>
+			<div class="b-line">
+				<input type="password" placeholder="确认密码">
+			</div>
+			<div class="aui-login-l">
+				<a href="login.html">注册</a>
+			</div>
+			<div class="aui-login-wen">
+				<div class="aui-login-wen-a">
+					<a href="login.html">去登录</a>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../script/api.js"></script>
+	<script src="../script/jquery.js"></script>
+	<script src="../script/login-three.js"></script>
+	<script src="../script/login-projector.js"></script>
+	<script src="../script/login-canvas.js"></script>
+	<script src="../script/login-3d-lines.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			$api.fixStatusBar($api.dom('.login_head'));
+			$api.fixStatusBar($api.dom('.header'));
+			api.addEventListener({
+				name : 'keyback'
+			}, function(ret, err) {
+				api.toast({
+					msg : '再点一哈退出应用',
+					duration : 2000,
+					location : 'bottom'
+				});
+				api.addEventListener({
+					name : 'keyback'
+				}, function(ret, err) {
+					api.closeWidget({
+						silent : true
+					});
+				});
+				setTimeout(function() {
+					exitApp();
+				}, 2000)
+			});
+			$(".eye").click(function() {
+				var arr = this.src.split("/");
+				if (arr[arr.length - 1] == "bkj.png") {
+					this.src = "../res/kj.png";
+					$(this).prev().attr("type", "text");
+				} else {
+					this.src = "../res/bkj.png";
+					$(this).prev().attr("type", "password");
+				}
+			});
+		};
+		function exitApp() {
+			api.addEventListener({
+				name : 'keyback'
+			}, function(ret, err) {
+				api.toast({
+					msg : '再点一哈退出应用',
+					duration : 2000,
+					location : 'bottom'
+				});
+				api.addEventListener({
+					name : 'keyback'
+				}, function(ret, err) {
+					api.closeWidget({
+						silent : true
+					});
+				});
+				setTimeout(function() {
+					exitApp();
+				}, 3000)
+			});
+		}
+
+		function login() {
+			$api.setStorage('login', 1);
+			api.toast({
+				msg : '登录成功',
+				duration : 3000,
+				location : 'bottom'
+			});
+			setTimeout(function() {
+				api.openWin({
+					reload : true,
+					name : 'index',
+					url : 'main.html',
+					hScrollBarEnabled : false
+				});
+			}, 1000)
+		}
+		function back() {
+			api.closeWin({
+			});
+		}
+	</script>
+</html>

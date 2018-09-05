@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+        <title>ad</title>
+        <link rel="stylesheet" type="text/css" href=".。/css/api.css" />
+        <style type="text/css">
+            html,
+            body {
+                height: 100%;
+                background-color: #FAFAFA;
+                overflow: hidden;
+            }
+            
+            .login_pic {
+                padding-top: 70px;
+                width: 238px;
+                margin: 0 auto;
+            }
+            
+            .login_pic img {
+                width: 238px;
+            }
+            
+            .btn {
+                width: 210px;
+                height: 40px;
+                margin-top: 20px;
+                line-height: 40px;
+                text-align: center;
+                margin: 21px auto;
+                border-radius: 5px;
+            }
+            
+            .btn.register {
+                background-color: #FE3232;
+                color: #fff;
+            }
+            
+            .btn.login {
+                border: 1px solid #FE3232;
+                color: #FE3232;
+            }
+            
+            .other_login {
+                width: 302px;
+                margin: 30px auto;
+            }
+            
+            .login_list {
+                padding: 0 10px;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-orient: horizontal;
+                -webkit-flex-flow: row;
+                flex-flow: row;
+            }
+            
+            .login_item {
+                height: 45px;
+                -webkit-box-flex: 1;
+                -webkit-flex: 1;
+                flex: 1;
+            }
+            
+            .login_item.item1 {
+                background: url(../image/login/ic_qq_login.png)center no-repeat;
+            }
+            
+            .login_item.item2 {
+                background: url(../image/login/ic_weixin_login.png)center no-repeat;
+            }
+            
+            .login_item.item3 {
+                background: url(../image/login/ic_weibo_login.png)center no-repeat;
+            }
+            
+            .login_item.item4 {
+                background: url(../image/login/ic_tencent_login.png)center no-repeat;
+            }
+            
+            .login_item.item5 {
+                background: url(../image/login/ic_renren_login.png)center no-repeat;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="login_pic"><img src="../image/login/pic_login.png"></div>
+        <div class="btn register" onclick="fnRegister()">手机号登录</div>
+        <div class="btn login" onclick="fnLogin()">注册新账号</div>
+        <div class="other_login"><img src="../image/login/other_login.png"></div>
+        <div class="login_list">
+            <div class="login_item item1"></div>
+            <div class="login_item item2"></div>
+            <div class="login_item item3"></div>
+            <div class="login_item item4"></div>
+            <div class="login_item item5"></div>
+        </div>
+    </body>
+    <script type="text/javascript" src="./script/api.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+
+        };
+
+        function fnRegister() {
+            api.openWin({
+                name: 'login_mobile',
+                url: 'login_mobile.html'
+            });
+        }
+
+        function fnLogin() {
+            api.openWin({
+                name: 'register_mobile',
+                url: './register_mobile.html',
+                bounces: false,
+                pageParam: {
+                    key: 'value'
+                }
+            });
+        }
+    </script>
+
+</html>

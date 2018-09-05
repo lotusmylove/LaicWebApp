@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <title>title</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style>
+            html,
+            body {
+                height: 100%;
+            }
+            
+            .swipe {
+                overflow: hidden;
+                visibility: hidden;
+                position: relative;
+                padding-bottom: 16px;
+            }
+            
+            .swipe-wrap {
+                overflow: hidden;
+                position: relative;
+            }
+            
+            .swipe-wrap > div {
+                float: left;
+                width: 100%;
+                position: relative;
+            }
+            
+            #swipeIndicator {
+                position: absolute;
+                left: 50%;
+                bottom: 0px;
+                -webkit-transform: translateX(-50%);
+                transform: translateX(-50%);
+            }
+            
+            #swipeIndicator li {
+                height: 16px;
+                line-height: 16px;
+                width: 16px;
+                float: left;
+                background: url(../image/gambit/dian.png) no-repeat center center;
+                background-color: transparent;
+                background-size: 4px 4px;
+            }
+            
+            #swipeIndicator li.active {
+                background: url(../image/gambit/dian_act.png) no-repeat center center;
+                background-color: transparent;
+                background-size: 4px 4px;
+            }
+            
+            .slide_1 {
+                height: 97px;
+                width: 100%;
+            }
+            
+            .slide_p1 {
+                width: 25%;
+                height: 97px;
+                float: left;
+                box-sizing: border-box;
+                padding-bottom: 5px;
+                padding-top: 83px;
+                color: #999;
+                font-size: 9px;
+                text-align: center;
+                background-size: 60px 60px;
+                background-position: center 17px;
+                background-repeat: no-repeat;
+            }
+            
+            .slide_1 .pic4 {
+                background-image: url(../image/gambit/pic4.png);
+            }
+            
+            .slide_1 .pic5 {
+                background-image: url(../image/gambit/pic5.png);
+            }
+            
+            .slide_1 .pic6 {
+                background-image: url(../image/gambit/pic6.png);
+            }
+            
+            .slide_1 .pic77 {
+                background-image: url(../image/gambit/pic7.png);
+            }
+            
+            .sky {
+                width: 100%;
+                height: 10px;
+                background-color: #f4f5f6;
+                border-top: 1px solid #e8e8e8;
+                border-bottom: 1px solid #e8e8e8;
+            }
+            
+            .content1,
+            .content2,
+            .content3 {
+                box-sizing: border-box;
+                padding: 0 15px;
+            }
+            
+            .section {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .title {
+                font-size: 16px;
+                color: #444;
+                line-height: 20px;
+                padding-top: 1rem;
+                padding-bottom: 0.5rem;
+            }
+            
+            .pic_ul {
+                display: flex;
+                display: -webkit-flex;
+                display: -webkit-box;
+                flex-flow: row;
+                -webkit-flex-flow: row;
+                -webkit-box-orient: horizontal;
+            }
+            
+            .pic {
+                flex: 1;
+                -webkit-flex: 1;
+                -webkit-box-flex: 1;
+                box-sizing: border-box;
+            }
+            
+            .content2 .pic {
+                flex: 1;
+                -webkit-flex: 1;
+                -webkit-box-flex: 1;
+                box-sizing: border-box;
+            }
+            
+            .content2 .pic img {
+                width: 50%;
+                display: block;
+            }
+            
+            .content3 .pic img {
+                width: 100%;
+                display: block;
+            }
+            
+            .pic img {
+                width: 100%;
+                display: block;
+            }
+            
+            .pic7 {
+                padding: 0 6px;
+            }
+            
+            .text {
+                color: #888;
+                font-size: 12px;
+                position: relative;
+                padding-bottom: 8px;
+                line-height: 38px;
+            }
+            
+            .icon {
+                position: absolute;
+                top: 0px;
+                right: 6px;
+                width: 37px;
+                height: 38px;
+                text-align: right;
+                box-sizing: border-box;
+                background-image: url(../image/gambit/icn2.png);
+                background-size: 18px 16px;
+                background-repeat: no-repeat;
+                background-position: left center;
+            }
+            
+            .zan {
+                position: absolute;
+                top: 0px;
+                right: 62px;
+                width: 32px;
+                height: 38px;
+                text-align: right;
+                box-sizing: border-box;
+                background-image: url(../image/gambit/icn1.png);
+                background-size: 18px 16px;
+                background-repeat: no-repeat;
+                background-position: left center;
+            }
+            
+            .arrow {
+                position: absolute;
+                top: 0px;
+                right: 6px;
+                width: 37px;
+                height: 38px;
+                text-align: right;
+                box-sizing: border-box;
+                background-image: url(../image/gambit/icn2.png);
+                background-size: 18px 16px;
+                background-repeat: no-repeat;
+                background-position: left center;
+            }
+            
+            .title em {
+                color: #406599;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="swipe" class="swipe">
+            <div class="swipe-wrap">
+                <div class=" swipe-page">
+                    <div class="slide_1">
+                        <div class="slide_p1 swipe-page-item pic4">谁更厉害</div>
+                        <div class="slide_p1 swipe-page-item pic5">驾照考试</div>
+                        <div class="slide_p1 swipe-page-item pic6">韩剧</div>
+                        <div class="slide_p1 swipe-page-item pic77">支付宝</div>
+                    </div>
+                </div>
+                <div class=" swipe-page">
+                    <div class="slide_1">
+                        <div class="slide_p1 swipe-page-item pic4">谁更厉害</div>
+                        <div class="slide_p1 swipe-page-item pic5">驾照考试</div>
+                        <div class="slide_p1 swipe-page-item pic6">韩剧</div>
+                        <div class="slide_p1 swipe-page-item pic77">支付宝</div>
+                    </div>
+                </div>
+                <div class=" swipe-page">
+                    <div class="slide_1">
+                        <div class="slide_p1 swipe-page-item pic4">谁更厉害</div>
+                        <div class="slide_p1 swipe-page-item pic5">驾照考试</div>
+                        <div class="slide_p1 swipe-page-item pic6">韩剧</div>
+                        <div class="slide_p1 swipe-page-item pic77">支付宝</div>
+                    </div>
+                </div>
+                <div class=" swipe-page">
+                    <div class="slide_1">
+                        <div class="slide_p1 swipe-page-item pic4">谁更厉害</div>
+                        <div class="slide_p1 swipe-page-item pic5">驾照考试</div>
+                        <div class="slide_p1 swipe-page-item pic6">韩剧</div>
+                        <div class="slide_p1 swipe-page-item pic77">支付宝</div>
+                    </div>
+                </div>
+            </div>
+            <ul id="swipeIndicator">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="sky"></div>
+        <div class="content1">
+            <div class="section">
+                <div class="title"><em>#孕妇</em> 怀孕了老公不让出去玩了，说太不在只让我在家待着，好无聊啊</div>
+                <div class="pic_ul">
+                    <div class="pic">
+                        <img src="../image/gambit/pic1.png" alt="">
+                    </div>
+                    <div class="pic pic7">
+                        <img src="../image/gambit/pic2.png" alt="">
+                    </div>
+                    <div class="pic">
+                        <img src="../image/gambit/pic3.png" alt="">
+                    </div>
+                </div>
+                <div class="text">
+                    <div>的公司的风格 32分钟前</div>
+                    <div class="zan">12</div>
+                    <div class="arrow">191</div>
+                </div>
+            </div>
+        </div>
+        <div class="sky"></div>
+        <div class="content2">
+            <div class="section">
+                <div class="title"><em>#爆料</em> 刚用粉笔写好字，现在开始骗了，大家来捧场</div>
+                <div class="pic_ul">
+                    <div class="pic">
+                        <img src="../image/gambit/pic8.png" alt="">
+                    </div>
+                </div>
+                <div class="text">
+                    <div>花落546 15小时前</div>
+                    <div class="zan">16</div>
+                    <div class="arrow">18</div>
+                </div>
+            </div>
+        </div>
+        <div class="sky"></div>
+        <div class="content1">
+            <div class="section">
+                <div class="title"><em>#吐槽</em> 我刚怀孕婆婆也想生二胎，养不动给我养！又当嫂子又当妈谁愿意，孕吐刚好没几天是要闹几样！！</div>
+                <div class="pic_ul">
+                    <div class="pic">
+                        <img src="../image/gambit/pic11.png" alt="">
+                    </div>
+                    <div class="pic pic7">
+                        <img src="../image/gambit/pic12.png" alt="">
+                    </div>
+                    <div class="pic">
+                        <img src="../image/gambit/pic13.png" alt="">
+                    </div>
+                </div>
+                <div class="text">
+                    <div>445464 5分钟前</div>
+                    <div class="zan">38</div>
+                    <div class="arrow">69</div>
+                </div>
+            </div>
+        </div>
+        <div class="sky"></div>
+        <div class="content3">
+            <div class="section">
+                <div class="title"><em>#观赏雨</em> 补发一张全景</div>
+                <div class="pic_ul">
+                    <div class="pic">
+                        <img src="../image/gambit/pic9.png" alt="">
+                    </div>
+                    <div class="pic pic7">
+                        <img src="../image/gambit/pic10.png" alt="">
+                    </div>
+                    <div class="pic">
+                        <img src="../image/gambit/sky.png" alt="">
+                    </div>
+                </div>
+                <div class="text">
+                    <div>隔壁老王 4小时前</div>
+                    <div class="zan">1</div>
+                    <div class="arrow">19</div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/swipe.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+            fnChange();
+        };
+
+        function fnChange() {
+            var swipe = $api.byId('swipe'),
+                swipeIndicator = $api.byId('swipeIndicator'),
+                indicators = $api.domAll(swipeIndicator, 'li');
+
+            new Swipe(swipe, {
+                auto: 3000,
+                callback: function(index) {
+                    for (var i = 0; i < indicators.length; i++) {
+                        if (index == i) {
+                            $api.addCls(indicators[i], 'active');
+                        } else {
+                            $api.removeCls(indicators[i], 'active');
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+</html>

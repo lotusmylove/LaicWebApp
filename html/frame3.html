@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>Hello APP</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<style>
+		#con{
+			margin: 10px;
+			font-size: 24px;
+		}
+		ul{
+			margin-bottom: 10px;
+		}
+		ul li{
+			margin: 5px 10px;
+			padding: 5px;
+			color: #000;
+			word-wrap: break-word;
+		}
+	</style>
+</head>
+<body>
+    <label id="con">Hello APP</label>
+    用户ID：<input type="text" name="userId" id="userId" value="11111" />
+    用户密码：<input type="text" name="pwd" id="pwd" value="2222" />
+    用户邮箱：<input type="text" name="email" id="email" value="333333" />
+    <a href="###" onclick="fnCreateUser();">创建用户</a>
+    <br><br><br><br>
+    <a href="###" onclick="fnOpenFrame();">注册用户</a>
+    <br><br><br><br>
+    <a href="###" onclick="fnOpenWin();">OpenWin</a>
+	<div id='sys-info'></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../script/sha1.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+      console.log($api.byId("#footer"));
+      api.toast({
+          msg: '网络错误',
+          duration: 2000,
+          location: 'bottom'
+      });
+
+    };
+function fnOpenFrame(){
+  location.href = "reguser.html";
+  return false;
+  api.openFrame({
+    name: 'group',
+    url: 'reguser.html',
+    rect: {
+        x: 0,
+        y: 0,
+        w: 320,
+        h: 480
+    },
+    pageParam: {
+        name: 'test'
+    },
+    bounces: true,
+    bgColor: 'rgba(0,0,0,0)',
+    vScrollBarEnabled: false,
+    hScrollBarEnabled: false
+  });
+}
+</script>
+</html>

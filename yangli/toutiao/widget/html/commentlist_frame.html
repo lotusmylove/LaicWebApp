@@ -1,0 +1,256 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+        <title>ad</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style type="text/css">
+            html,
+            body {
+                height: 100%;
+                background-color: #F5F5F5;
+            }
+            
+            .clearfix:before {
+                display: table;
+                content: "";
+                clear: both;
+            }
+            
+            .clearfix:after {
+                display: table;
+                content: "";
+                clear: both;
+            }
+            
+            .tit>div {
+                display: inline-block;
+                float: left;
+            }
+            /*更多样式*/
+            
+            .tit>div.more {
+                width: 20px;
+                height: 56px;
+                float: right;
+                background: url('../image/theme/more.png')right no-repeat;
+            }
+            /*评论时间，头像昵称，回复品论昵称样式*/
+            
+            .name_pic,
+            .detaile .name,
+            .comment .name {
+                display: inline-block;
+                float: left;
+                padding-top: 10px;
+                line-height: 20px;
+            }
+            
+            .name_pic img {
+                vertical-align: middle;
+                margin-right: 10px;
+                border-radius: 50%;
+            }
+            /*评论的时间*/
+            
+            .time {
+                font-size: 12px;
+                color: #9E9E9E;
+            }
+            
+            .comment {
+                background-color: #FFFFFF;
+                padding: 0 15px;
+            }
+            
+            .content {
+                line-height: 28px;
+                margin-bottom: 20px;
+                border-bottom: 1px solid #F4F4F4;
+            }
+            
+            .comment_tit {
+                line-height: 30px;
+                padding-top: 10px;
+                display: inline-block;
+                border-bottom: 1px solid #F8E2E2;
+                float: left;
+            }
+            /*时间热度排序样式*/
+            
+            .comment .sort {
+                float: right;
+                margin-top: 15px;
+                font-size: 12px;
+                border-radius: 20px;
+                padding: 0 8px;
+                border: 1px solid #F4F4F4;
+            }
+            
+            .comment .sort>div {
+                float: left;
+                line-height: 15px;
+                padding: 1px 3px;
+                color: #ACACAC;
+            }
+            
+            .content .title {
+                line-height: 45px;
+                font-weight: 600;
+                font-size: 18px;
+            }
+            /*评论昵称*/
+            
+            .comment ._name {
+                color: #ACACAC;
+                display: inline-block;
+            }
+            
+            .commment_tit {
+                height: 47px;
+                margin-top: 12px;
+                border-top: 1px solid #F4F4F4;
+                border-bottom: 1px solid #F4F4F4;
+            }
+            /*评论内容*/
+            
+            .comment_text {
+                clear: both;
+                padding: 0 0 10px 46px;
+                line-height: 30px;
+            }
+            /*赞*/
+            
+            .zan,
+            .comment_num {
+                float: right;
+                height: 46px;
+                padding-left: 23px;
+                line-height: 46px;
+                color: #9E9E9E;
+            }
+            
+            .zan {
+                margin-right: 10px;
+                background: url('../image/theme/zan.png')left center no-repeat;
+                -webkit-background-size: 20px;
+                background-size: 20px;
+            }
+            
+            .comment_num {
+                background: url('../image/comment/comment_normal.png')left center no-repeat;
+                -webkit-background-size: 23px;
+                background-size: 23px;
+            }
+            /*回复评论*/
+            
+            .comment_require {
+                margin: 0 0 10px 46px;
+                padding: 15px;
+                font-size: 13px;
+                line-height: 20px;
+                background-color: #EEEEEE;
+            }
+            
+            .comment_require ._name {
+                color: #5B7AA6;
+            }
+            
+            .comment_require .text {
+                display: inline;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="comment">
+            <div class="comment_content">
+                <div class="">
+                    <div class="comment_tit">评论</div>
+                    <div class="sort">
+                        <div>时间</div>
+                        <div>|</div>
+                        <div>热度</div>
+                    </div>
+                </div>
+                <div class="content clearfix">
+                    <div class="name_pic">
+                        <img src="../image/theme/name_1.png"></div>
+                    <div class="name">
+                        <div class="_name">相怀永不见</div>
+                        <div class="time">05-18&nbsp;22:49</div>
+                    </div>
+                    <div class="comment_num">22</div>
+                    <div class="zan">32</div>
+                    <div class="comment_text">真是可笑，秦岭是中国公认的中心，但是西安就在秦岭附近，却被认为是西部城市，北京那么靠北，却被认为是中心，真是好笑</div>
+                    <div class="comment_require">
+                        <div class="user">
+                            <div class="_name">手机用户:</div>
+                            <div class="text">这不是按地理位置划分的，陕西，贵州，重庆，广西以西都是中国西部</div>
+                        </div>
+                        <div class="user">
+                            <div class="_name">午夜sdsadas:</div>
+                            <div class="text">那是方便行政管理罢了，与自然地理无关，现在把陕西划分到中部战区了。而不是西部战区</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content clearfix">
+                    <div class="name_pic">
+                        <img src="../image/comment/touxiang.png"></div>
+                    <div class="name">
+                        <div class="_name">许州...</div>
+                        <div class="time">5-18&nbsp;22:39</div>
+                    </div>
+                    <div class="comment_num">12</div>
+                    <div class="zan">96</div>
+                    <div class="comment_text">中华龙脉</div>
+                </div>
+                <div class="content clearfix">
+                    <div class="name_pic">
+                        <img src="../image/theme/name_1.png"></div>
+                    <div class="name">
+                        <div class="_name">FFMari</div>
+                        <div class="time">40分钟前</div>
+                    </div>
+                    <div class="comment_num">0</div>
+                    <div class="zan">18</div>
+                    <div class="comment_text">秦岭淮河一条线，南吃大米北吃面，江南才子山东将，陕西的黄土埋皇上</div>
+                </div>
+                <div class="content clearfix">
+                    <div class="name_pic">
+                        <img src="../image/comment/touxiang2.png"></div>
+                    <div class="name">
+                        <div class="_name">迷路的小雪</div>
+                        <div class="time">7小时前</div>
+                    </div>
+                    <div class="comment_num">12</div>
+                    <div class="zan">91</div>
+                    <div class="comment_text">其实中国的最中心是西安</div>
+                </div>
+                <div class="content clearfix">
+                    <div class="name_pic">
+                        <img src="../image/comment/touxiang1.png"></div>
+                    <div class="name">
+                        <div class="_name">指南针</div>
+                        <div class="time">12小时前</div>
+                    </div>
+                    <div class="comment_num">0</div>
+                    <div class="zan">0</div>
+                    <div class="comment_text">标题分裂祖国不得好死</div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="./script/api.js"></script>
+    <script type="text/javascript">
+        apiready = function() {};
+
+        function fnInit() {
+
+        }
+    </script>
+
+</html>

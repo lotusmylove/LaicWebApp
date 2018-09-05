@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <style type="text/css">
+    body {
+        background: #EEE;
+    }
+    .bg-dark {
+        background: #333333 !important;
+    }
+    .aui-slide-node img {
+        width: auto;
+        height: 100%;
+    }
+
+    #aui-slide div label {
+      white-space: nowrap;
+      text-overflow:ellipsis;
+      overflow: hidden;
+      background-image: -webkit-linear-gradient(top, rgba(59,59,59,.6), rgba(27,27,27,.6), rgba(50,50,50,.4), rgba(31,31,31,.4));
+      background-image: linear-gradient(top, rgba(59,59,59,.6), rgba(27,27,27,.6), rgba(50,50,50,.4), rgba(31,31,31,.4));
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      padding-left: 20px;
+      display:block;
+      color:#fff;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="aui-slide">
+        <div class="aui-slide-wrap" >
+            <div class="aui-slide-node bg-dark">
+                <img src="../image/l1.png" />
+                <label><div class="blur"></div>封神榜</label>
+            </div>
+            <div class="aui-slide-node bg-dark">
+                <img src="../image/l2.png" />
+                <label><div class="blur"></div>三国演义</label>
+            </div>
+            <div class="aui-slide-node bg-dark">
+                <img src="../image/l3.png" />
+                <label><div class="blur"></div>水煮水浒传：豹子头林冲与金莲妹妹不得不说的故事</label>
+            </div>
+        </div>
+        <div class="aui-slide-page-wrap"><!--分页容器--></div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript">
+  apiready = function() {
+    fnInitPull();
+    //fninit();
+    //headList(progress, isPull);
+    //fnInitPushRefresh();
+  };
+  //初始化图片轮播
+  var slide = new auiSlide({
+      container:document.getElementById("aui-slide"),
+      // "width":300,
+      "height":240,
+      "speed":500,
+      "autoPlay": 3000, //自动播放
+      "loop":true,
+      "pageShow":true,
+      "pageStyle":'line',
+      'dotPosition':'center'
+  })
+  // 刷新
+  function fnInitPull() {
+    api.setRefreshHeaderInfo({
+      visible: true,
+      loadingImg: 'widget://image/refresh.png',
+      bgColor: '#f0f0f0',
+      textColor: '#888',
+      textDown: '下拉刷新...',
+      textUp: '松开刷新...',
+      showTime: true
+    }, function(ret, err) {
+      api.refreshHeaderLoading();
+      setTimeout(fnLoadData,2000);
+      //headList(progress, true);
+    });
+  };
+  function fnLoadData() {
+    var now = Date.now();
+    $api.byId('divTitle').innerHTML = $api.byId('divTitle').innerHTML + "<br>"+now;
+    api.refreshHeaderLoadDone();
+    api.toast({
+      msg: '加载完毕',
+      duration: 2000,
+      location: 'top'
+    });
+  }
+
+</script>
+</html>

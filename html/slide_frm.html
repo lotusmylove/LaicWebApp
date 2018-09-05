@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <style type="text/css">
+    body {
+        background: #ffffff;
+    }
+    .bg-dark {
+        background: #333333 !important;
+    }
+    .aui-slide-node img {
+        width: auto;
+        height: 100%;
+    }
+    </style>
+</head>
+<body>
+  <header id="header">
+      <div class="header home active">
+          <div class="top-menu"></div>
+          <div class="add_btn btn" tapmode onclick="fnMore()"></div>
+      </div>
+      <div class="header video">
+          <div class="top-menu"></div>
+          <div class="search-video-btn" tapmode onclick="fnSearch();"></div>
+      </div>
+      <div class="header topic gambit_head">
+          <div class="gambit_login" tapmode onclick="fnLogin()"></div>
+          <div class="gambit_menu gambit_recommend" id="top-menu">
+              <div class="list active" tapmode onclick="changeStyle(0)">推荐</div>
+              <div class="list em2" tapmode onclick="changeStyle(1)">关注</div>
+          </div>
+          <div class="gambit_seek" tapmode onclick="fnOpenThemeChoose();"></div>
+      </div>
+      <div class="header my"></div>
+  </header>
+  <section class="content"></section>
+  <footer id="footer" class="footer">
+      <div class="menu home active " tapmode="active" onclick="fnChange(0)">首页</div>
+      <div class="menu video" tapmode="active" onclick="fnChange(1)">视频</div>
+      <div class="menu gambit" tapmode="active" onclick="fnChange(2)">话题</div>
+      <div class="menu my" tapmode="active" onclick="fnChange(3)">我的</div>
+  </footer>
+</body>
+
+
+    <div class="aui-content-padded">
+        <p id="divTitle">优化说明：新增当前页（currentPage）回调及总页数获取；优化图片显示</p>
+    </div>
+    <div id="aui-slide">
+        <div class="aui-slide-wrap" >
+            <div class="aui-slide-node bg-dark">
+                <img src="../image/l1.png" />
+            </div>
+            <div class="aui-slide-node bg-dark">
+                <img src="../image/l2.png" />
+            </div>
+            <div class="aui-slide-node bg-dark">
+                <img src="../image/l3.png" />
+            </div>
+        </div>
+        <div class="aui-slide-page-wrap"><!--分页容器--></div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript">
+  apiready = function() {
+    fnInitPull();
+    fnInit();
+    fnChange(0);
+
+    //fninit();
+    //headList(progress, isPull);
+    //fnInitPushRefresh();
+  };
+  //初始化图片轮播
+  var slide = new auiSlide({
+      container:document.getElementById("aui-slide"),
+      // "width":300,
+      "height":240,
+      "speed":500,
+      "autoPlay": 3000, //自动播放
+      "loop":true,
+      "pageShow":true,
+      "pageStyle":'line',
+      'dotPosition':'center'
+  })
+  // 刷新
+  function fnInitPull() {
+    api.setRefreshHeaderInfo({
+      visible: true,
+      loadingImg: 'widget://image/refresh.png',
+      bgColor: '#f0f0f0',
+      textColor: '#888',
+      textDown: '下拉刷新...',
+      textUp: '松开刷新...',
+      showTime: true
+    }, function(ret, err) {
+      api.refreshHeaderLoading();
+      setTimeout(fnLoadData,2000);
+      //headList(progress, true);
+    });
+  };
+  function fnLoadData() {
+    var now = Date.now();
+    $api.byId('divTitle').innerHTML = $api.byId('divTitle').innerHTML + "<br>"+now;
+
+    api.refreshHeaderLoadDone();
+    api.toast({
+      msg: '加载完毕',
+      duration: 2000,
+      location: 'top'
+    });
+  }
+
+  //Tab切换相关功能
+  function changeStyle(index) {
+      var topMenu = $api.byId('top-menu');
+      var divs = $api.domAll(topMenu, 'div');
+      api.setFrameGroupIndex({
+          name: frameNames[2],
+          index: index,
+          scroll: true
+      });
+      for (var i = 0; i < divs.length; i++) {
+          if (i == index) {
+              $api.addCls(divs[i], 'active');
+          } else {
+              $api.removeCls(divs[i], 'active');
+          }
+      }
+  }
+  var menus, headers, headerHeight, footerHeight, headerTop;
+  var navigationBar, home_group_id, video_group_id;
+
+  function fnInit() {
+      var header = $api.byId('header');
+      var footer = $api.byId('footer');
+      menus = $api.domAll(footer, '.menu');
+      headers = $api.domAll(header, '.header');
+      footerHeight = $api.offset(footer).h;
+
+      for (var i = 0; i < headers.length; i++) {
+          //$api.fixIos7Bar(headers[i]);
+      }
+
+      var offset = $api.offset(header);
+      headerHeight = offset.h;
+      headerTop = offset.t;
+
+      navigationBar = api.require('navigationBar');
+  };
+
+  var frameNames = ['home_group', 'video_group', 'topics_group', 'my_frame'];
+
+  function fnChange(index) {
+      for (var i = 0; i < menus.length; i++) {
+          if (index == i) {
+              $api.addCls(menus[i], 'active');
+              $api.addCls(headers[i], 'active');
+              switch (i) {
+                  case 3:
+                      fnOpenFrame(i, true);
+                      break;
+                  case 2:
+                      fnOpenFrameGroup(i, true);
+                      break;
+                  default:
+                      fnOpenFrameGroup(i, true);
+                      fnNavigationBar(i, true);
+                      break;
+              }
+          } else {
+              $api.removeCls(menus[i], 'active');
+              $api.removeCls(headers[i], 'active');
+              switch (i) {
+                  case 3:
+                      fnOpenFrame(i, false);
+                      break;
+                  case 2:
+                      fnOpenFrameGroup(i, false);
+                      break;
+                  default:
+                      fnOpenFrameGroup(i, false);
+                      fnNavigationBar(i, false);
+                      break;
+              }
+          }
+      }
+  };
+
+  function fnOpenFrame(index, isOpen) {
+      if (isOpen) {
+          api.openFrame({
+              name: frameNames[index],
+              url: './' + frameNames[index] + '.html',
+              bounces: false,
+              rect: {
+                  x: 0,
+                  y: 0,
+                  w: 'auto',
+                  h: api.winHeight - footerHeight
+              },
+              vScrollBarEnabled:false
+          });
+      } else {
+          api.setFrameAttr({
+              name: frameNames[index],
+              hidden: true
+          });
+      }
+  };
+
+  var home_group = {
+          item: [{
+              title: '推荐',
+              bg: '#d43d3d',
+          }, {
+              title: '热点',
+              bg: '#d43d3d',
+          }, {
+              title: '北京',
+              bg: '#d43d3d',
+          }, {
+              title: '视频',
+              bg: '#d43d3d',
+          }, {
+              title: '社会',
+              bg: '#d43d3d',
+          }, {
+              title: '订阅',
+              bg: '#d43d3d',
+          }, {
+              title: '娱乐',
+              bg: '#d43d3d',
+          }, {
+              title: '图片',
+              bg: '#d43d3d',
+          }, {
+              title: '科技',
+              bg: '#d43d3d'
+          }],
+          font: {
+              color: '#efb7b7',
+              colorSelected: '#fff',
+              size: 15,
+              sizeSelected: 15
+          }
+      },
+      video_group = {
+          item: [{
+              title: '推荐',
+              bg: '#fff',
+          }, {
+              title: '逗比剧',
+              bg: '#fff',
+          }, {
+              title: '音乐台',
+              bg: '#fff',
+          }, {
+              title: '看天下',
+              bg: '#fff',
+          }, {
+              title: '小品',
+              bg: '#fff',
+          }, {
+              title: '萌萌哒',
+              bg: '#fff',
+          }, {
+              title: '最娱乐',
+              bg: '#fff',
+          }, {
+              title: '爱生活',
+              bg: '#fff',
+          }, {
+              title: '妹纸',
+              bg: '#fff',
+          }],
+          font: {
+              color: '#505050',
+              colorSelected: '#f85959',
+              size: 15,
+              sizeSelected: 15
+          }
+      };
+
+  var currentIndex = 0;
+
+  function fnNavigationBar(index, isOpen) {
+      if (isOpen) {
+          currentIndex = index;
+          if (typeof window[frameNames[index] + '_id'] == 'undefined') {
+              navigationBar.open({
+                  y: headerTop,
+                  w: api.winWidth - 50,
+                  h: headerHeight - headerTop,
+                  itemSize: {
+                      w: 60
+                  },
+                  items: window[frameNames[index]].item,
+                  font: window[frameNames[index]].font,
+                  selectedIndex: 0
+              }, function(ret, err) {
+                  switch (ret.eventType) {
+                      case 'show':
+                          window[frameNames[currentIndex] + '_id'] = ret.id;
+                          break;
+                      case 'click':
+                          api.setFrameGroupIndex({
+                              name: frameNames[currentIndex],
+                              index: ret.index,
+                              scroll: true
+                          });
+                          break;
+                  }
+              });
+          } else {
+              navigationBar.show({
+                  id: window[frameNames[index] + '_id']
+              });
+          }
+      } else {
+          if (typeof window[frameNames[index] + '_id'] != 'undefined') {
+              navigationBar.hide({
+                  id: window[frameNames[index] + '_id']
+              });
+          }
+      }
+  };
+
+  var home_group_frames = [],
+      video_group_frames = [];
+  for (var i = 0; i < home_group.item.length; i++) {
+      home_group_frames.push({
+          name: 'home_frame_' + i,
+          url: 'home_frame.html',
+          vScrollBarEnabled: false,
+          pageParam: {
+              type: home_group.item[i].title
+          }
+      });
+  };
+
+  for (var i = 0; i < video_group.item.length; i++) {
+      video_group_frames.push({
+          name: 'video_group_' + i,
+          url: 'video_frame.html',
+          vScrollBarEnabled: false,
+          pageParam: {
+              type: '视频',
+              childType: video_group.item[i].title
+          }
+      });
+  };
+
+  var topics_group_frames = [{
+      name: ' recommentlist_frame',
+      url: './recommentlist_frame.html',
+      vScrollBarEnabled: false
+  }, {
+      name: 'themelist_frame',
+      url: './themelist_frame.html',
+      vScrollBarEnabled: false
+  }];
+
+  function fnOpenFrameGroup(index, isOpen) {
+      if (isOpen) {
+          currentIndex = index;
+          api.openFrameGroup({
+              name: frameNames[index],
+              scrollEnabled: true,
+              rect: {
+                  x: 0,
+                  y: headerHeight,
+                  w: 'auto',
+                  h: api.winHeight - headerHeight - footerHeight
+              },
+              index: 0,
+              frames: window[frameNames[index] + '_frames']
+          }, function(ret, err) {
+
+              if (currentIndex < 2) {
+                  navigationBar.config({
+                      id: window[frameNames[currentIndex] + '_id'],
+                      key: 'selectedIndex',
+                      value: ret.index
+                  });
+              } else {
+                  changeStyle(ret.index);
+              }
+          });
+      } else {
+          api.setFrameGroupAttr({
+              name: frameNames[index],
+              hidden: true
+          });
+      }
+  };
+
+  function fnOpenThemeChoose() {
+      api.openWin({
+          name: 'theme_choose',
+          url: 'theme_choose.html',
+
+      });
+  }
+
+  function fnLogin() {
+      api.openWin({
+          name: 'login_choose',
+          url: './login_choose.html'
+      });
+  }
+  // 搜索
+  function fnSearch() {
+      api.openWin({
+          name: 'search_home',
+          url: 'search_home.html'
+      });
+  }
+// more
+  function fnMore(){
+      api.openWin({
+          name: 'more',
+          url: './more.html',
+          animation:{
+              type:"none",
+              subType:"from_right",
+              duration:100
+          }
+      });
+  }
+
+</script>
+</html>

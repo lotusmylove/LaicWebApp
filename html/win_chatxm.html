@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+		<style type="text/css">
+			#tx {
+				border-radius: 50%;
+				width: 30px;
+				height: 30px;
+				display: inline;
+				position: absolute;
+				top: 7px;
+				left: 3px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="aui-bar aui-bar-nav" id="head">
+			<a class="aui-btn aui-pull-left" tapmode onclick="closeWin()"> <span class="aui-iconfont aui-icon-left"></span> </a>
+			<div class="aui-title">
+				<img src="../res/tx1.jpg" id="tx"/> 李宇春
+			</div>
+		</header>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/sha1.min.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			api.parseTapmode();
+			fnGetLoginToken();
+			//融云初始化
+
+			 /*
+			 * 融云初始化
+			* 周枫
+			* 2015-08-03
+			 */
+			 function rongCloud() {
+			         var token = $api.getStorage('rongtoken');
+			         //融云初始化
+
+			 }
+
+			 function openNoticeLogout(msg_text) {
+			          api.alert({
+			                  msg :msg_text
+			          }, function(ret, err) {
+			                  //断开融云链接
+			                logoutRongCloud();
+			          });
+			  }
+
+
+		};
+
+
+		function closeWin() {
+			api.closeWin({
+			});
+		}
+
+
+				function fnGetLoginToken(){
+					//获取token
+					var userId = $api.getStorage('id');
+					//会员id
+					var name = $api.getStorage('zh');
+					//会员昵称
+					var portraitUri = $api.getStorage('tx');
+					//会员头像
+					var appKey = "cpj2xarlc177n";
+					var appSecret = "9drgnot2QRk";
+					var nonce = Math.floor(Math.random() * 1000000);
+					//随机数
+					var timestamp = Date.now();
+					//时间戳
+					var signature = sha1("" + appSecret + nonce + timestamp);
+					//数据签名(通过哈希加密计算)
+					api.ajax({
+						url : "http://api.cn.ronghub.com/user/getToken.json",
+						method : "post",
+						headers : {
+							"RC-App-Key" : appKey,
+							"RC-Nonce" : "" + nonce,
+							"RC-Timestamp" : "" + timestamp,
+							"RC-Signature" : "" + signature,
+							"Content-Type" : "application/x-www-form-urlencoded"
+						},
+						data : {
+							values : {
+								userId : userId,
+								name : name,
+								portraitUri : portraitUri
+							}
+						}
+					}, function(ret, err) {
+						if (ret) {
+							$api.setStorage('rongtoken', ret.token);
+							$api.setStorage('zh', name);
+							$api.setStorage('id', userId);
+							$api.setStorage('tx', portraitUri);
+							/*
+							api.openWin({
+								reload : true,
+								name : 'friends',
+								url : 'friends.html',
+								hScrollBarEnabled : false,
+							});
+							*/
+							setTimeout(function() {
+								api.toast({
+									msg : '登录超时，请检查网络',
+									duration : 3000,
+									location : 'bottom'
+								});
+							}, 5000)
+						} else {
+							api.toast({
+								msg : '获取token失败',
+								duration : 3000,
+								location : 'bottom'
+							});
+						}
+					});
+				}
+
+
+
+	</script>
+</html>

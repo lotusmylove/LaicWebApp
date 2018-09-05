@@ -1,0 +1,13 @@
+@charset 'utf-8';
+body { margin:0; padding:0 }
+ul { list-style:none }
+img { border:0 }
+.banner { position:relative; width:100% }
+.swipe { overflow:hidden; visibility:hidden; position:relative }
+.swipe-box { overflow:hidden; position:relative }
+.swipe-box>div { float:left; width:100%; position:relative }
+.swipe-box .img img { display:block; width:100%; border:0 none }
+.dot-area { position:absolute; left:50%; bottom:10px; width:68px; margin-left:-20px }
+.dot { float:left; width:7px; height:7px; margin-right:12px; background-color:rgba(207, 207, 207, 0.4); border-radius:7px }
+.dot:last-child { margin-right:0 }
+.dot.on { background-color:#ffffff; border:#ffffff solid 1px; }

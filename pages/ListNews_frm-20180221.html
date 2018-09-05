@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-flex.css" />
+    <style type="text/css">
+      body {
+          background: #EEE;
+      }
+      .bg-dark {
+          background: #333333 !important;
+      }
+      .aui-slide-node img {
+          width: auto;
+          height: 100%;
+      }
+
+      #aui-slide div label {
+        white-space: nowrap;
+        text-overflow:ellipsis;
+        overflow: hidden;
+        background-image: -webkit-linear-gradient(top, rgba(59,59,59,.6), rgba(27,27,27,.6), rgba(50,50,50,.4), rgba(31,31,31,.4));
+        background-image: linear-gradient(top, rgba(59,59,59,.6), rgba(27,27,27,.6), rgba(50,50,50,.4), rgba(31,31,31,.4));
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        padding-left: 20px;
+        display:block;
+        color:#fff;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+    </style>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      .search_box {
+        width: 100%;
+        height: 50px;
+        background-color: #f4f5f6;
+        box-sizing: border-box;
+        padding-left: 15px;
+        padding-top: 8px;
+        padding-right: 15px;
+      }
+
+      .search {
+        width: 100%;
+        height: 33px;
+        line-height: 33px;
+        box-sizing: border-box;
+        padding-left: 31px;
+        font-size: 14px;
+        color: #999;
+        background-color: #fff;
+        border: 1px solid #e8e8e8;
+        border-radius: 6px;
+        background-image: url(../image/search.png);
+        background-size: 15px 15px;
+        background-repeat: no-repeat;
+        background-position: 13px center;
+      }
+
+      .content {
+        box-sizing: border-box;
+        padding: 0 5px;
+      }
+
+      .content .text {
+        width: 100%;
+        line-height: 20px;
+        font-size: 16px;
+        color: #444;
+        padding-top: 15px;
+        padding-bottom: 21px;
+      }
+
+      .content .text2 {
+        width: 100%;
+        height: 24px;
+        line-height: 22px;
+        font-size: 12px;
+        color: #888;
+        box-sizing: border-box;
+        padding-left: 23px;
+        background-image: url(../image/pic3.png);
+        background-size: 16px 16px;
+        background-repeat: no-repeat;
+        background-position: left center;
+        position: relative;
+      }
+
+      .content .arrow {
+        width: 44px;
+        height: 8px;
+        display: inline-block;
+        box-sizing: border-box;
+        padding-right: 6px;
+        background-image: url(../image/pic5.png);
+        background-size: 8px 4px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: absolute;
+        right: 0;
+        bottom: 8px;
+      }
+
+      .content .section1 {
+        width: 100%;
+        height: 114px;
+        position: relative;
+        box-sizing: border-box;
+        padding-right: 123px;
+      }
+
+      .content .section1 .from {
+        float: left;
+      }
+
+      .content .img {
+        position: absolute;
+        right: 3px;
+        top: 10px;
+      }
+
+      .content .img img {
+        width: 120px;
+      }
+
+      .content .section2 .text2 {
+        width: 100%;
+        height: 24px;
+        line-height: 22px;
+        font-size: 12px;
+        color: #888;
+        box-sizing: border-box;
+        padding-left: 23px;
+        background-image: url(../image/pic4.png);
+        background-size: 16px 16px;
+        background-repeat: no-repeat;
+        background-position: left center;
+        position: relative;
+      }
+
+      .content2,
+      .content3 {
+        box-sizing: border-box;
+        padding: 0 5px;
+      }
+
+      .content2 .section,
+      .content3 .section {
+        width: 100%;
+        box-sizing: border-box;
+        border-bottom: 1px solid #e8e8e8;
+      }
+
+      .content2 .title,
+      .content3 .title {
+        font-size: 16px;
+        color: #444;
+        line-height: 20px;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+
+      .content2 .pic_ul {
+        display: flex;
+        display: -webkit-flex;
+        display: -webkit-box;
+        flex-flow: row;
+        -webkit-flex-flow: row;
+        -webkit-box-orient: horizontal;
+      }
+
+      .content2 .pic {
+        flex: 1;
+        -webkit-flex: 1;
+        -webkit-box-flex: 1;
+        box-sizing: border-box;
+        width: 33%;
+        margin-right: 3px;
+      }
+
+      .content2 .pic img,
+      .content3 .pic img {
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .content .textbottom,
+      .content2 .text,
+      .content3 .text {
+        color: #888;
+        font-size: 12px;
+        position: relative;
+        padding-left: 22px;
+        padding-bottom: 8px;
+        line-height: 38px;
+      }
+
+      .content .icon,
+      .content2 .icon,
+      .content3 .icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .content .icon img,
+      .content2 .icon img,
+      .content3 .icon img {
+        width: 50%;
+        margin-top: 11px;
+      }
+
+      .content2 .arrow,
+      .content3 .arrow {
+        position: absolute;
+        bottom: 8px;
+        right: 0px;
+        width: 38px;
+        height: 38px;
+        box-sizing: border-box;
+        background-image: url(../image/pic5.png);
+        background-size: 8px 4px;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+
+      em {
+        padding-right: 4px;
+      }
+    </style>
+</head>
+<body>
+    <script id="j-template" type="text/template">
+      {{ if(it && it.length > 0){ }}
+        {{ for(var i=0; i<it.length;i++){ }}
+          <div class="aui-slide-node bg-dark" tapmode onclick="fnPlay('{{=it[i].videoUrl}}');">
+              <img src="{{=it[i].imgUrl}}" />
+              <label><div class="blur"></div>{{=it[i].name}}</label>
+          </div>
+        {{ } }}
+      {{ } }}
+    </script>
+      <div id="aui-slide">
+          <div id="divAuiSlide" class="aui-slide-wrap">
+          </div>
+          <div class="aui-slide-page-wrap"><!--分页容器--></div>
+      </div>
+
+      <script id="today-template" type="text/template">
+        {{ if(it && it.length > 0){ }}
+          {{ for(var i=0; i<it.length;i++){ }}
+          <div class="aui-flex-item-6 aui-flex-row aui-flex-middle" style="padding:0px 2px;">
+              <img src="{{=it[i].imgUrl}}">
+              <h3>{{=it[i].name}}</h3>
+              <p class="summre">{{=it[i].summary}}</p>
+          </div>
+          {{ } }}
+        {{ } }}
+      </script>
+      <ul class="aui-list">
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner">
+                  <div class="aui-list-item-title aui-text-primary">今日精选</div>
+                  <div class="aui-list-item-right">更多...</div>
+              </div>
+          </li>
+      </ul>
+      <div id="divTodayBest" class="aui-flex-col aui-flex-center aui-border-tb"></div>
+
+    <script id="news-template" type="text/template">
+    {{ if(it && it.length > 0){ }}
+      {{ for(var i=0; i<it.length;i++){ }}
+        {{? it[i].type == 0 }}
+        <div class="content" tapmode onclick="fnOpenContent('{{= it[i].id }}')">
+              <div class="section1">
+                  <div class="from">
+                      <div class="text">{{=it[i].name}}</div>
+                      <div class="textbottom">
+                          <div class="icon"><img src="../image/from1.png"></div>
+                          <div>
+                              <em>{{=it[i].publisher}}</em>
+                              <em>{{=it[i].commentCount}}评论</em>
+                              <em>5分钟前</em>
+                              <div class="arrow"></div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="img"><img src="{{=it[i].imgUrl}}" id="thumbnail0_{{=it[i].id}}"></div>
+                  <div class="pic"></div>
+              </div>
+            </div>
+            {{?? it[i].type == 1 }}
+            <div class="content3" tapmode onclick="alert('{{=it[i].url}}')">
+              <div class="section">
+                <div class="title">{{=it[i].name}}</div>
+                <div class="pic">
+                  <img src="{{=it[i].imgUrl}}" id="thumbnail0_{{=it[i].id}}">
+                </div>
+                <div class="text">
+                  <div class="icon"><img src="../image/from2.png"></div>
+                  <div>
+                    <em>{{=it[i].publisher}}</em>
+                    <em>{{=it[i].commentCount}}评论</em>
+                    <em>3小时前</em>
+                  </div>
+                  <div class="arrow"></div>
+                </div>
+              </div>
+            </div>
+            {{?? it[i].type == 2 }}
+            <div class="content2" tapmode onclick="fnOpenContent('{{= it[i].id }}')">
+              <div class="section">
+                <div class="title">{{=it[i].name}}</div>
+                <div class="pic_ul">
+                  <div class="pic">
+                    <img src="{{=it[i].imgUrl}}" id="thumbnail0_{{=it[i].id}}_0">
+                  </div>
+                  <div class="pic">
+                    <img src="{{=it[i].imgUrl}}" id="thumbnail0_{{=it[i].id}}_1">
+                  </div>
+                  <div class="pic">
+                    <img src="{{=it[i].imgUrl}}" id="thumbnail0_{{=it[i].id}}_2">
+                  </div>
+                </div>
+                <div class="text">
+                  <div class="icon">
+                    <img src="../image/from1.png"></div>
+                    <div>
+                      <em>{{=it[i].publisher}}</em>
+                      <em>24评论</em>
+                      <em>5小时前</em>
+                    </div>
+                    <div class="arrow"></div>
+                  </div>
+                </div>
+              </div>
+              {{?? it[i].type == 3 }}
+              <div class="content3" onclick="alert('{{= it[i].id }}')">
+                <div class="section">
+                  <div class="title">{{=it[i].name}}</div>
+                  <div class="pic">
+                    <img src="{{=it[i].imgUrl}}" id="thumbnail0_{{=it[i].id}}">
+                  </div>
+                  <div class="text">
+                    <div class="icon"><img src="../image/from2.png"></div>
+                    <div>
+                      <em>{{=it[i].publisher}}</em>
+                      <em>{{=it[i].commentCount}}评论</em>
+                      <em>3小时前</em>
+                    </div>
+                    <div class="arrow"></div>
+                  </div>
+                </div>
+              </div>
+            {{ } }}
+          {{ } }}
+        {{ } }}
+</script>
+    <div id="divTodayNews" class="aui-border-tb"></div>
+    <script id="newslist-template" type="text/template">
+        {{ if(it && it.length > 0){ }}
+          {{ for(var i=0; i<it.length;i++){ }}
+            {{? it[i].type == 0 }}
+                <li class="aui-list-item" style="padding-left:5px;">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-title" style="height:50px;overflow: hidden;word-break: normal;text-overflow: ellipsis; ">
+                              {{=it[i].name}}
+                            </div>
+                            <div class="aui-info aui-margin-t-5" style="padding:10px 0px 0px 0px">
+                                <div class="aui-info-item">
+                                    <img src="../image/from1.png" style="width:1rem" class="aui-img-round">
+                                    <span class="aui-margin-l-5">{{=it[i].publisher}}</span>
+                                </div>
+                                <div class="aui-info-item">{{=it[i].commentCount}}评论</div>
+                                <div class="aui-info-item">2015-07-14</div>
+                            </div>
+                        </div>
+                        <div class="aui-list-item-media" style="width:130px;padding:5px;">
+                            <img src="{{=it[i].imgUrl}}" style="width:120px;height:90px;">
+                        </div>
+                    </div>
+                </li>
+            {{?? it[i].type == 1 }}
+            <div class="content3" tapmode onclick="alert('{{=it[i].url}}')">
+              <div class="section">
+                <div class="title">{{=it[i].name}}</div>
+                <div class="pic">
+                  <img src="{{=it[i].imgUrl}}" id="thumbnail0_{{=it[i].id}}">
+                </div>
+                <div class="text">
+                  <div class="icon"><img src="../image/from2.png"></div>
+                  <div>
+                    <em>{{=it[i].publisher}}</em>
+                    <em>{{=it[i].commentCount}}评论</em>
+                    <em>3小时前</em>
+                  </div>
+                  <div class="arrow"></div>
+                </div>
+              </div>
+            </div>
+            {{?? it[i].type == 2 }}
+            <div class="content2" tapmode onclick="fnOpenContent('{{= it[i].id }}')">
+              <div class="section">
+                <div class="title">{{=it[i].name}}</div>
+                <div class="pic_ul">
+                  <div class="pic">
+                    <img src="{{=it[i].imgUrl}}" id="thumbnail0_{{=it[i].id}}_0">
+                  </div>
+                  <div class="pic">
+                    <img src="{{=it[i].imgUrl}}" id="thumbnail0_{{=it[i].id}}_1">
+                  </div>
+                  <div class="pic">
+                    <img src="{{=it[i].imgUrl}}" id="thumbnail0_{{=it[i].id}}_2">
+                  </div>
+                </div>
+                <div class="text">
+                  <div class="icon">
+                    <img src="../image/from1.png"></div>
+                    <div>
+                      <em>{{=it[i].publisher}}</em>
+                      <em>24评论</em>
+                      <em>5小时前</em>
+                    </div>
+                    <div class="arrow"></div>
+                  </div>
+                </div>
+              </div>
+              {{?? it[i].type == 3 }}
+              <div class="content3" onclick="alert('{{= it[i].id }}')">
+                <div class="section">
+                  <div class="title">{{=it[i].name}}</div>
+                  <div class="pic">
+                    <img src="{{=it[i].imgUrl}}" id="thumbnail0_{{=it[i].id}}">
+                  </div>
+                  <div class="text">
+                    <div class="icon"><img src="../image/from2.png"></div>
+                    <div>
+                      <em>{{=it[i].publisher}}</em>
+                      <em>{{=it[i].commentCount}}评论</em>
+                      <em>3小时前</em>
+                    </div>
+                    <div class="arrow"></div>
+                  </div>
+                </div>
+              </div>
+            {{ } }}
+          {{ } }}
+        {{ } }}
+    </script>
+    <div class="aui-border-tb">
+      <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-media-list" id="divNewsList">
+            <li class="aui-list-item" style="padding-left:5px;">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-title" style="height:50px;overflow: hidden;word-break: normal;text-overflow: ellipsis; ">
+                          媒体项右侧显示媒体项右侧显示媒体项右侧显示媒体显示媒体显示媒体显示媒体显示媒体
+                        </div>
+                        <div class="aui-info aui-margin-t-5" style="padding:10px 0px 0px 0px">
+                            <div class="aui-info-item">
+                                <img src="../image/from1.png" style="width:1rem" class="aui-img-round">
+                                <span class="aui-margin-l-5">流浪男</span>
+                            </div>
+                            <div class="aui-info-item">3000评论</div>
+                            <div class="aui-info-item">2015-07-14</div>
+                        </div>
+                    </div>
+                    <div class="aui-list-item-media" style="width:130px;padding:5px;">
+                        <img src="../image/demo4.png" style="width:120px;height:90px;">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+  </div>
+<!--
+<div class="content" tapmode onclick="fnOpenContent('5a8913d7859047a9637388d0')" style='border-bottom: 1px solid #dddddd;'>
+    <div class="section1">
+        <div class="from">
+            <div class="text">习近平“乐民之乐”情怀 照亮“为民抒怀”舞台</div>
+            <div class="textbottom">
+              <div class="icon"><img src="http://7xuooa.com1.z0.glb.clouddn.com/apicloud/f117c3a6a8fbe5432c456ca847686b56.png"></div>
+                <div> <em>央视网</em> <em>undefined评论</em> <em>5分钟前</em>
+                    <div class="arrow"></div>
+                </div>
+            </div>
+        </div>
+        <div class="img"><img src="http://p1.img.cctvpic.com/photoworkspace/contentimg/2018/02/18/2018021806201894646.jpg" id="thumbnail0_5a8913d7859047a9637388d0"></div>
+        <div class="pic"></div>
+    </div>
+</div>
+
+<div class="content3" onclick="alert('5a891e9e7fe430583f6c8e03')">
+    <div class="section">
+        <div class="title">测试标题0001</div>
+        <div class="pic"> <img src="http://pic.chinadaily.com.cn/img/attachement/jpg/site1/20180220/d4bed9d6cb401bf5ae9b3d.jpg" id="thumbnail0_5a891e9e7fe430583f6c8e03"> </div>
+        <div class="text">
+            <div class="icon"><img src="http://7xuooa.com1.z0.glb.clouddn.com/apicloud/42e1c045190af5c58d769a8aadfbe7d3.png"></div>
+            <div> <em>法国5</em> <em>undefined评论</em> <em>3小时前</em> </div>
+            <div class="arrow"></div>
+        </div>
+    </div>
+</div>
+-->
+
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../script/sha1.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+
+<script type="text/javascript">
+  apiready = function() {
+    fnInitPull();
+    fnLoadData();
+    //fninit();
+    //headList(progress, isPull);
+    //fnInitPushRefresh();
+  };
+  //初始化图片轮播
+  function fnInitAuiSlide() {
+    var slide = new auiSlide({
+        container:document.getElementById("aui-slide"),
+        // "width":300,
+        "height":240,
+        "speed":500,
+        "autoPlay": 3000, //自动播放
+        "loop":true,
+        "pageShow":true,
+        "pageStyle":'line',
+        'dotPosition':'center'
+    })
+  }
+  // 刷新
+  function fnInitPull() {
+    api.setRefreshHeaderInfo({
+      visible: true,
+      loadingImg: 'widget://image/refresh.png',
+      bgColor: '#f0f0f0',
+      textColor: '#888',
+      textDown: '下拉刷新...',
+      textUp: '松开刷新...',
+      showTime: true
+    }, function(ret, err) {
+      api.refreshHeaderLoading();
+      setTimeout(fnLoadData,2000);
+      //headList(progress, true);
+    });
+  };
+  function fnLoadData_del() {
+    var now = Date.now();
+    $api.byId('divTitle').innerHTML = $api.byId('divTitle').innerHTML + "<br>"+now;
+    api.refreshHeaderLoadDone();
+    api.toast({
+      msg: '加载完毕',
+      duration: 2000,
+      location: 'top'
+    });
+  }
+  function fnLoadData() {
+    var pageParam = api.pageParam;
+    //console.log( JSON.stringify( pageParam ) );
+    var now = Date.now();
+    //$api.byId('divTitle').innerHTML = $api.byId('divTitle').innerHTML + "<br>"+JSON.stringify(pageParam) + "&nbsp;&nbsp;" + now;
+    fnGetDataFromCloud(pageParam.type,'true','j-template','divAuiSlide');
+    //fnGetDataFromCloud(pageParam.type,'','today-template','divTodayBest');
+    fnGetDataFromCloud(pageParam.type,'','news-template','divTodayNews');
+    fnGetDataFromCloud(pageParam.type,'','newslist-template','divNewsList');
+    //fnGetDataFromCloud('同步剧场','today-template','divSyncTv');
+    //fnGetDataFromCloud('电影','today-template','divMovie');
+    api.refreshHeaderLoadDone();
+    api.toast({
+      msg: '加载完毕',
+      duration: 2000,
+      location: 'top'
+    });
+  }
+
+  function fnGetDataFromCloud(strKey,strIsTop,strTemplateId,strDomId) {
+    var now = Date.now();
+    var appID = "A6058340878951";
+    var appKey = SHA1(appID+"UZ"+"796C1E15-5EAE-8E40-88B2-F5ED7BCA61A0"+"UZ"+now)+"."+now;
+    //alert($api.dom("#account").value);
+    //var strUrl = "https://d.apicloud.com/mcm/api/videoInfo";
+    var strUrl = "https://d.apicloud.com/mcm/api/newsInfo";
+    if(strIsTop == 'true'){
+      //strUrl = strUrl + '?filter={"where":{"cate":{"like":"'+strKey+'"}},"skip":0,"limit":5}';
+      strUrl = strUrl + '?filter={"fields":{"id":"1","name":"1","imgUrl":"1"},"where":{"istop":{"like":"true"},"cate":{"like":"'+strKey+'"}},"order":"createdAt DESC","skip":0,"limit":5}'
+    }else{
+      strUrl = strUrl + '?filter={"fields":{"id":"1","name":"1","imgUrl":"1","summary":"1","body":"1","publisher":"1","createdAt":"1","type":"1"},"where":{"cate":{"like":"'+strKey+'"}},"order":"createdAt DESC","skip":0,"limit":10}'
+    }
+    //strUrl = strUrl + '?filter={"fields":{"id":"1","name":"1","imgUrl":"1"},"where":{"istop":{"like":"true"},"cate":{"like":"'+strKey+'"}},"order":"createdAt ASC","skip":0,"limit":5}'
+    //strUrl = strUrl + '?filter={"fields":{"id":"1","name":"1","imgUrl":"1","summary":"1","body":"1","publisher":"1","createdAt":"1"},"where":{"cate":{"like":"'+strKey+'"}},"order":"createdAt ASC","skip":0,"limit":10}'
+    console.log(strUrl);
+    var strMethod = "GET";
+    api.ajax({
+        url: strUrl,
+        method: strMethod,
+        "headers": {
+          "X-APICloud-AppId": appID,
+          "X-APICloud-AppKey": appKey
+        }
+    },function(ret, err){
+        if (ret) {
+            var tmpl = document.getElementById(strTemplateId).innerHTML;
+            var doTtmpl = doT.template(tmpl);
+            $api.html($api.byId(strDomId), doTtmpl(ret));
+            if(strDomId == 'divTodayNews'){console.log(doTtmpl(ret));}
+            if(strIsTop == 'true'){
+              fnInitAuiSlide();
+            }
+        } else {
+            alert( JSON.stringify( err ) );
+            api.toast({
+                msg: JSON.stringify( err ),
+                duration: 2000,
+                location: 'middle'
+            });
+        }
+    });
+  }
+  function fnOpenPhotonews(id) {
+    api.openWin({
+      name: 'photonews',
+      url: './photonews.html',
+      pageParam: {
+        id: id
+      }
+    });
+  };
+
+  function fnOpenContent(id) {
+    api.openWin({
+      name: 'head_content',
+      url: '../yangli/toutiao/widget/html/head_content.html',
+      pageParam: {
+        id: id
+      }
+    });
+  };
+
+</script>
+</html>

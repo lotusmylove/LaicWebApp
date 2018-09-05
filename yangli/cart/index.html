@@ -1,0 +1,21 @@
+<script type="text/javascript" src="script/api.js"></script>
+<script type="text/javascript">
+	apiready = function() {
+		if ($api.getStorage('login') == 1) {
+			api.openWin({
+				reload : true,
+				name : 'index',
+				url : 'html/main.html',
+				hScrollBarEnabled : false
+			});
+		} else {
+			api.openWin({
+				bounces : false,
+				name : 'login',
+				url : 'html/login.html',
+				vScrollBarEnabled : false,
+				hScrollBarEnabled : false
+			});
+		}
+	}
+</script>

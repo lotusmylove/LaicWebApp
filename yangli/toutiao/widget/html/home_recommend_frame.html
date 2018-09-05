@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+        <title>今日头条首页</title>
+        <link rel="stylesheet" type="text/css" href=".。/css/api.css" />
+        <style type="text/css">
+            html,
+            body {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-flex-flow: column;
+                flex-flow: column;
+                height: 100%;
+                background-color: #fff;
+            }
+            
+            .header {
+                height: 43px;
+                width: 100%;
+                display: none;
+                line-height: 43px;
+            }
+            
+            .header.active {
+                display: block;
+            }
+            
+            .top-menu {
+                padding: 0 43px 0 8px;
+                white-space: nowrap;
+                overflow: scroll;
+            }
+            
+            .top-menu>div {
+                display: inline-block;
+                padding: 0 11px;
+            }
+            /*按钮*/
+            
+            .btn {
+                height: 40px;
+                width: 35px;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            /*首页头部导航*/
+            /*字体颜色*/
+            
+            .header.home>div.active {
+                opacity: 1;
+            }
+            
+            .header.home {
+                background: #d43d3d;
+            }
+            
+            .header.home .top-menu>div {
+                color: #fff;
+                opacity: .8;
+            }
+            
+            .add_btn {
+                background: #d43d3d url('./../image/shouye/add_btn.png')center center no-repeat;
+                -webkit-background-size: 18px;
+                background-size: 18px;
+            }
+            /*视频头部导航*/
+            
+            .search-video-btn {
+                background: #fff url('./../image/shouye/search.png')center center no-repeat;
+                -webkit-background-size: 20px;
+                background-size: 20px;
+            }
+            
+            .search-topic-btn {
+                background: #fff url('./../image/shouye/search.png')center center no-repeat;
+                -webkit-background-size: 20px;
+                background-size: 20px;
+            }
+            
+            .pic.toutiao {
+                background: url('../image/shouye/icon-min.png') center no-repeat;
+            }
+            
+            .pic {
+                height: 20px;
+                width: 20px;
+                position: relative;
+                top: 5px;
+                margin-right: 5px;
+                border-radius: 50%;
+                -webkit-background-size: 20px 20px;
+                background-size: 20px 20px;
+            }
+            
+            .item_info {
+                margin-top: 6px;
+                height: 32px;
+                position: relative;
+                top: 8px;
+            }
+            
+            .top {
+                border-bottom: 1px solid #D3D3D3;
+                padding: 16px 0;
+                margin: 0 15px;
+            }
+            
+            .title {
+                font-size: 18px;
+                text-align: left;
+                color: #444444;
+                font-weight: 400;
+            }
+            
+            .item_info>div {
+                display: inline-block;
+            }
+            
+            .special,
+            .comment,
+            .time {
+                color: #999;
+                margin-right: 10px;
+                line-height: 25px;
+            }
+            
+            .hot {
+                display: inline-block;
+                border: 1px solid #F05F5F;
+                border-radius: 4px;
+                color: #aaa;
+                font-size: 12px;
+                padding: 0 2px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="top">
+            <h1 class="title">习近平从严值当党:打铁还须自身硬</h1>
+            <div class="item_info">
+                <div class="pic toutiao"></div>
+                <div class="special">专题 </div>
+                <div class="comment">3.5万评论 </div>
+                <div class="time">刚刚</div>
+                <div class="hot">置顶</div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="./script/api.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+
+        };
+    </script>
+
+</html>

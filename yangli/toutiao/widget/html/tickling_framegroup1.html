@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        html,
+        body {
+            height: 100%;
+
+        }
+        .message{
+            padding: 10px;
+            display: -webkit-flex;
+            display: -webkit-box;
+            flex-flow: row;
+            -webkit-flex-flow: row;
+            -webkit-box-orient: horizontal;
+        }
+
+        .info img{
+            height: 32px;
+            width: 32px;
+            margin-right: 8px;
+        }
+        .mes{
+         flex: 1;
+         -webkit-flex: 1;
+         -webkit-box-flex: 1;
+         position: relative;
+     }
+     .text{
+       border: 1px solid #EFEFEF;
+       padding: 5px;
+
+   }
+   .date{
+    padding-left: 20px;
+    line-height: 20px;
+}
+
+</style>
+
+</head>
+
+<body>
+    <div class="message">
+        <div class="info"><img src="../image/my/my.png"></div>
+        <div class="mes">
+            <div class="text">欢迎反馈，反馈时上传截图会便于定位问题。购物相关问题清点右上角常见问题。</div>
+            <div class="date">2012-07-7&nbsp;<span>10:18</span></div>
+        </div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+
+    };
+    
+</script>
+
+</html>

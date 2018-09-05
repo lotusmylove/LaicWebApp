@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <title>title</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+        <style>
+            html,
+            body {
+                height: 100%;
+                background-color: #f4f5f6;
+            }
+
+            .sky1 {
+                width: 100%;
+                height: 8px;
+                background-color: #f4f5f6;
+                border-bottom: 1px solid #e8e8e8;
+            }
+
+            .sky2 {
+                width: 100%;
+                height: 40px;
+                line-height: 40px;
+                font-size:13px;
+                color:#9d9d9d;
+                background-color: #f4f5f6;
+                border-top: 1px solid #e8e8e8;
+                border-bottom: 1px solid #e8e8e8;
+                box-sizing: border-box;
+				        padding-left: 15px;
+            }
+            .sky3 {
+                width: 100%;
+                height: 35px;
+                background-color: #f4f5f6;
+                border-top: 1px solid #e8e8e8;
+                border-bottom: 1px solid #e8e8e8;
+            }
+
+            .cont {
+                background-color: #fff;
+                box-sizing: border-box;
+                padding-left: 15px;
+            }
+            .t1 {
+            	height: 70px;
+                line-height: 70px;
+                width: 100%;
+                font-size: 15px;
+                color: #222;
+                position: relative;
+                border-bottom:1px solid #e8e8e8;
+           }
+
+           .t3{
+           		height: 50px;
+                line-height: 50px;
+                width: 100%;
+                font-size: 15px;
+                color: #222;
+                position: relative;
+           }
+
+            .t2 {
+                height: 49px;
+                line-height: 49px;
+                width: 100%;
+                font-size: 15px;
+                color: #222;
+                position: relative;
+                border-bottom:1px solid #e8e8e8;
+            }
+            .btn{
+                height: 49px;
+                line-height: 49px;
+                width: 100%;
+                font-size: 15px;
+                color: #222;
+                position: relative;
+                border-bottom:1px solid #e8e8e8;
+            }
+
+            .r {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                box-sizing: border-box;
+                padding-right: 16px;
+                color: #999;
+                font-size: 13px;
+                line-height: 49px;
+                text-align: center;
+            }
+
+            .close {
+                width: 85px;
+                height: 49px;
+                background-image: url(../image/my/close.png);
+                background-repeat: no-repeat;
+                background-size: 50px 33px;
+                background-position: center center;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                box-sizing: border-box;
+                padding-right: 16px;
+                color: #999;
+                font-size: 13px;
+                line-height: 49px;
+                text-align: center;
+            }
+
+            .active .close {
+                width: 85px;
+                height: 49px;
+                background-image: url(../image/my/open.png);
+                background-repeat: no-repeat;
+                background-size: 50px 33px;
+                background-position: center center;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                box-sizing: border-box;
+                padding-right: 16px;
+                color: #999;
+                font-size: 13px;
+                line-height: 49px;
+                text-align: center;
+            }
+
+            .arrow {
+                width: 40px;
+                height: 50px;
+                background-image: url(../image/my/arrow.png);
+                background-repeat: no-repeat;
+                background-size: 6px 12px;
+                background-position: center center;
+
+            }
+
+            .arrow_t1 {
+            	width: 40px;
+                height: 70px;
+                background-image: url(../image/my/arrow.png);
+                background-repeat: no-repeat;
+                background-size: 6px 12px;
+                background-position: center center;
+            }
+            .back {
+            	width:100%;
+            	height:50px;
+            	line-height: 50px;
+            	text-align: center;
+            	font-size:15px;
+            	color:#f85959;
+            	background-color: #fff;
+            	font-weight: 600;
+            }
+            .text {
+            	font-size: 13px;
+            	color:#a0a0a0;
+            	float:right;
+            	padding-right: 33px;
+            	box-sizing: border-box;
+            }
+            .text1 {
+            	font-size: 13px;
+            	color:#f85959;
+            	float:right;
+            	padding-right: 33px;
+            	box-sizing: border-box;
+            }
+            .PersonalInfoText {
+              width:100%;
+              padding-right: 15px;
+              font-size: 13px;
+              color: #a0a0a0;
+              float: right;
+              text-align:right;
+            }
+            .PersonalInfoTextNowarp {
+              width:100%;
+              padding-right: 15px;
+              font-size: 13px;
+              color: #a0a0a0;
+              float: right;
+              text-align:right;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;"
+            }
+        </style>
+    </head>
+
+    <body>
+
+          <ul class="aui-list aui-media-list aui-margin-b-15">
+            <li class="aui-list-item aui-list-item-middle">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title aui-font-size-14">头像</div>
+                        </div>
+                    </div>
+                    <div class="aui-list-item-media" style="width: 4rem;" tapmode onclick="fnSetAvatar();">
+                        <img id="userphoto" src="../image/demo5.png" class="aui-list-img-sm">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item aui-list-item-middle" tapmode onclick="fnOpenWin('win_PersonalInfoModfiy.html');">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner" style="width:100px;">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title aui-font-size-14">昵称</div>
+                        </div>
+                    </div>
+                    <div class="PersonalInfoTextNowarp" id="divTextName">
+                        寸心哥哥
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item aui-list-item-middle" tapmode onclick="fnOpenWin('win_PersonalInfoModfiy.html');">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner" style="width:100px;">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title aui-font-size-14">手机</div>
+                        </div>
+                    </div>
+                    <div class="PersonalInfoTextNowarp" id="divTextMoblie">
+                        ***
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item aui-list-item-middle" tapmode onclick="fnOpenWin('win_PersonalInfoModfiy.html');">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner" style="width:100px;">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title aui-font-size-14">签名</div>
+                        </div>
+                    </div>
+                    <div class="PersonalInfoTextNowarp" id="divTextRemark">
+                        这里是内容区域，新版中的列表布局可以很轻松的帮助开发者完成常见列表样式新版中的列表布局可以很轻松的帮助开发者完成常见列表样式。
+                    </div>
+                </div>
+            </li>
+          </ul>
+
+        <div style="margin:0 auto;padding:0 50px;">
+            <div class="aui-btn aui-btn-block aui-btn-danger aui-btn-sm" tapmode onclick="fnLogOut();">退出登录</div>
+        </div>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../script/sha1.js"></script>
+    <!--<script type="text/javascript" src="../script/common.js"></script>-->
+<script type="text/javascript">
+  apiready = function() {
+    fnLoadPersonInfo();
+  };
+  function fnLoadPersonInfo() {
+    var userExtInfo = $api.getStorage('userExtInfo');
+    if(userExtInfo ==null){
+      $api.byId('divTextName').innerText = "点击登录";
+      $api.byId('userphoto').src = "../image/demo5.png";
+      $api.byId('divTextRemark').innerText = "";
+      $api.byId('divTextMoblie').innerText = "";
+      return false;
+    }else if(userExtInfo.userExtInfo == null){
+      return false;
+    }
+    if(userExtInfo.userExtInfo.userphoto != null){
+      $api.byId('userphoto').src = userExtInfo.userExtInfo.userphoto.url;
+    }
+    $api.byId('divTextName').innerText = userExtInfo.userExtInfo.username;
+    $api.byId('divTextRemark').innerText = userExtInfo.userExtInfo.remark;
+    $api.byId('divTextMoblie').innerText = userExtInfo.userExtInfo.mobile;
+  }
+
+  function fnSetAvatar(){
+    api.actionSheet({
+        title: '上传头像',
+        cancelTitle: '取消',
+        buttons: ['拍照','相册']
+    }, function(ret, err){
+        if( ret ){
+             //alert( JSON.stringify( ret ) );
+             if(ret.buttonIndex == 3){return false;}
+             var SouceTypes = ["camera","album"];
+             api.getPicture({
+                 sourceType: SouceTypes[ret.buttonIndex-1],
+                 allowEdit: true,
+                 quality: 100,
+                 //targetWidth: 100,
+                 //targetHeight: 100,
+                 saveToPhotoAlbum: false
+             }, function(ret, err){
+                 if(ret){
+                      //alert(JSON.stringify(ret));
+                      //fnUploadAvatar(ret.data);
+                      var img_url = ret.data;
+                     if (img_url != "") {
+                       //打开裁剪frame
+                       openImageClipFrame(img_url);
+                     }
+                      //fnUploadFile(ret.data)
+                 }else{
+                      alert(JSON.stringify(err));
+                 }
+             });
+
+        }else{
+             alert( JSON.stringify( err ) );
+        }
+    });
+  }
+
+  function fnUploadFile(AvatarURL_){
+    var now = Date.now();
+    var appID = "A6058340878951";
+    var appKey = SHA1(appID+"UZ"+"796C1E15-5EAE-8E40-88B2-F5ED7BCA61A0"+"UZ"+now)+"."+now;
+    api.ajax({
+        url: 'https://d.apicloud.com/mcm/api/file',
+        method: 'POST',
+        "headers": {
+          "X-APICloud-AppId": appID,
+          "X-APICloud-AppKey": appKey
+        },
+        data: {
+            files:{
+              "name": "logo.jpg",
+              file: AvatarURL_
+            }
+        }
+    },function(ret, err){
+        if (ret) {
+            console.log( JSON.stringify( ret ) );
+            fnUploadAvatar(ret)
+        } else {
+            alert( JSON.stringify( err ) );
+        }
+    });
+  }
+
+  function fnUploadAvatar(files){
+    var now = Date.now();
+    var appID = "A6058340878951";
+    var appKey = SHA1(appID+"UZ"+"796C1E15-5EAE-8E40-88B2-F5ED7BCA61A0"+"UZ"+now)+"."+now;
+    //alert($api.dom("#account").value);
+    api.ajax({
+        //url: 'https://d.apicloud.com/mcm/api/file',
+        url: 'https://d.apicloud.com/mcm/api/userExtInfo/59c0e4c3f091d0ba4d1cfcac',
+        method: 'PUT',
+        "headers": {
+          "X-APICloud-AppId": appID,
+          "X-APICloud-AppKey": appKey
+        },
+        data: {
+            values: {
+                remark: "这个家伙",
+                userphoto:JSON.stringify( files )
+            }
+        }
+    },function(ret, err){
+        if (ret) {
+            alert( JSON.stringify( ret ) );
+            console.log("-------------------------");
+            console.log(JSON.stringify( ret ));
+            //fnUpdateUserAvatar(ret.url);
+
+            api.setStorage("userExtInfo",ret)
+            $api.byId('userphoto').src = ret.url;
+
+            api.execScript({
+                name: 'root',
+                frameName: 'demo_my_frm',
+                script: 'funcGoto();'
+            });
+        } else {
+            alert( JSON.stringify( err ) );
+            api.toast({
+                msg: '帐号或密码错误，请重新输入...',
+                duration: 2000,
+                location: 'middle'
+            });
+        }
+    });
+  }
+
+  //作废  直接更新userExtInfo表数据
+  function fnUpdateUserAvatar(strUrl){
+    var now = Date.now();
+    var appID = "A6058340878951";
+    var appKey = SHA1(appID+"UZ"+"796C1E15-5EAE-8E40-88B2-F5ED7BCA61A0"+"UZ"+now)+"."+now;
+    //alert($api.dom("#account").value);
+    api.ajax({
+        url: 'https://d.apicloud.com/mcm/api/user/'+userInfo.userId,
+        method: 'put',
+        "headers": {
+          "X-APICloud-AppId": appID,
+          "X-APICloud-AppKey": appKey,
+          "Authorization": userInfo.id
+        },
+        data: {
+            values: {
+                "userPhoto": strUrl
+            }
+        }
+    },function(ret, err){
+        if (ret) {
+            alert( JSON.stringify( ret ) );
+            //fnUpdateUserAvatar(ret.url);
+        } else {
+            //alert( JSON.stringify( err ) );
+            api.toast({
+                msg: '帐号或密码错误，请重新输入...',
+                duration: 2000,
+                location: 'middle'
+            });
+
+        }
+    });
+  }
+
+  function fnLogOut(){
+    //执行apicloud注销请求
+    var now = Date.now();
+    var appID = "A6058340878951";
+    var appKey = SHA1(appID+"UZ"+"796C1E15-5EAE-8E40-88B2-F5ED7BCA61A0"+"UZ"+now)+"."+now;
+    var userInfo = $api.getStorage('userInfo');
+    api.ajax({
+        url: 'https://d.apicloud.com/mcm/api/user/logout',
+        method: 'POST',
+        "headers": {
+          "X-APICloud-AppId": appID,
+          "X-APICloud-AppKey": appKey,
+          "Authorization": userInfo.id
+        }
+    },function(ret, err){
+      if (ret) {
+        //清空本地缓存用户身份
+        $api.clearStorage();
+        //重新加载用户信息页面
+        api.execScript({
+            name: 'root',
+            frameName: 'frame_setting',
+            script: 'funcGoto();'
+        });
+        //关闭页面
+        api.closeWin();
+      } else {
+          alert( JSON.stringify( err ) );
+      }
+    });
+  };
+  /**
+ * 打开图片裁剪页面
+ * 周枫
+ * 2016.5.21
+ */
+function openImageClipFrame(img_src){
+        console.log("mg_src=="+img_src);
+        //api.openFrame({
+        api.openWin({
+                name : 'w_imageclip_frame',
+                scrollToTop : true,
+                allowEdit : true,
+                url : 'frm_ImageClip.html',
+                rect : {
+                  x : 0,
+                  y : 0,
+                  w : api.winWidth,
+                  h : api.winHeight,
+                },
+                animation : {
+                  type : "reveal", //动画类型（详见动画类型常量）
+                  subType : "from_right", //动画子类型（详见动画子类型常量）
+                  duration : 300
+                },
+                pageParam : {
+                  img_src : img_src
+                },
+                vScrollBarEnabled : false,
+                hScrollBarEnabled : false,
+                //页面是否弹动 为了下拉刷新使用
+                bounces : false
+        });
+}
+
+function fnOpenWin(strUrl) {
+  api.openWin({
+      name: 'modefiy',
+      url: strUrl
+  });
+}
+    </script>
+
+</html>

@@ -1,0 +1,7 @@
+
+*_frame.html
+*_win.html
+*.html
+
+
+首页底部Banner划分：门户、任务、寸信、视频、商城

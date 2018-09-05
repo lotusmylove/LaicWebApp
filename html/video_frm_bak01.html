@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+    <style type="text/css">
+    body {
+        background: #ffffff;
+    }
+    .bg-dark {
+        background: #333333 !important;
+    }
+    .aui-slide-node img {
+        width: auto;
+        height: 100%;
+    }
+    </style>
+</head>
+<body>
+  <header id="header">
+      <div class="header home active">
+          <div class="top-menu"></div>
+          <div class="add_btn btn" tapmode onclick="fnMore()"></div>
+      </div>
+      <div class="header video">
+          <div class="top-menu"></div>
+          <div class="search-video-btn" tapmode onclick="fnSearch();"></div>
+      </div>
+      <div class="header topic gambit_head">
+          <div class="gambit_login" tapmode onclick="fnLogin()"></div>
+          <div class="gambit_menu gambit_recommend" id="top-menu">
+              <div class="list active" tapmode onclick="changeStyle(0)">推荐</div>
+              <div class="list em2" tapmode onclick="changeStyle(1)">关注</div>
+          </div>
+          <div class="gambit_seek" tapmode onclick="fnOpenThemeChoose();"></div>
+      </div>
+      <div class="header my"></div>
+  </header>
+  <section class="content"></section>
+  <footer id="footer" class="footer">
+      <div class="menu home active " tapmode="active" onclick="fnChange(0)">首页</div>
+      <div class="menu video" tapmode="active" onclick="fnChange(1)">视频</div>
+      <div class="menu gambit" tapmode="active" onclick="fnChange(2)">话题</div>
+      <div class="menu my" tapmode="active" onclick="fnChange(3)">我的</div>
+  </footer>
+
+
+  <div class="aui-content-padded">
+      <p id="divTitle">优化说明：新增当前页（currentPage）回调及总页数获取；优化图片显示</p>
+  </div>
+  <div id="aui-slide">
+      <div class="aui-slide-wrap" >
+          <div class="aui-slide-node bg-dark">
+              <img src="../image/l1.png" />
+          </div>
+          <div class="aui-slide-node bg-dark">
+              <img src="../image/l2.png" />
+          </div>
+          <div class="aui-slide-node bg-dark">
+              <img src="../image/l3.png" />
+          </div>
+      </div>
+      <div class="aui-slide-page-wrap"><!--分页容器--></div>
+  </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript">
+  apiready = function() {
+    fnInitPull();
+    tet();
+    //fninit();
+    //headList(progress, isPull);
+    //fnInitPushRefresh();
+  };
+
+
+
+
+
+
+function tet() {
+  var NVNavigationBar = api.require('NVNavigationBar');
+  NVNavigationBar.open({
+      rect: {
+           x: 0,
+           y: 600,
+           w: api.frameWidth,
+           h: 42
+      },
+     styles: {
+           orientation: 'horizontal',
+           bg: '#6b6b6b',
+           bgAlpha: 1,
+           font: {
+           size: 14,
+           sizeSelected: 18,
+           color: '#FFFFFF',
+           colorSelected: '#ff0000',
+           alpha: 1
+           },
+           itemSize: {
+               w: 90,
+               h: 44
+           }
+     },
+      items: [{
+         title: '标题一',
+         bg: '#FFE7BA',
+         bgSelected: '#ff00000'
+         },{
+         title: '标题二',
+         bg: '#FFE1FF',
+         bgSelected: '#FFA500'
+         },{
+         title: '标题三',
+         bg: '#FFAEB9',
+         bgSelected: '#FFA500'
+         },{
+         title: '标题四',
+         bg: '#CDCD00',
+         bgSelected: '#FFA500'
+         },{
+         title: '标题五',
+         bg: '#BBFFFF',
+         bgSelected: '#FFA500'
+         },{
+         title: '标题六',
+         bg: '#436EEE',
+         bgSelected: '#FFA500'
+         }],
+         selectedIndex: 1,
+         fixedOn: api.frameName,
+         id: 'first'
+  }, function(ret, err) {
+      api.alert({msg:JSON.stringify(ret)});
+  });
+}
+
+
+
+
+
+
+  //初始化图片轮播
+  var slide = new auiSlide({
+      container:document.getElementById("aui-slide"),
+      // "width":300,
+      "height":240,
+      "speed":500,
+      "autoPlay": 3000, //自动播放
+      "loop":true,
+      "pageShow":true,
+      "pageStyle":'line',
+      'dotPosition':'center'
+  })
+  // 刷新
+  function fnInitPull() {
+    api.setRefreshHeaderInfo({
+      visible: true,
+      loadingImg: 'widget://image/refresh.png',
+      bgColor: '#f0f0f0',
+      textColor: '#888',
+      textDown: '下拉刷新...',
+      textUp: '松开刷新...',
+      showTime: true
+    }, function(ret, err) {
+      api.refreshHeaderLoading();
+      setTimeout(fnLoadData,2000);
+      //headList(progress, true);
+    });
+  };
+  function fnLoadData() {
+    var now = Date.now();
+    $api.byId('divTitle').innerHTML = $api.byId('divTitle').innerHTML + "<br>"+now;
+
+    api.refreshHeaderLoadDone();
+    api.toast({
+      msg: '加载完毕',
+      duration: 2000,
+      location: 'top'
+    });
+  }
+
+</script>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>工作任务清单</title>
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+<style type="text/css">
+    .text-white {
+        color: #ffffff !important;
+    }
+
+    .aui-grid [class*=aui-col-] {
+        padding: 0.75rem 0;
+    }
+    /*tab切换类*/
+
+    .aui-tab-xm {
+        position: relative;
+        background-color: #ffffff;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-align-self: center;
+        align-self: center;
+    }
+
+    .aui-tab-item-xm {
+        width: 100%;
+        /*height: 2.2rem;
+        line-height: 2.2rem;*/
+        position: relative;
+        font-size: 0.7rem;
+        text-align: center;
+        color: #212121;
+        margin-left: -1px;
+        -webkit-box-flex: 1;
+        box-flex: 1;
+        padding: 5px 0;
+    }
+
+    .aui-tab-item-xm.aui-active {
+        color: #FFF;
+        border-radius: 2px;
+        background-color: #039be5;
+    }
+
+    .aui-list-item.wechat-top {
+        background-color: #f3f3f7;
+    }
+
+    .aui-list .wechat-avatar {
+        width: 3rem;
+    }
+
+    .wechat-avatar .aui-row-padded {
+        background-color: #dddee0;
+        padding: 0.1rem;
+        border-radius: 0.2rem;
+        margin-left: -0.05rem;
+        margin-right: -0.05rem;
+    }
+
+    .wechat-avatar .aui-row-padded [class*=aui-col-xs-] {
+        padding: 0.05rem;
+    }
+
+    .wechat-avatar,
+    .wechat-avatar>img {
+        border-radius: 0.2rem;
+    }
+
+    .aui-media-list-item-inner {
+    	-webkit-box-sizing: border-box;
+    	box-sizing: border-box;
+    	display: -webkit-box;
+    	/* display: -webkit-flex; */
+    	/* display: flex; */
+    }
+</style>
+</head>
+
+<body>
+  <div class="aui-tab-xm" id="tab">
+      <div id="2018-05-21" class="aui-tab-item-xm aui-active" tapmode onclick="fnShowTasks(this);">周一<div>21</div></div>
+      <div id="2018-05-22" class="aui-tab-item-xm" tapmode onclick="fnShowTasks(this);">周二<div>22</div></div>
+      <div id="2018-05-23" class="aui-tab-item-xm" tapmode onclick="fnShowTasks(this);">周三<div>23</div></div>
+      <div id="2018-05-24" class="aui-tab-item-xm" tapmode onclick="fnShowTasks(this);">周四<div>24</div></div>
+      <div id="2018-05-25" class="aui-tab-item-xm" tapmode onclick="fnShowTasks(this);">周五<div>25</div></div>
+      <div id="2018-05-26" class="aui-tab-item-xm" tapmode onclick="fnShowTasks(this);">周六<div>26</div></div>
+      <div id="2018-05-27" class="aui-tab-item-xm" tapmode onclick="fnShowTasks(this);">周日<div>27</div></div>
+  </div>
+  <!-- aui-text-default      #212121
+.aui-text-primary     #00bcd4
+.aui-text-success     #009688
+.aui-text-info            #03a9f4
+.aui-text-warning    #ffc107
+.aui-text-danger     #e51c23
+.aui-text-pink           #e91e63
+.aui-text-purple       #673ab7
+.aui-text-indigo       #3f51b5 -->
+  <style>
+    .aui-list-item{overflow:hidden;width:150%;}
+    .ibtn{float:right;width:30%;text-align:center;background:#E2421B;color:#fff;}
+    .swipeleft{transform:translateX(-30%);-webkit-transform:translateX(-30%);}
+    .btnFinish{width:50%;min-height:3.5rem;line-height:3.5rem;background: #4CAF50;color:#FFF;float:left;font-size: 14pt;}
+    .btnDel{width:50%;min-height:3.5rem;line-height:3.5rem;background:red;color:#FFF;float:left;font-size: 14pt;}
+    .aui-list-item-title{text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+    .aui-media-list-item-inner{padding-right: 20px;}
+  </style>
+  <div class="aui-content aui-margin-b-15">
+      <ul class="aui-list aui-media-list">
+          <li class="aui-list-item wechat-top">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-label-icon">
+                      <i class="fa fa-calendar"></i>
+                  </div>
+                  <div class="aui-list-item-inner">
+                      周三 2018年5月23日
+                      <a class="aui-pull-right">
+                          <span class="aui-iconfont aui-icon-pencil aui-text-primary" tapmode onclick="fnNewTask();"> 新建</span>
+                      </a>
+                  </div>
+              </div>
+          </li>
+          <li id="tk_01" class="aui-list-item aui-list-item-middle">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media wechat-avatar">
+                      <div class="aui-badge">9</div>
+                      <div class="aui-row-padded">
+                          <div class="aui-col-xs-4">
+                              <img src="../image/demo1.png" />
+                          </div>
+                          <div class="aui-col-xs-4">
+                              <img src="../image/demo2.png" />
+                          </div>
+                          <div class="aui-col-xs-4">
+                              <img src="../image/demo3.png" />
+                          </div>
+                          <div class="aui-col-xs-4">
+                              <img src="../image/demo4.png" />
+                          </div>
+                          <div class="aui-col-xs-4">
+                              <img src="../image/demo5.png" />
+                          </div>
+                          <div class="aui-col-xs-4">
+                              <img src="../image/demo6.png" />
+                          </div>
+                          <div class="aui-col-xs-4">
+                              <img src="../image/demo1.png" />
+                          </div>
+                          <div class="aui-col-xs-4">
+                              <img src="../image/demo3.png" />
+                          </div>
+                          <div class="aui-col-xs-4">
+                              <img src="../image/demo5.png" />
+                          </div>
+                      </div>
+                  </div>
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
+                            当天上午去海油研究总院开会讨论相关商务问题</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          <i class="fa fa-flag aui-text-primary"> 5月23日 上午9点</i>
+                          <div class="aui-list-item-right"><div class="aui-label aui-label-success">项目工作</div></div>
+                      </div>
+                  </div>
+                  <div class="ibtn aui-list-item-right">
+                    <div class="btnFinish" tapmode onclick="fnLeftMenu('complete','01');"><i class="fa fa-check"></i>完成</div>
+                    <div class="btnDel" tapmode onclick="fnLeftMenu('delete','01');"><i class="fa fa-remove">删除</i></div>
+                  </div>
+              </div>
+          </li>
+          <li id="tk_02" class="aui-list-item aui-list-item-middle" onclick="fnOpenTask('1001','程映辉','../mui/images/cbd.jpg')">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media wechat-avatar">
+                      <div class="aui-badge">9</div>
+                      <img src="../image/demo5.png" />
+                  </div>
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title">流浪男</div>
+                          <div class="aui-list-item-right">星期一</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          <i class="fa fa-flag aui-text-warning"> 5月24日</i>
+                          <div class="aui-list-item-right"><div class="aui-label aui-label-info">休闲娱乐</div></div>
+                      </div>
+                  </div>
+                  <div class="ibtn aui-list-item-right">
+                    <div class="btnFinish" tapmode onclick="fnLeftMenu('complete','02');"><i class="fa fa-check"></i>完成</div>
+                    <div class="btnDel" tapmode onclick="fnLeftMenu('delete','02');"><i class="fa fa-remove">删除</i></div>
+                  </div>
+              </div>
+          </li>
+          <li id="tk_03" class="aui-list-item aui-list-item-middle" onclick="fnOpenTask('1002','程新红','../mui/images/cxh.jpg')">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media wechat-avatar">
+                      <img src="../image/demo1.png" />
+                  </div>
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title">张三</div>
+                          <div class="aui-list-item-right">1天前</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          <i class="fa fa-flag aui-text-danger"> 5月24日</i>
+                      </div>
+                  </div>
+                  <div class="ibtn aui-list-item-right">
+                    <div class="btnFinish" tapmode onclick="fnLeftMenu('complete','03');"><i class="fa fa-check"></i>完成</div>
+                    <div class="btnDel" tapmode onclick="fnLeftMenu('delete','03');"><i class="fa fa-remove">删除</i></div>
+                  </div>
+              </div>
+          </li>
+          <li id="tk_04" class="aui-list-item aui-list-item-middle" onclick="fnOpenTask('1003','Baby','../mui/images/baby.jpg')">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media wechat-avatar">
+                      <div class="aui-dot"></div>
+                      <img src="../image/demo4.png" />
+                  </div>
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title">中国使馆提醒在马达加斯加中国公民和机构注意安全</div>
+                      </div>
+                      <div class="aui-list-item-text">
+                          <i class="fa fa-flag aui-text-success"> 5月24日</i>
+                      </div>
+                  </div>
+                  <div class="ibtn aui-list-item-right">
+                    <div class="btnFinish" tapmode onclick="fnLeftMenu('complete','04');"><i class="fa fa-check"></i>完成</div>
+                    <div class="btnDel" tapmode onclick="fnLeftMenu('delete','04');"><i class="fa fa-remove">删除</i></div>
+                  </div>
+              </div>
+          </li>
+      </ul>
+  </div>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+      fnInitSwipeLeft();
+    }
+    function fnShowTasks(obj){
+      var tabs = document.getElementById("tab").children;
+      for(var i=0;i<tabs.length;i++){
+        if(tabs[i].id == obj.id){
+          tabs[i].className = "aui-tab-item-xm aui-active";
+        }else{
+          tabs[i].className = "aui-tab-item-xm";
+        }
+      }
+    }
+  function fnNewTask(){
+    $api.toast('提示信息', '开发中...',  3000);
+  }
+  function fnOpenTask(){
+    $api.toast('提示信息', '开发中...',  3000);
+  }
+  function fnLeftMenu(strFlag,strTaskId) {
+    if(strFlag == "complete"){
+
+    }else{
+      var objTask = document.getElementById("tk_"+strTaskId);
+      var objParent = objTask.parentNode;
+      objParent.removeChild(objTask);
+      $api.toast('提示信息', '任务已删除',  2000);
+    }
+  }
+  function fnInitSwipeLeft() {
+    //侧滑显示删除按钮
+    var expansion = null; //是否存在展开的list
+    //var container = document.querySelectorAll('.list li a');
+    var container = document.querySelectorAll('.aui-media-list-item-inner');
+    for(var i = 0; i < container.length; i++){
+        var x, y, X, Y, swipeX, swipeY;
+        container[i].addEventListener('touchstart', function(event) {
+            x = event.changedTouches[0].pageX;
+            y = event.changedTouches[0].pageY;
+            swipeX = true;
+            swipeY = true ;
+            if(expansion){   //判断是否展开，如果展开则收起
+                expansion.className = "aui-media-list-item-inner";
+            }
+        });
+        container[i].addEventListener('touchmove', function(event){
+
+            X = event.changedTouches[0].pageX;
+            Y = event.changedTouches[0].pageY;
+            // 左右滑动
+            if(swipeX && Math.abs(X - x) - Math.abs(Y - y) > 0){
+                // 阻止事件冒泡
+                event.stopPropagation();
+                if(X - x > 10){   //右滑
+                    event.preventDefault();
+                    this.className = "aui-media-list-item-inner";    //右滑收起
+                }
+                if(x - X > 10){   //左滑
+                    event.preventDefault();
+                    this.className = "aui-media-list-item-inner swipeleft";   //左滑展开
+                    expansion = this;
+                }
+                swipeY = false;
+            }
+            // 上下滑动
+            if(swipeY && Math.abs(X - x) - Math.abs(Y - y) < 0) {
+                swipeX = false;
+            }
+        });
+    }
+  }
+</script>
+
+</html>

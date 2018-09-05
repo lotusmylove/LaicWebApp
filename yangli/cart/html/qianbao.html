@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../css/ui.css"/>
+		<style>
+			body {
+				background: #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<div class="header-background"></div>
+			<div class="toolbar statusbar-padding">
+				<button class="bar-button back-button" onclick="back()">
+					<i class="icon icon-back"></i>
+				</button>
+				<div class="header-title">
+					<div class="title">
+						我的钱包
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="height:4rem"></div>
+		<div>
+			<div class="aui-wallet-content">
+				<span>可用余额(元)</span>
+				<p>
+					3999.00
+				</p>
+			</div>
+			<div class="aui-add-cell t-line" style="padding:0">
+				<div class="aui-add-fix aui-wallet-text r-line">
+					总金额3999.00
+				</div>
+				<div class="aui-add-fix aui-wallet-text">
+					提现金额0.00
+				</div>
+			</div>
+			<div class="t-line aui-wallet-recharge">
+				<a href="#">充值</a>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			$api.fixStatusBar($api.dom('.header'));
+		};
+		function back() {
+			api.closeWin({
+			});
+		}
+	</script>
+</html>

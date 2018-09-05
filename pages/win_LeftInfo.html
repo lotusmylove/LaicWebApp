@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>APP</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/slidebars.css">
+    <style>
+    	body {
+    		background: #F4F4F4;
+    		font-family: Arial, sans-serif;
+    		font-size: 14px;
+    		font-weight: lighter;
+    	}
+
+    	.l-main {
+    		width: 530px;
+    		margin: 0 auto;
+    	}
+
+    	.menu {
+    		width: 250px;
+    		margin: 0px;
+    		background: #fff;
+    		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    		border-radius: 5px;
+    		float: left;
+    	}
+
+    	.menu__header {
+    		background: #4B4F55;
+    		border-bottom: 1px solid #353A40;
+    		border-radius: 5px 5px 0 0;
+    	}
+
+    	.menu__header-title {
+    		color: #fff;
+    		padding: 15px;
+    		text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    	}
+
+    	.menu__body {
+    		border-radius: 0 0 5px 5px;
+    	}
+
+    	.menu--small {
+    		width: 110px;
+    	}
+
+    	.nav {
+    		list-style: none;
+    	}
+
+    	.nav__item {
+    		position: relative;
+    	}
+
+    	.nav__item-link {
+    		padding: 10px 15px;
+    		text-decoration: none;
+    		color: #8B8E93;
+    		display: block;
+    		border-bottom: 1px solid #F0F0F0;
+    	}
+
+    	.nav__item-link:hover {
+    		background: #f0f0f0;
+    	}
+
+    	.nav__item-link.is-active {
+    		background: #6E757F;
+    		color: #fff;
+    		border-bottom-color: #4B4F55;
+    		box-shadow: 0 1px 0 #7A828D inset;
+    	}
+
+    	.nav__item-link.is-active:after {
+    		display: block;
+    		position: absolute;
+    		top: 50%;
+    		margin-top: -6px;
+    		border-top: 6px solid transparent;
+    		border-bottom: 6px solid transparent;
+    		border-left: 6px solid #6E757F;
+    	}
+
+    	.nav__item-link.is-active .nav__item-icon {
+    		color: #fff;
+    	}
+
+    	.nav__item:last-child .nav__item-link {
+    		border-bottom: none;
+    	}
+
+    	.nav__item-icon {
+    		color: #D2D5DA;
+    		width: 20px;
+    		text-align: center;
+    		font-size: 18px;
+    		margin-right: 10px;
+    	}
+      .nav__item-text {
+    		text-align: center;
+    		font-size: 16px;
+    	}
+    	.badge {
+    		font-size: 12px;
+    		padding: 2px 8px;
+    		border: 1px solid #D1D1D1;
+    		border-radius: 10px;
+    		position: absolute;
+    		top: 10px;
+    		right: 15px;
+    	}
+
+    	.badge--warning {
+    		background: #ED373F;
+    		border-color: #ED373F;
+    	}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+      <div class="menu">
+    	    <header class="menu__header">
+            <ul class="aui-list aui-media-list">
+                <li class="aui-list-item aui-list-item-middle">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-media" style="width: 3rem;">
+                            <img src="../image/demo5.png" class="aui-list-img-sm">
+                        </div>
+                        <div class="aui-list-item-inner aui-list-item-arrow">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-14">付争明</div>
+                                <div class="aui-list-item-right">08:00</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                梦想创造未来...
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+    	    </header>
+    	    <div class="menu__body">
+    	      <ul class="nav">
+    	        <li class="nav__item" style="border-left: 3px solid #ff2600;">
+    	          <a href="#" class="nav__item-link is-active">
+                  <i class="fa fa-envelope nav__item-icon"></i>
+    	            <span class="nav__item-text">消息通知</span>
+    	            <span class="badge" style="background: #ff2600;border-color: #ff2600;">32</span>
+    	          </a>
+    	        </li>
+    	        <li class="nav__item" style="border-left: 3px solid #9C27B0;">
+    	          <a href="#" class="nav__item-link is-active">
+    	            <i class="fa fa-calendar nav__item-icon"></i>
+    	            <span class="nav__item-text">待办任务</span>
+    	            <span class="badge" style="background: #9C27B0;border-color: #9C27B0;">8</span>
+    	          </a>
+    	        </li>
+    	         <li class="nav__item" style="border-left: 3px solid #ffc107;">
+    	          <a href="#" class="nav__item-link is-active">
+    	            <i class="fa fa-cog nav__item-icon"></i>
+    	            <span class="nav__item-text">系统设置</span>
+    	            <span class="badge" style="background: #ffc107;border-color: #ffc107;">17</span>
+    	          </a>
+    	        </li>
+    	        <li class="nav__item" style="border-left: 3px solid #FF5722;">
+    	          <a href="#" class="nav__item-link is-active">
+    	            <i class="fa fa-question nav__item-icon"></i>
+    	            <span class="nav__item-text">系统帮助</span>
+    	            <span class="badge" style="background: #FF5722;border-color: #FF5722;">3</span>
+    	          </a>
+    	        </li>
+    	        <li class="nav__item" style="border-left: 3px solid #009688;">
+    	          <a href="#" class="nav__item-link is-active">
+    	            <i class="fa fa-phone nav__item-icon"></i>
+    	            <span class="nav__item-text">用户反馈</span>
+    	            <span class="badge" style="background: #009688;border-color: #009688;">9</span>
+    	          </a>
+    	        </li>
+    	      </ul>
+    	    </div>
+    	  </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+apiready = function () {
+  $api.fixStatusBar( $api.dom('header') );
+
+}
+</script>
+</html>

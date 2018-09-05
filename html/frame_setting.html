@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="./css/api.css" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./css/aui.css" />
+    <style>
+        .aui-btn-block{width:90%;margin:0 auto;padding:8px 0px;}
+        textarea{width:90%;margin:0 auto;height:200px;overflow:scroll}
+
+    </style>
+</head>
+<body>
+    <div id="wrap" class="flex-wrap flex-vertical">
+
+        <header class="aui-bar aui-bar-nav aui-bar-info">
+            <div class="aui-title">顶部导航栏</div>
+        </header>
+        <div id="main" class="flex-con" style="text-align:center">
+            <div style="height:10px;"></div>
+            <input id="ip" type="text" placeholder="IP" />
+            <input id="dk" type="text" placeholder="端口" />
+            <div class="aui-btn aui-btn-info aui-btn-block" onclick="Init();">连接服务器</div>
+
+            <div style="height:20px;"></div>
+            <input id="setmsg" type="text" placeholder="信息" />
+            <div class="aui-btn aui-btn-info aui-btn-block" onclick="setMsg();">发送</div>
+
+            <div style="height:10px;"></div>
+			<textarea id="msg"></textarea>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+
+        var socketManager;
+        var sid;
+        apiready = function () {
+            socketManager = api.require('socketManager');
+            //如果之前输入过自动填充
+            $("#ip").val($api.getStorage("ip"));
+            $("#dk").val($api.getStorage("dk"));
+        }
+
+
+        //连接服务端
+        function Init() {
+            $api.setStorage("ip", $("#ip").val());
+            $api.setStorage("dk", $("#dk").val());
+            socketManager.createSocket({
+                host: $("#ip").val(),
+                port: $("#dk").val(),
+                timeout:10
+            }, function (ret, err) {
+                if (ret) {
+                    sid = ret.sid;
+                    appendToTextarea(ret.data);
+                    console.log(ret.state);
+                } else {
+                    appendToTextarea(JSON.stringify(err));
+                }
+            });
+        }
+
+        function setMsg() {
+            appendToTextarea($("#setmsg").val());
+            socketManager.write({
+                sid: sid,
+                data: $("#setmsg").val()
+            }, function (ret, err) {
+                if (ret.status) {
+                    appendToTextarea("已发送：" + $("#setmsg").val());
+                } else {
+                    appendToTextarea("未发送：" + $("#setmsg").val());
+                }
+            });
+        }
+
+        function appendToTextarea(msg) {
+            Date.prototype.Format = function (fmt) { //author: meizz
+                var o = {
+                    "M+": this.getMonth() + 1,                 //月份
+                    "d+": this.getDate(),                    //日
+                    "h+": this.getHours(),                   //小时
+                    "m+": this.getMinutes(),                 //分
+                    "s+": this.getSeconds(),                 //秒
+                    "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                    "S": this.getMilliseconds()             //毫秒
+                };
+                if (/(y+)/.test(fmt))
+                    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+                for (var k in o)
+                    if (new RegExp("(" + k + ")").test(fmt))
+                        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                return fmt;
+            }
+            var time = new Date().Format("yyyy-MM-dd hh:mm:ss");
+            var str = $("#msg").val() + time + " " + msg + "\n";
+            $("#msg").val(str);
+            $("#msg").scrollTop(500000);
+        }
+    </script>
+</body>
+</html>

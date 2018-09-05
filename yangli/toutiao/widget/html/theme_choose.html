@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+        <title>今日头条首页</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style type="text/css">
+            html,
+            body {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-flex-flow: column;
+                flex-flow: column;
+                height: 100%;
+                background-color: #FFFFFF;
+            }
+            
+            #nav {
+                height: 42px;
+                border-bottom: 1px solid #d8d8d8;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-orient: horizontal;
+                -webkit-flex-flow: row;
+                flex-flow: row;
+            }
+            
+            .back {
+                height: 42px;
+                width: 42px;
+                background: url('../image/shouye/back-black.png') no-repeat;
+                -webkit-background-size: 18px 18px;
+                background-size: 18px 18px;
+                background-position: center center;
+                /*  display: inline-block;
+  float: left;*/
+            }
+            
+            .search {
+                padding: 6px 15px 0 0px;
+                -webkit-box-flex: 1;
+                -webkit-flex: 1;
+                flex: 1;
+            }
+            
+            .search .input {
+                height: 100%;
+                overflow: auto;
+                line-height: 30px;
+                border: 1px solid #DEDEDE;
+                border-radius: 8px;
+                color: #CCCCCC;
+                padding: 0 8px;
+                font-size: 15px;
+            }
+            
+            .search .input>div {
+                display: inline-block;
+                float: left;
+                font-size:14px;
+            }
+            
+            .search-pic {
+                height: 20px;
+                width: 20px;
+                padding: 5px;
+                background: url(../image/theme/search.png) center no-repeat;
+                -webkit-background-size: 20px 20px;
+                background-size: 20px 20px;
+            }
+            
+            .content {
+                -webkit-box-flex: 1;
+                -webkit-flex: 1;
+                flex: 1;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="nav">
+            <div class="back" tapmode onclick="api.closeWin();"></div>
+            <div class="search">
+                <div class="input">
+                    <div class="search-pic"></div>
+                    <div>搜索感兴趣的话题</div>
+                </div>
+            </div>
+        </div>
+        <div class="content"></div>
+        <!--  <footer id=footer>
+    <div class="comment">写评论...</div>
+</footer>
+-->
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+            fnInit();
+            skipContent();
+        };
+        var nav, navHeight, footHeight, foot;
+
+        function fnInit() {
+            nav = $api.byId('nav');
+            $api.fixStatusBar(nav);
+            navHeight = $api.offset(nav).h;
+
+        }
+
+        function skipContent() {
+            api.openFrame({
+                name: 'theme_choose_left_frame',
+                url: './theme_choose_left_frame.html',
+                bounces: true,
+                rect: {
+                    x: 0,
+                    y: navHeight,
+                    w: 72,
+                    h: api.winHeight - navHeight
+                },
+                vScrollBarEnabled:false
+            });
+            api.openFrame({
+                name: 'theme_choose_right_frame',
+                url: './theme_choose_right_frame.html',
+                bounces: true,
+                rect: {
+                    x: 72,
+                    y: navHeight,
+                    w: api.winWidth - 80,
+                    h: api.winHeight - navHeight
+                },
+                vScrollBarEnabled:false
+            });
+            api.execScript({
+                name:'theme_choose',
+                frameName: 'theme_choose_left_frame',
+                script:'fnChange("0");;'
+            });
+        }
+    </script>
+
+</html>

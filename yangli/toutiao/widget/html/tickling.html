@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            background-color: #f4f5f6;
+        }
+        .title {
+            height: 88px;
+            line-height: 43px;
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+            color: #222;
+            background-color: #fefefe;
+            border-bottom: 1px solid #d8d8d8;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .title .arrow {
+            width: 43px;
+            height: 43px;
+            position: absolute;
+            left: 0;
+            bottom: 43px;
+            background-image: url(../image/pic22.png);
+            background-repeat: no-repeat;
+            background-size: 11px 19px;
+            background-position: center center;
+        }
+        .ticklings{
+           height: 43px;
+           background-color: #F4F5F6;
+       }
+       .ticklings>div{
+
+        width: 50%;
+        float: left;
+        display: inline-block;
+        text-align: center;
+    }
+    .ticklings>div.active{
+        border-bottom: 2px solid #4FA6E3;
+        color: blue;
+    }
+
+    
+</style>
+</head>
+
+<body>
+    <div class="title" id="header">
+        <div> 意见反馈</div>
+        <div class="arrow event-back" onclick="api.closeWin();"></div>
+        
+        <div class="ticklings">   
+            <div class="active">我的意见</div>
+            <div>常见问题</div>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        fnOpenFrameGroup();
+        fnChange();
+    };
+    var headerHeight,divs;
+    function fnChange(){
+        var ticklings=$api.domAll('.ticklings');
+        divs=$api.domAll(ticklings[0],'div');
+        for(var i=0;i<divs.length;i++){
+            divs[i].num=i;
+            divs[i].onclick=function(){
+                for(var j=0;j<divs.length;j++){
+                    divs[j].className="";
+                }
+                api.setFrameGroupIndex({
+                    name: 'tickling_framegroup',
+                    index: this.num,
+                    bounces:false
+                });
+                this.className="active";
+            }
+        }
+    }
+    function fnOpenFrameGroup(){
+        headerHeight=getHeaderHeight();
+        api.openFrameGroup({
+            name: 'tickling_framegroup',
+            scrollEnabled: false,
+            rect: {
+                x:0,
+                y:headerHeight,
+                w:'auto',
+                h:api.winHeight-headerHeight
+            },
+            index: 0,
+            frames: [{
+                name: 'tickling_framegroup1', 
+                url: './tickling_framegroup1.html',
+                bounces:false
+            },{
+                name: 'tickling_framegroup2', 
+                url: './tickling_framegroup2.html',
+                bounces:false
+            }]
+        }, function(ret, err){
+
+        });
+    }
+</script>
+
+</html>

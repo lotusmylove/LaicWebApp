@@ -1,0 +1,51 @@
+.laic-bg-primary
+{
+    background-color: #007aff !important;
+}
+.laic-bg-positive
+{
+    background-color: #4cd964 !important;;
+}
+.laic-bg-negative
+{
+    background-color: #dd524d !important;;
+}
+.laic-bg-black
+{
+    background-color: #000000 !important;
+}
+.laic-bg-black a,.laic-bg-black h1
+{
+    color: #FFFFFF !important;
+}
+
+.mui-content-custom{
+	padding-top: 45px;
+	padding-bottom: 50px;
+}
+.laic-media-left{
+	width:auto !important;
+	float:left !important;
+}
+.laic-media-right{
+	float:right !important;
+	width:40px !important;
+}
+.laic-navigate-right｛
+    margin-right: -120px !important;
+｝
+.laic-icon-small {
+    font-size: 18px !important;
+}
+.laic-media-right p,.laic-media-right span{
+    font-size: 18px !important;
+    font-weight: 400;
+}
+.laic-pull-left{ float:left; width:100px;}
+.laic-pull-right{ float:right; width:100px;}
+.laic-pull-center{ margin:0 50px;}
+
+.laic-list-text {
+	line-height: 42px;
+    padding-left: 10px;
+}

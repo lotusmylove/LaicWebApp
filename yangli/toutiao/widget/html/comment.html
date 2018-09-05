@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+        html,body{
+            height:100%;
+        }
+        .box {
+        	height:150px;
+        	width:100%;
+        	background-color: #f4f5f6;
+        	box-sizing: border-box;
+        	padding:0 20px;
+        	position:absolute;
+        	left:0;
+        	bottom:0;
+        }
+        .text {
+        	width:100%;
+        	height:95px;
+        	border:1px solid #d8d8d8;        	
+        	margin-top:10px;
+        	background-color: #fff;
+        	border-radius: 6px;
+        }
+        .release {
+        	width:56px;
+        	height:28px;
+        	line-height: 28px;
+        	text-align: center;
+        	color:#fff;
+        	background-color: #cacaca;
+        	font-size:14px;
+        	float:right;
+        	margin-top: 8px;
+        	border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+    	<div class="text" tapmode onclick="fnOpen()">
+            
+        </div>
+    	<div class="release">发布</div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    var UIInput;
+    apiready = function() {
+        UIInput = api.require('UIInput');
+    };
+
+    function fnOpen(){
+        UIInput.open({
+             rect: {
+                x: 4,
+                y: 4,
+                w: api.winWidth,
+                h: 40
+            },
+            styles: {
+                bgColor: '#ccc',
+                size: 14,
+                color: '#000',
+                placeholder: {
+                    color: '#222'
+                }
+            },
+            autoFocus: true,
+            maxRows: 4,
+            placeholder: '这是一个输入框',
+            keyboardType: 'search',
+            fixedOn: api.frameName
+        });
+    }
+</script>
+</html>

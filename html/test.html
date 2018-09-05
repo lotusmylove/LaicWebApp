@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>Hello APP</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<style>
+		#con{
+			margin: 10px;
+			font-size: 24px;
+		}
+		ul{
+			margin-bottom: 10px;
+		}
+		ul li{
+			margin: 5px 10px;
+			padding: 5px;
+			color: #000;
+			word-wrap: break-word;
+		}
+	</style>
+</head>
+<body>
+    <label id="con">Hello APP</label><br><br>
+    <a href="###" onclick="fnOpenWin('../yangli/dianping/widget/index.html');">点击打开大众点评首页</a><br><br>
+    <a href="###" onclick="fnOpenWin('../yangli/shiwuai/index.html');">点击打开拾吾爱首页</a><br><br>
+    <a href="###" onclick="fnOpenWin('../yangli/toutiao/widget/html/main.html');">点击打开今天头条首页</a><br><br>
+    <a href="###" onclick="fnOpenWin('../yangli/twfb/html/index.html');">点击打开图文发布首页</a><br><br>
+    <a href="###" onclick="fnOpenWin('../yangli/wangzhuan/index.html');">点击打开玩转晋州首页</a><br><br>
+    <a href="###" onclick="fnOpenWin('../aui/index.html');">点击打开AUI首页</a><br><br>
+    <a href="###" onclick="fnOpenWin('slide_frm.html');">点击打开slide_frm首页</a><br><br>
+    <a href="###" onclick="fnOpenWin('../index-20171006.html');">点击打开index_20171006首页</a><br><br>
+    <a href="###" onclick="fnOpenWin('../index_LaicStudio.html');">点击打开index_LaicStudio首页</a><br><br>
+    <a href="###" onclick="fnOpenWin('../wangEditor/demo.html');">点击打开编辑器首页</a><br><br>
+    <a href="###" onclick="fnOpenWin('frm_Tasks.html');">点击打开SQLlite</a><br><br>
+    <a href="###" onclick="fnOpenWin('../yangli/shop/index.html');">点击打开Shop首页</a><br><br>
+    <a href="###" onclick="fnOpenWin('../yangli/163news/index.html');">点击打开163News首页</a><br><br>
+    <a href="###" onclick="fnOpenWin('../yangli/missfresh/index.html');">点击打开Missfresh首页</a><br><br>
+
+<a href="###" onclick="fnOpenWin('../yangli/163music/index.html');">163music</a><br><br>
+<a href="###" onclick="fnOpenWin('../yangli/qingtingFM/index.html');">qingtingFM</a><br><br>
+<a href="###" onclick="fnOpenWin('../yangli/Qiushibaike/index.html');">Qiushibaike</a><br><br>
+<a href="###" onclick="fnOpenWin('../yangli/QQFilm/index.html');">QQFilm</a><br><br>
+<a href="###" onclick="fnOpenWin('../yangli/Sohu/index.html');">Sohu</a><br><br>
+<a href="###" onclick="fnOpenWin('../yangli/cart/html/main.html');">cart</a><br><br>
+	<div id='sys-info'></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../script/sha1.js"></script>
+<script type="text/javascript">
+  function fnOpenWin(strUrl){
+    api.openWin({
+      bounces : false,
+      name : 'yangli',
+      url : strUrl,
+      vScrollBarEnabled : false,
+      hScrollBarEnabled : false
+    });
+  }
+    apiready = function(){
+		var ver = api.version;
+		var sType = api.systemType;
+		var sVer = api.systemVersion;
+		var id = api.deviceId;
+		var model = api.deviceModel;
+		var name = api.deviceName;
+		var cType = api.connectionType;
+		var winName = api.winName;
+		var winWidth = api.winWidth;
+		var winHeight = api.winHeight;
+		var frameName = api.frameName || '';
+		var frameWidth = api.frameWidth || '';
+		var frameHeight = api.frameHeight || '';
+
+		var str = '<ul>';
+		str += '<li>引擎版本信息: ' + ver + '</li>';
+		str += '<li>系统类型: ' + sType + '</li>';
+		str += '<li>系统版本: ' + sVer + '</li>';
+		str += '<li>设备标识: ' + id + '</li>';
+		str += '<li>设备型号: ' + model + '</li>';
+		str += '<li>设备名称: ' + name + '</li>';
+		str += '<li>网络状态: ' + cType + '</li>';
+		str += '<li>主窗口名字: ' + winName + '</li>';
+		str += '<li>主窗口宽度: ' + winWidth + '</li>';
+		str += '<li>主窗口高度: ' + winHeight + '</li>';
+		str += '<li>子窗口名字: ' + frameName + '</li>';
+		str += '<li>子窗口宽度: ' + frameWidth + '</li>';
+		str += '<li>子窗口高度: ' + frameHeight + '</li>';
+		str += '</ul>';
+
+		$api.byId('sys-info').innerHTML = str;
+
+    };
+
+    var now = Date.now();
+    var appID = "A6058340878951";
+    var appKey = SHA1(appID+"UZ"+"796C1E15-5EAE-8E40-88B2-F5ED7BCA61A0"+"UZ"+now)+"."+now;
+    //alert($api.dom("#account").value);
+    var filter = {
+        "include":"UserPhoto",
+        "includefilter":{"UserPhoto":{"limit":2}}
+    }
+    $.ajax({
+          "url": "https://d.apicloud.com/mcm/api/user?filter=" + encodeURIComponent(JSON.stringify(filter)),
+          "type": "GET",
+          "cache": false,
+          "headers": {
+            "X-APICloud-AppId": appID,
+            "X-APICloud-AppKey": appKey
+          }
+    }).done(function (data, status, header) {
+          console.log($api.jsonToStr(data));
+          alert($api.jsonToStr(data))
+          //success body
+    }).fail(function (header, status, errorThrown) {
+          console.log($api.jsonToStr(header));
+          alert($api.jsonToStr(header))
+          //fail body
+    })
+
+</script>
+</html>

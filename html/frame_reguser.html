@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../mui/css/mui.min.css" rel="stylesheet" />
+		<link href="../mui/css/style.css" rel="stylesheet" />
+		<style>
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			.mui-input-group:first-child {
+				margin-top: 20px;
+			}
+			.mui-input-group label {
+				width: 22%;
+			}
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 78%;
+			}
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			.mui-btn {
+				padding: 10px;
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>账号</label>
+					<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入账号">
+				</div>
+				<div class="mui-input-row">
+					<label>密码</label>
+					<input id='password' type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
+				</div>
+				<div class="mui-input-row">
+					<label>确认</label>
+					<input id='password_confirm' type="password" class="mui-input-clear mui-input" placeholder="请确认密码">
+				</div>
+				<div class="mui-input-row">
+					<label>邮箱</label>
+					<input id='email' type="email" class="mui-input-clear mui-input" placeholder="请输入邮箱">
+				</div>
+			</form>
+
+
+			<div class="mui-content-padded">
+				<button id='reg' class="mui-btn mui-btn-block mui-btn-primary" onclick="fnCreateUser();">注册</button>
+			</div>
+			<div class="mui-content-padded">
+				<p>注册真实可用，注册成功后的用户可用于登录，但是示例程序并未和服务端交互，用户相关数据仅存储于本地。</p>
+			</div>
+		</div>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../script/sha1.js"></script>
+		<script>
+      function fnCreateUser() {
+      	var accountBox = $api.dom("#account").value;
+      	var passwordBox = $api.dom("#password").value;
+      	var passwordConfirmBox = $api.dom("#password_confirm").value;
+      	var emailBox = $api.dom("#email").value;
+      	var regInfo = {
+      		account: accountBox,
+      		password: passwordBox,
+      		email: emailBox
+      	};
+      	var passwordConfirm = passwordConfirmBox;
+      	if (passwordConfirm != passwordBox) {
+					$api.toast('提示信息',"密码两次输入不一致。");
+      		return;
+      	}
+
+        var now = Date.now();
+        var appID = "A6058340878951";
+        var appKey = SHA1(appID+"UZ"+"796C1E15-5EAE-8E40-88B2-F5ED7BCA61A0"+"UZ"+now)+"."+now;
+        //alert($api.dom("#account").value);
+        $.ajax({
+            "url": "https://d.apicloud.com/mcm/api/user",
+            "type": "POST",
+            "cache": false,
+            "headers": {
+              "X-APICloud-AppId": appID,
+              "X-APICloud-AppKey": appKey
+            },
+            "data":{
+              "username":$api.dom("#account").value,
+              "password":$api.dom("#password").value,
+              "email":$api.dom("#email").value
+          }
+        }).done(function (data, status, header) {
+            //success body
+						alert($api.jsonToStr(data));
+						$api.toast('提示信息',"用户注册成功，请登录。",3000);
+						fnOpenWin('win_login.html');
+						api.closeWin();
+
+        }).fail(function (header, status, errorThrown) {
+            //fail body
+						$api.toast('提示信息',"数据请求失败，请重试。",3000);
+        })
+
+				api.closeToWin({
+				    name: 'group'
+				});
+      }
+			function fnOpenWin(strUrl) {
+				api.openWin({
+						name: 'page1',
+						url: strUrl
+				});
+			}
+    </script>
+	</body>
+
+</html>

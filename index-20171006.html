@@ -1,0 +1,425 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="./css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/aui.css" />
+    <style>
+        header{ background-color: #f2f2f2; }
+        header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
+        header ul li.active{ display: block; }
+    </style>
+</head>
+<body>
+<div id="wrap" class="flex-wrap flex-vertical">
+  <header class="aui-bar aui-bar-nav" id="aui-header">
+    <a class="aui-btn aui-pull-left" tapmode onclick="closeWin()">
+        <span class="aui-iconfont aui-icon-left"></span>
+    </a>
+    <div class="aui-title">微信</div>
+    <a class="aui-btn aui-pull-right">
+        <span class="aui-iconfont aui-icon-menu"></span>
+    </a>
+  </header>
+  <div id="main" class="flex-con">
+
+  </div>
+  <footer id="footer" class="aui-bar aui-bar-tab">
+    <div class="aui-bar-tab-item aui-active" onclick="fnChange( 0 );">
+        <i class="aui-iconfont aui-icon-home"></i>
+        <div class="aui-bar-tab-label">首页</div>
+    </div>
+    <div class="aui-bar-tab-item" onclick="fnChange( 1 );">
+        <i class="aui-iconfont aui-icon-video"></i>
+        <div class="aui-bar-tab-label">视频</div>
+    </div>
+    <div class="aui-bar-tab-item" onclick="fnChange( 2 );">
+        <i class="aui-iconfont aui-icon-cart"></i>
+        <div class="aui-bar-tab-label">商城</div>
+    </div>
+    <div class="aui-bar-tab-item" onclick="fnChange( 3 );">
+        <i class="aui-iconfont aui-icon-paper"></i>
+        <div class="aui-bar-tab-label">寸信</div>
+    </div>
+    <div class="aui-bar-tab-item" onclick="fnChange( 4 );">
+        <i class="aui-iconfont aui-icon-my"></i>
+        <div class="aui-bar-tab-label">我的</div>
+    </div>
+  </footer>
+<input type=text id='inputFrameName' value='' style='display:none;'/>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="script/api.js"></script>
+<script type="text/javascript">
+apiready = function () {
+  $api.fixStatusBar( $api.dom('header') );
+  api.setStatusBarStyle({
+      style: 'dark',
+      color : '#6ab494'
+  });
+  fnInit();
+  fnChange(1);
+}
+
+var menus, headers, headerHeight, footerHeight, headerTop;
+var navigationBar, home_group_id, video_group_id;
+var NVNavigationBar;
+function fnInit() {
+    var header = $api.byId('aui-header');
+    var footer = $api.byId('footer');
+    menus = $api.domAll(footer, '.aui-bar-tab-item');
+    headers = $api.domAll(header, '.header');
+    footerHeight = $api.offset(footer).h;
+    var offset = $api.offset(header);
+    headerHeight = offset.h;
+    if(api.systemType == 'android'){
+      headerTop = 20;
+    }else{
+      headerTop = 25;
+    }
+    headerTop = headerTop + 50;
+    NVNavigationBar = api.require('NVNavigationBar');
+};
+
+var frameNames = ['home_group', 'video_group', 'mall_group','chat_group', 'demo_my_frm'];
+
+function fnChange(index) {
+    for (var i = 0; i < menus.length; i++) {
+        if (index == i) {
+            $api.addCls(menus[i], 'aui-active');
+            //$api.addCls(headers[i], 'active');
+            switch (i) {
+                case 4:
+                    fnOpenFrame(i, true);
+                    break;
+                case 2:
+                    fnOpenFrameGroup(i, true);
+                    break;
+                default:
+                    fnOpenFrameGroup(i, true);
+                    fnNavigationBar(i, true);
+                    break;
+            }
+        } else {
+            $api.removeCls(menus[i], 'aui-active');
+            //$api.removeCls(headers[i], 'active');
+            switch (i) {
+                case 4:
+                    fnOpenFrame(i, false);
+                    break;
+                case 2:
+                    fnOpenFrameGroup(i, false);
+                    break;
+                default:
+                    fnOpenFrameGroup(i, false);
+                    fnNavigationBar(i, false);
+                    break;
+            }
+        }
+    }
+};
+
+function fnOpenFrame(index, isOpen) {
+    if (isOpen) {
+        api.openFrame({
+            name: frameNames[index],
+            url: 'html/' + frameNames[index] + '.html',
+            bounces: false,
+            rect: {
+                x: 0,
+                y: $api.dom('header').offsetHeight,
+                w: 'auto',
+                h: api.winHeight - footerHeight - $api.dom('header').offsetHeight
+            },
+            vScrollBarEnabled:false
+        });
+    } else {
+        api.setFrameAttr({
+            name: frameNames[index],
+            hidden: true
+        });
+    }
+};
+
+var home_group = {
+        item: [{
+            title: '推荐',
+            bg: '#d43d3d',
+        }, {
+            title: '热点',
+            bg: '#d43d3d',
+        }, {
+            title: '北京',
+            bg: '#d43d3d',
+        }, {
+            title: '视频',
+            bg: '#d43d3d',
+        }, {
+            title: '社会',
+            bg: '#d43d3d',
+        }, {
+            title: '订阅',
+            bg: '#d43d3d',
+        }, {
+            title: '娱乐',
+            bg: '#d43d3d',
+        }, {
+            title: '图片',
+            bg: '#d43d3d',
+        }, {
+            title: '科技',
+            bg: '#d43d3d'
+        }],
+        font: {
+            color: '#efb7b7',
+            colorSelected: '#fff',
+            size: 15,
+            sizeSelected: 15
+        },
+        id: 'NavBar_Home'
+    },
+    video_group = {
+        item:  [{
+            title: '推荐',
+            bg: '#d43d3d',
+            bgSelected:'#0ecde0'
+        }, {
+            title: '频道',
+            bg: '#d43d3d',
+            bgSelected:'#0ecde0'
+        }, {
+            title: '搜索',
+            bg: '#d43d3d',
+            bgSelected:'#0ecde0'
+        }, {
+            title: '我的',
+            bg: '#d43d3d',
+            bgSelected:'#0ecde0'
+        }],
+        font: {
+            color: '#efb7b7',
+            colorSelected: '#FFFFFF',
+            size: 14,
+            sizeSelected: 18
+        },
+        id: 'NavBar_Video'
+    },
+    mall_group = {
+        item:  [{
+            title: '推荐',
+            bg: '#d43d3d',
+            bgSelected:'#0ecde0'
+        }, {
+            title: '频道',
+            bg: '#d43d3d',
+            bgSelected:'#0ecde0'
+        }, {
+            title: '搜索',
+            bg: '#d43d3d',
+            bgSelected:'#0ecde0'
+        }, {
+            title: '我的',
+            bg: '#d43d3d',
+            bgSelected:'#0ecde0'
+        }],
+        font: {
+            color: '#efb7b7',
+            colorSelected: '#FFFFFF',
+            size: 14,
+            sizeSelected: 18
+        },
+        id: 'NavBar_Mall'
+    },
+    chat_group = {
+        item:  [{
+            title: '推荐',
+            bg: '#d43d3d',
+            bgSelected:'#0ecde0'
+        }, {
+            title: '频道',
+            bg: '#d43d3d',
+            bgSelected:'#0ecde0'
+        }, {
+            title: '搜索',
+            bg: '#d43d3d',
+            bgSelected:'#0ecde0'
+        }, {
+            title: '我的',
+            bg: '#d43d3d',
+            bgSelected:'#0ecde0'
+        }],
+        font: {
+            color: '#efb7b7',
+            colorSelected: '#FFFFFF',
+            size: 14,
+            sizeSelected: 18
+        },
+        id: 'NavBar_Chat'
+    };
+
+var currentIndex = 0;
+
+function fnNavigationBar(index, isOpen) {
+    if (isOpen) {
+        currentIndex = index;
+        if (typeof window[frameNames[index] + '_id'] == 'undefined') {
+            NVNavigationBar.open({
+              rect: {
+                   x: 0,
+                   y: 20,
+                   w: api.frameWidth - 50,
+                   h: 50
+              },
+             styles: {
+                   orientation: 'horizontal',
+                   bg: '#6b6b6b',
+                   bgAlpha: 1,
+                   font: {
+                   size: 14,
+                   sizeSelected: 18,
+                   color: '#efb7b7',
+                   colorSelected: '#FFFFFF',
+                   alpha: 1
+                   },
+                   itemSize: {
+                       w: 90,
+                       h: 50
+                   }
+             },
+             items: window[frameNames[index]].item,
+             selectedIndex: 0,
+             fixedOn: api.frameName,
+             id: window[frameNames[index]].id
+            }, function(ret, err) {
+                switch (ret.eventType) {
+                    case 'show':
+                        window[frameNames[currentIndex] + '_id'] = ret.id;
+                        break;
+                    case 'click':
+                        api.setFrameGroupIndex({
+                            name: frameNames[currentIndex],
+                            index: ret.index,
+                            scroll: true
+                        });
+                    break;
+                }
+            });
+        } else {
+            NVNavigationBar.show({
+                id: window[frameNames[index]].id
+            });
+        }
+    } else {
+        if (typeof window[frameNames[index] + '_id'] != 'undefined') {
+            NVNavigationBar.hide({
+                id: window[frameNames[index]].id
+            });
+        }
+    }
+};
+
+var home_group_frames = [],
+    video_group_frames = [];
+for (var i = 0; i < home_group.item.length; i++) {
+    home_group_frames.push({
+        name: 'home_frame_' + i,
+        url: 'html/home_frame.html',
+        vScrollBarEnabled: false,
+        pageParam: {
+            type: home_group.item[i].title
+        }
+    });
+};
+
+for (var i = 0; i < video_group.item.length; i++) {
+    video_group_frames.push({
+        name: 'video_group_' + i,
+        url: 'html/video_list_frm.html',
+        vScrollBarEnabled: false,
+        pageParam: {
+            type: '视频',
+            childType: video_group.item[i].title
+        }
+    });
+};
+
+var mall_group_frames = [{
+    name: 'mall_frame',
+    url: 'html/test.html',
+    vScrollBarEnabled: false
+}, {
+    name: 'themelist_frame',
+    url: './themelist_frame.html',
+    vScrollBarEnabled: false
+}];
+
+var chat_group_frames = [{
+    name: 'chat_frame',
+    url: 'html/frame_chats.html',
+    vScrollBarEnabled: false
+}, {
+    name: 'themelist_frame',
+    url: './themelist_frame.html',
+    vScrollBarEnabled: false
+}];
+
+function fnOpenFrameGroup(index, isOpen) {
+    if (isOpen) {
+        currentIndex = index;
+        var arrTitle = ['首页','视频','商城','寸信','我的'];
+        if(index == 1){
+          var strTempHTML = '<a class="aui-btn aui-pull-left" tapmode onclick="closeWin()">';
+          //strTempHTML = strTempHTML + '<span class="aui-iconfont aui-icon-left"></span>';
+          strTempHTML = strTempHTML + '</a><div class="aui-title">'+arrTitle[i];
+          strTempHTML = strTempHTML + '</div><a class="aui-btn aui-pull-right" tapmode onclick="showPopup(\'top-right\');">';
+          strTempHTML = strTempHTML + '<span class="aui-iconfont aui-icon-menu"></span></a>';
+          $api.html($api.byId('aui-header'), strTempHTML);
+        }
+        api.openFrameGroup({
+            name: frameNames[index],
+            scrollEnabled: true,
+            rect: {
+                x: 0,
+                y: headerHeight,
+                w: 'auto',
+                h: api.winHeight - headerHeight - footerHeight
+            },
+            index: 0,
+            frames: window[frameNames[index] + '_frames']
+        }, function(ret, err) {
+          $api.byId('inputFrameName').value = frameNames[index] + "_" + ret.index;
+          //console.log($api.byId('inputFrameName').value);
+            if (currentIndex < 2) {
+              NVNavigationBar.setSelected({
+                  id: window[frameNames[index]].id,
+                  index: ret.index,
+                  selected: true
+              }, function(ret) {
+                  //alert(JSON.stringify(ret));
+              });
+            } else {
+                //changeStyle(ret.index);
+            }
+        });
+    } else {
+        api.setFrameGroupAttr({
+            name: frameNames[index],
+            hidden: true
+        });
+    }
+};
+
+function showPopup(location){
+  api.execScript({
+      name: 'root',
+      frameName: $api.byId('inputFrameName').value,
+      script: 'showPopup("'+location+'");'
+  });
+
+}
+</script>

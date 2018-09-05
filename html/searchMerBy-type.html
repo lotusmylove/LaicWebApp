@@ -1,0 +1,113 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0, width=device-width"/>
+    <title>api</title>
+    <link rel="stylesheet" type="text/css" href="../yangli/wangzhuan/css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../yangli/wangzhuan/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../yangli/wangzhuan/css/searchAct.css" />
+</head>
+<body>
+    <div id="wrap">
+        <div id="main">
+            <ul>
+                <div id="divtaskLevel" style="display:none;">
+                  <li>
+                    <a tapmode="active" onclick="searchMerType('All');">
+                      <span>全部</span><em>33</em>
+                    </a>
+                  </li>
+                  <li>
+    								<a tapmode="active" onclick="searchMerType('重要且紧急');">
+    									<span>重要且紧急</span><em>12</em>
+    								</a>
+    							</li>
+                  <li>
+    								<a tapmode="active" onclick="searchMerType('紧急不重要');">
+    									<span>紧急不重要</span><em>4</em>
+    								</a>
+    							</li>
+                  <li>
+                    <a tapmode="active" onclick="searchMerType('重要不紧急');">
+                      <span>重要不紧急</span><em>21</em>
+                    </a>
+                  </li>
+                  <li>
+                    <a tapmode="active" onclick="searchMerType('普通');">
+                      <span>普通</span><em>2</em>
+                    </a>
+                  </li>
+                </div>
+
+                <div id="divtaskStatus" style="display:none;">
+                  <li>
+                    <a tapmode="active" onclick="searchMerType('All');">
+                      <span>全部</span><em>33</em>
+                    </a>
+                  </li>
+                  <li>
+    								<a tapmode="active" onclick="searchMerType('未开始');">
+    									<span>未开始</span><em>12</em>
+    								</a>
+    							</li>
+                  <li>
+    								<a tapmode="active" onclick="searchMerType('进行中');">
+    									<span>进行中</span><em>4</em>
+    								</a>
+    							</li>
+                  <li>
+                    <a tapmode="active" onclick="searchMerType('已完成');">
+                      <span>已完成</span><em>21</em>
+                    </a>
+                  </li>
+                  <li>
+                    <a tapmode="active" onclick="searchMerType('已作废');">
+                      <span>已作废</span><em>2</em>
+                    </a>
+                  </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script>
+apiready = function(){
+  var pageParam = api.pageParam;
+  var sType = pageParam.type;
+  $api.byId("div"+sType).style.display = "";
+}
+var body = $api.dom('body');
+$api.addEvt(body, 'touchend', function (e) {
+    var main = $api.dom('#main');
+    var wrap = $api.dom('#wrap');
+
+    if (!$api.contains(main, e.target) || !$api.contains(wrap, e.target)) {
+        api.execScript({
+            name: 'Tasks',
+            script: 'closeFramGroup();'
+        });
+    }
+});
+function searchMerType(sType) {
+    if (!sType) {
+        return;
+    }
+    /*var that = $api.dom(event.target, 'span');
+     var txt = $api.text(that);
+     api.execScript({
+     name: 'life-list',
+     script: 'changeTypeTab("' + txt + '");'
+     });*/
+     var pageParam = api.pageParam;
+     var sFilter = pageParam.type;
+    api.execScript({
+        frameName: 'frm_Tasks',
+        script: 'getDataByFilter("' + sFilter + '", "' + sType + '");'
+    });
+
+}
+
+</script>
+</html>

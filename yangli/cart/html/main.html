@@ -1,0 +1,285 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../css/ui.css" />
+		<style>
+			body, .tab-bar {
+				background-color: #FFFFFF
+			}
+			.tab-bottom:before {
+				border-top: 1px solid rgba(177, 177, 177, 0.35);
+			}
+			.aui-header-bg {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background-color: #FFCC00;
+			}
+			.bt {
+				color: #FFFFFF;
+				font-size: 1.1rem;
+				text-align: center;
+				top: 0;
+				left: 0;
+				position: relative;
+				line-height: 2.7rem;
+			}
+			.bg {
+				width: 100%;
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background: linear-gradient(150deg, #feab47 10%, #ff5200 40%, #ff5200 83%);
+			}
+			.bg1 {
+				width: 100%;
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background: linear-gradient(299deg, #feab47 16%, #ff5200 0%, #ff5200 90%);
+			}
+			.aui-title-input input::-webkit-input-placeholder {
+				color: #5B5B5B;
+			}
+			.aa {
+				font-size: 1.4rem;
+				position: relative;
+				top: -0.25rem;
+				left: 0;
+			}
+			.bb {
+				font-size: 1.27rem;
+				color: #F9F9F9;
+				margin-right: 0.6rem;
+			}
+			.cc {
+				font-size: 1.4rem;
+				position: relative;
+				top: 0rem;
+				left: 0;
+				color: #606060;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<div class="bg" ></div>
+			<div class="toolbar statusbar-padding" style="min-height:2.7rem">
+				<button class="bar-button back-button">
+					<i class="icon icon-sao"></i>
+				</button>
+				<div class="header-title" style="height:2.7rem; padding:0 3rem">
+					<div class="title aui-title-input">
+						<input type="text" placeholder="秋季新品">
+					</div>
+				</div>
+				<a> <i class="iconfont bb">&#xe63f;</i> </a></div>
+			</div>
+		</div>
+		<div class="tab-bar tab-bottom">
+			<a class="tab-button m1 active" tapmode onclick="menu(0)"><i class="tab-button-icon icon iconfont aa">&#xe635;</i><span class="tab-button-txt">首页</span></a>
+			<a class="tab-button m2 cached" tapmode onclick="menu(1)"><i class="tab-button-icon icon iconfont aa">&#xe6d5;</i><span class="tab-button-txt">新品</span></a>
+			<a class="tab-button m3 cached" tapmode onclick="menu(2)"><i class="tab-button-icon icon iconfont aa">&#xe636;</i><span class="tab-button-txt">分类</span></a>
+			<a class="tab-button m4 cached" tapmode onclick="menu(3)"><i class="tab-button-icon icon iconfont aa">&#xe637;</i><span class="tab-button-txt">消息</span></a>
+			<a class="tab-button m5 cached" tapmode onclick="menu(4)"><i class="tab-button-icon icon iconfont aa">&#xe634;</i></i><span class="tab-button-txt">我的</span></a>
+		</div>
+	</body>
+	<script src="../script/api.js"></script>
+	<script src="../script/aui-tab.js" ></script>
+	<script type="text/javascript">
+		apiready = function() {
+			api.addEventListener({
+				name : 'keyback'
+			}, function(ret, err) {
+				api.toast({
+					msg : '再点一哈退出应用',
+					duration : 2000,
+					location : 'bottom'
+				});
+				api.addEventListener({
+					name : 'keyback'
+				}, function(ret, err) {
+					api.closeWidget({
+						silent : true
+					});
+				});
+				setTimeout(function() {
+					exitApp();
+				}, 2000)
+			});
+			$api.fixStatusBar($api.dom('.header'));
+			var head = $api.dom('.header');
+			var body = $api.dom('body');
+			var foot = $api.dom('.tab-bar');
+			var head_h = $api.offset(head).h;
+			var body_h = $api.offset(body).h;
+			var foot_h = $api.offset(foot).h;
+			var rect_h = body_h - head_h - foot_h;
+			api.openFrameGroup({
+				scrollEnabled : false,
+				name : 'menu',
+				rect : {
+					x : 0,
+					y : head_h,
+					w : 'auto',
+					h : rect_h
+				},
+				index : 0,
+				frames : [{
+					name : 'frame1',
+					url : '0.html',
+					vScrollBarEnabled : false,
+					hScrollBarEnabled : true,
+				}, {
+					name : 'frame2',
+					url : '1.html',
+					vScrollBarEnabled : false,
+					hScrollBarEnabled : false,
+				}, {
+					name : 'frame3',
+					url : '2.html',
+					vScrollBarEnabled : false,
+					hScrollBarEnabled : false,
+				}, {
+					name : 'frame4',
+					url : '3.html',
+					vScrollBarEnabled : false,
+					hScrollBarEnabled : false,
+				}, {
+					name : 'frame5',
+					url : '4.html',
+					vScrollBarEnabled : false,
+					hScrollBarEnabled : false,
+				}]
+			}, function(ret, err) {
+			});
+		}
+		function menu(id) {
+			var html = '';
+			if (id == 0) {
+				$api.removeCls($api.dom('.m1'), 'cached');
+				$api.addCls($api.dom('.m1'), 'active');
+				$api.removeCls($api.dom('.m2'), 'active');
+				$api.addCls($api.dom('.m2'), 'cached');
+				$api.removeCls($api.dom('.m3'), 'active');
+				$api.addCls($api.dom('.m3'), 'cached');
+				$api.removeCls($api.dom('.m4'), 'active');
+				$api.addCls($api.dom('.m4'), 'cached');
+				$api.removeCls($api.dom('.m5'), 'active');
+				$api.addCls($api.dom('.m5'), 'cached');
+				html += '<div class="bg" ></div>';
+				html += '<div class="toolbar statusbar-padding" style="min-height:2.7rem">';
+				html += '<button class="bar-button back-button"><i class="icon icon-sao"></i></button>';
+				html += '<div class="header-title" style="height:2.7rem; padding:0 3rem">';
+				html += '<div class="title aui-title-input"><input type="text" placeholder="秋季新品"></div></div>';
+				html += '<a> <i class="iconfont bb">&#xe63f;</i> </a></div>';
+				$api.html($api.dom('.header'), html);
+			} else if (id == 1) {
+				$api.removeCls($api.dom('.m2'), 'cached');
+				$api.addCls($api.dom('.m2'), 'active');
+				$api.removeCls($api.dom('.m1'), 'active');
+				$api.addCls($api.dom('.m1'), 'cached');
+				$api.removeCls($api.dom('.m3'), 'active');
+				$api.addCls($api.dom('.m3'), 'cached');
+				$api.removeCls($api.dom('.m4'), 'active');
+				$api.addCls($api.dom('.m4'), 'cached');
+				$api.removeCls($api.dom('.m5'), 'active');
+				$api.addCls($api.dom('.m5'), 'cached');
+				html += '<div class="header-background"></div>';
+				html += '<div class="toolbar statusbar-padding">';
+				html += '<button class="bar-button back-button"><i class="icon aui-icon-shi">&#xe680;</i></button>';
+				html += '<div class="header-title"><div class="title">新品上架</div></div></div>';
+				$api.html($api.dom('.header'), html);
+			} else if (id == 2) {
+				$api.removeCls($api.dom('.m3'), 'cached');
+				$api.addCls($api.dom('.m3'), 'active');
+				$api.removeCls($api.dom('.m1'), 'active');
+				$api.addCls($api.dom('.m1'), 'cached');
+				$api.removeCls($api.dom('.m2'), 'active');
+				$api.addCls($api.dom('.m2'), 'cached');
+				$api.removeCls($api.dom('.m4'), 'active');
+				$api.addCls($api.dom('.m4'), 'cached');
+				$api.removeCls($api.dom('.m5'), 'active');
+				$api.addCls($api.dom('.m5'), 'cached');
+				html += '<div class="header-background"></div>';
+				html += '<div class="toolbar statusbar-padding">';
+				html += '<button class="bar-button back-button"> <i class="iconfont cc">&#xe696;</i></button>';
+				html += '<div class="header-title"><div class="title">分类</div></div></div>';
+				$api.html($api.dom('.header'), html);
+			} else if (id == 3) {
+				$api.removeCls($api.dom('.m4'), 'cached');
+				$api.addCls($api.dom('.m4'), 'active');
+				$api.removeCls($api.dom('.m1'), 'active');
+				$api.addCls($api.dom('.m1'), 'cached');
+				$api.removeCls($api.dom('.m2'), 'active');
+				$api.addCls($api.dom('.m2'), 'cached');
+				$api.removeCls($api.dom('.m3'), 'active');
+				$api.addCls($api.dom('.m3'), 'cached');
+				$api.removeCls($api.dom('.m5'), 'active');
+				$api.addCls($api.dom('.m5'), 'cached');
+				html += '<div class="bg1"></div>';
+				html += '<div class="bt">消 息</div>';
+				$api.html($api.dom('.header'), html);
+			} else if (id == 4) {
+				$api.removeCls($api.dom('.m5'), 'cached');
+				$api.addCls($api.dom('.m5'), 'active');
+				$api.removeCls($api.dom('.m1'), 'active');
+				$api.addCls($api.dom('.m1'), 'cached');
+				$api.removeCls($api.dom('.m2'), 'active');
+				$api.addCls($api.dom('.m2'), 'cached');
+				$api.removeCls($api.dom('.m3'), 'active');
+				$api.addCls($api.dom('.m3'), 'cached');
+				$api.removeCls($api.dom('.m4'), 'active');
+				$api.addCls($api.dom('.m4'), 'cached');
+				html += '<div class="bg1"></div>';
+				html += '<div class="toolbar statusbar-padding" style="min-height:2.7rem">';
+				html += '<button class="bar-button back-button"><i class="iconfont bb">&#xe642;</i> </a></button>';
+				html += '<div class="header-title" style="height:2.7rem; padding:0 3rem">';
+				html += '</div>';
+				html += '</div>';
+				$api.html($api.dom('.header'), html);
+			}
+			api.setFrameGroupIndex({
+				name : 'menu',
+				index : id
+			});
+		}
+
+		function exitApp() {
+			api.addEventListener({
+				name : 'keyback'
+			}, function(ret, err) {
+				api.toast({
+					msg : '再点一哈退出应用',
+					duration : 2000,
+					location : 'bottom'
+				});
+				api.addEventListener({
+					name : 'keyback'
+				}, function(ret, err) {
+					api.closeWidget({
+						silent : true
+					});
+				});
+				setTimeout(function() {
+					exitApp();
+				}, 3000)
+			});
+		}
+
+		function opleft() {
+			api.openSlidPane({
+				type : 'left'
+			});
+		}
+	</script>
+</html>

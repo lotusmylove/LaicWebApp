@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link href="../mui/css/mui.min.css" rel="stylesheet"/>
+    <link href="../mui/css/laic-custom.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	//mui.init();
+    </script>
+    <style>
+    .mui-content>.mui-table-view:first-child {
+        margin-top: 0px !important;
+    }
+    </style>
+</head>
+<body>
+	<div class="mui-content">
+		<ul class="mui-table-view mui-table-view-chevron">
+			<li class="mui-table-view-cell mui-media" onclick="li('1001','订阅号','../mui/images/cbd.jpg')">
+				<a class="mui-navigate-right" style="margin-right: -120px !important;">
+					<img class="mui-media-object laic-pull-left" src="../mui/images/cbd.jpg">
+					<div class="laic-media-right laic-pull-right">
+						18:40
+						<p><span class="mui-icon mui-icon-micoff"></span></p>
+					</div>
+					<div class="mui-media-body  laic-pull-center">
+						订阅号
+						<p class="mui-ellipsis">烤炉模式的城市，到了黄昏时候，就如同被打翻的调色盘一般.</p>
+					</div>
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media" onclick="li('1002','付之家','../mui/images/fzj.jpg')">
+				<a class="mui-navigate-right" style="margin-right: -120px !important;">
+					<img class="mui-media-object laic-pull-left" src="../mui/images/fzj.jpg">
+					<div class="laic-media-right laic-pull-right">
+						14:40
+						<p><span class="mui-icon mui-icon-micoff"></span></p>
+					</div>
+					<div class="mui-media-body  laic-pull-center">
+						付之家
+						<p class="mui-ellipsis">程映辉:今天带付子荣游泳去了</p>
+					</div>
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media" onclick="li('1003','快乐之家','../mui/images/klzj.jpg')">
+				<a class="mui-navigate-right" style="margin-right: -120px !important;">
+					<img class="mui-media-object laic-pull-left" src="../mui/images/klzj.jpg">
+					<div class="laic-media-right laic-pull-right">
+						16:45
+					</div>
+					<div class="mui-media-body  laic-pull-center">
+						快乐之家
+						<p class="mui-ellipsis">程鑫鸿:主要是太缺德了</p>
+					</div>
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media" onclick="li('1004','程鑫鸿','../mui/images/cxh.jpg')">
+				<a name="aUser" uid="cxh" href="###" class="mui-navigate-right" style="margin-right: -120px !important;">
+					<img class="mui-media-object laic-pull-left" src="../mui/images/cxh.jpg">
+					<div class="laic-media-right laic-pull-right">
+						昨天
+					</div>
+					<div class="mui-media-body  laic-pull-center">
+						程鑫鸿
+						<p class="mui-ellipsis">幸福的事情；可是，打呼噜怎么办？</p>
+					</div>
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media" onclick="li('1005','Baby','../mui/images/baby.jpg')">
+				<a name="aUser" uid="baby" href="###" class="mui-navigate-right" style="margin-right: -120px !important;">
+					<img class="mui-media-object laic-pull-left" src="../mui/images/baby.jpg">
+					<div class="laic-media-right laic-pull-right">
+						周一
+					</div>
+					<div class="mui-media-body  laic-pull-center">
+						Baby
+						<p class="mui-ellipsis">明天早上去散步？</p>
+					</div>
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media" onclick="li('1006','程映辉','../mui/images/cyh.jpg')">
+				<a name="aUser" uid="cyh" href="###" class="mui-navigate-right" style="margin-right: -120px !important;">
+					<img class="mui-media-object laic-pull-left" src="../mui/images/cyh.jpg">
+					<div class="laic-media-right laic-pull-right">
+						周一
+					</div>
+					<div class="mui-media-body  laic-pull-center">
+						程映辉
+						<p class="mui-ellipsis">明天早上去散步？</p>
+					</div>
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media">
+				<a name="aUser" uid="fq" href="###" class="mui-navigate-right" style="margin-right: -120px !important;">
+					<img class="mui-media-object laic-pull-left" src="../mui/images/fq.jpg">
+					<div class="laic-media-right laic-pull-right">
+						周一
+					</div>
+					<div class="mui-media-body  laic-pull-center">
+						付强
+						<p class="mui-ellipsis">明天早上去散步？</p>
+					</div>
+				</a>
+			</li>
+
+		</ul>
+	</div>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script>
+    apiready = function () {
+/*
+      $api.domAll('.mui-media').on('tap', 'a', function(e) {
+        location.href = this.getAttribute('href');
+        localStorage.setItem("toUid_laicchat",this.getAttribute("uid"));
+        location.href = 'im-chat.html';
+      });
+*/
+    };
+
+    function li(id, zh, tx) {
+			api.openWin({
+				reload : true,
+				name : 'chat',
+				url : 'win_chat.html',
+				vScrollBarEnabled : false,
+				pageParam : {
+					id : id,
+					zh : zh,
+					tx : tx
+				}
+			});
+		}
+/*
+		(function($, doc) {
+			$.init({
+				statusBarBackground: '#f7f7f7'
+			});
+			$.plusReady(function() {
+				mui('.mui-media').on('tap', 'a', function(e) {
+					location.href = this.getAttribute('href');
+					localStorage.setItem("toUid_laicchat",this.getAttribute("uid"));
+					location.href = 'im-chat.html';
+				});
+				//选项卡点击事件
+				mui('.mui-bar-tab').on('tap', 'a', function(e) {
+					location.href = this.getAttribute('href');
+				});
+
+			});
+		}(mui, document));
+*/
+	</script>
+</body>
+</html>

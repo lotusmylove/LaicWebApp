@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../css/ui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/sider.css" />
+		<style>
+			.menu {
+				width: 100%;
+				background: #FFFFFF;
+				padding: 0.5rem;
+				height: 11.6rem;
+			}
+			.menu ul {
+				padding-left: 0.7rem;
+				padding-right: 0.7rem;
+				margin: 0;
+				list-style: none;
+			}
+			.menu ul li {
+				width: 25%;
+				text-align: center;
+				font-size: 0.9rem;
+				float: left;
+				color: #505050;
+			}
+			.menu ul li:active {
+				background: #F6F6F6
+			}
+			.pic {
+				padding-top: 0.5rem;
+			}
+			.pic img {
+				width: 2.8rem;
+				display: inline
+			}
+			.txt {
+				position: relative;
+				top: -0.2rem;
+				left: 0
+			}
+			.new_pr {
+				background: #ffffff;
+				margin-top: 0.8rem;
+			}
+			.main {
+				background: #ffffff;
+			}
+			.aui-flex-items2 span {
+				background: #00897B
+			}
+		</style>
+	</head>
+	<body>
+		<div class="banner">
+			<div id='slider' class='swipe'>
+				<div class='swipe-box'>
+					<div class='img'><img src="../res/ban1.jpg">
+					</div>
+					<div class='img'><img src="../res/ban2.jpg">
+					</div>
+					<div class='img'><img src="../res/ban3.jpg">
+					</div>
+					<div class='img'><img src="../res/ban4.jpg">
+					</div>
+				</div>
+			</div>
+			<div class="dot-area">
+				<div class="dot on"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+			</div>
+		</div>
+		<div class="menu">
+			<ul>
+				<li tapmode onclick="">
+					<div class="pic"><img src="../res/menu-1.png"/>
+					</div>
+					<div class="txt">
+						签 到
+					</div>
+				</li>
+				<li tapmode onclick="">
+					<div class="pic"><img src="../res/menu-2.png"/>
+					</div>
+					<div class="txt">
+						新 品
+					</div>
+				</li>
+				<li tapmode onclick="">
+					<div class="pic"><img src="../res/menu-3.png"/>
+					</div>
+					<div class="txt">
+						团 购
+					</div>
+				</li>
+				<li tapmode onclick="">
+					<div class="pic"><img src="../res/menu-4.png"/>
+					</div>
+					<div class="txt">
+						分 类
+					</div>
+				</li>
+				<li tapmode onclick="">
+					<div class="pic"><img src="../res/menu-5.png"/>
+					</div>
+					<div class="txt">
+						生 活
+					</div>
+				</li>
+				<li tapmode onclick="">
+					<div class="pic"><img src="../res/menu-6.png"/>
+					</div>
+					<div class="txt">
+						秀 秀
+					</div>
+				</li>
+				<li tapmode onclick="">
+					<div class="pic"><img src="../res/menu-7.png"/>
+					</div>
+					<div class="txt">
+						达 人
+					</div>
+				</li>
+				<li tapmode onclick="hb()">
+					<div class="pic"><img src="../res/menu-8.png"/>
+					</div>
+					<div class="txt">
+						红 包
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="new_pr">
+			<a class="home-inform aui-home-inform"> <i class="name icon-inform"></i> <span style="font-size:14px; padding-left:5px">APP新版本上线换一种方式购物</span> </a>
+		</div>
+		<div class="my-car-thumbnail"><img src="../res/new1.jpg">
+		</div>
+		<div class="main">
+			<div class="aui-title-h">
+				<h2>大牌热卖</h2>
+			</div>
+			<div class="aui-flex">
+				<div class="aui-flex-item aui-flex-items">
+					<span> <a href="product.html"><img src="../res/b1.jpg"></a> </span>
+					<a class="aui-flex-box">新款上市</a>
+				</div>
+				<div class="aui-flex-item aui-flex-items">
+					<span> <a href="product.html"><img src="../res/b2.jpg"></a> </span>
+					<a class="aui-flex-box">爱美装扮</a>
+				</div>
+				<div class="aui-flex-item aui-flex-items">
+					<span> <a href="product.html"><img src="../res/b3.jpg"></a> </span>
+					<a class="aui-flex-box">热潮时代</a>
+				</div>
+			</div>
+		</div>
+		<div class="main" onclick="xinpin()">
+			<div class="aui-title-h">
+				<h2>新品必购</h2>
+			</div>
+			<div class="aui-flex">
+				<div class="aui-flex-item aui-flex-items1">
+					<span> <img src="../res/xiao1.jpg"> </span>
+				</div>
+				<div class="aui-flex-item aui-flex-items1">
+					<span> <img src="../res/xiao2.jpg"> </span>
+				</div>
+				<div class="aui-flex-item aui-flex-items1">
+					<span> <img src="../res/xiao3.jpg"> </span>
+				</div>
+				<div class="aui-flex-item aui-flex-items1">
+					<span> <img src="../res/xiao4.jpg"> </span>
+				</div>
+			</div>
+		</div>
+		<div class="main" onclick="product()">
+			<div class="aui-title-h">
+				<h2>新品上架</h2>
+			</div>
+			<div class="aui-flex">
+				<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+					<span> <img src="../res/b4.jpg"> </span>
+					<a class="aui-flex-box"> <h2>森宿P从一数到十 2017春新款印花宽松休闲连帽长袖短外套女新品 2711041 假日蓝 S</h2> <em>￥199.00</em> </a>
+				</div>
+				<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+					<span> <img src="../res/b5.jpg"> </span>
+					<a href="#" class="aui-flex-box"> <h2>奥亿斓 秋冬女装钱夫人大版宽松显瘦立领拉链中长款毛呢大衣外套 黑色不加棉 XL</h2> <em>￥199.00</em> </a>
+				</div>
+			</div>
+			<div class="aui-flex">
+				<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+					<span> <img src="../res/b7.jpg"> </span>
+					<a class="aui-flex-box"> <h2>关注自营 Markentsee 2017女装新款秋季连帽字母印花牛仔短外套女长袖上衣韩版百搭学生外套zx179609 图片色 XXL</h2> <em>￥199.00</em> </a>
+				</div>
+				<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+					<span> <img src="../res/b6.jpg"> </span>
+					<a class="aui-flex-box"> <h2>哥弟女装2017秋冬新品双面呢羊毛大衣女中长款外套A400013 藏蓝 M(3码) </h2> <em>￥199.00</em> </a>
+				</div>
+			</div>
+			<div class="aui-flex">
+				<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+					<span> <img src="../res/b8.jpg"> </span>
+					<div class="aui-flex-box">
+						<h2>依依衣舍韩版2017春装新款女装宽松显瘦直筒裤破洞牛仔裤HH5296妠 </h2><em>￥199.00</em>
+					</div>
+				</div>
+				<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+					<span> <img src="../res/b9.jpg"> </span>
+					<div class="aui-flex-box">
+						<h2>关注魅芭琪短外套女2017冬装新款韩版修身大码时尚保暖短款连帽羽绒棉服女 W18 灰 色 L</h2><em>￥199.00</em>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/swipe.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			var dots = document.getElementsByClassName('dot');
+			var slider = new Swipe(document.getElementById('slider'), {
+				startSlide : 0,
+				speed : 400,
+				auto : 3000,
+				continuous : true,
+				disableScroll : false,
+				stopPropagation : false,
+				callback : function(pos) {
+					document.getElementsByClassName('on')[0].className = 'dot';
+					dots[pos].className = 'dot on';
+				}
+			});
+		};
+		function product() {
+			api.openWin({
+				name : 'product',
+				url : 'product.html',
+				vScrollBarEnabled : false,
+				hScrollBarEnabled : false
+			});
+			
+		}
+		function hb() {
+			api.openWin({
+				name : 'hb',
+				url : 'hb.html',
+			});
+		}
+		function xinpin() {
+			api.openWin({
+				name : 'xinpin',
+				url : 'xinpin.html',
+			});
+		}
+	</script>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../css/ui.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/sider.css" />
+		<style>
+			.aui-content-text {
+				background: #FFFFFF;
+				margin-bottom: 0.8rem;
+			}
+			.dot-area {
+				position: absolute;
+				left: 50%;
+				bottom: 10px;
+				width: 6rem;
+				margin-left: -0.5rem
+			}
+		</style>
+	</head>
+	<body class="item">
+		<div class="header">
+			<div style="background:none"></div>
+			<div class="toolbar statusbar-padding">
+				<button class="bar-button back-button" onclick="back()">
+					<i class="icon icon-back-i"></i>
+				</button>
+				<div class="header-title">
+					<div class="title"></div>
+				</div>
+			</div>
+		</div>
+		<!-- 首页轮播 begin -->
+		<div class="banner">
+			<div id='slider' class='swipe'>
+				<div class='swipe-box'>
+					<div class='img'><img src="../res/s1.jpg">
+					</div>
+					<div class='img'><img src="../res/s2.jpg">
+					</div>
+					<div class='img'><img src="../res/s3.jpg">
+					</div>
+					<div class='img'><img src="../res/s4.jpg">
+					</div>
+					<div class='img'><img src="../res/s5.jpg">
+					</div>
+					<div class='img'><img src="../res/s6.jpg">
+					</div>
+				</div>
+			</div>
+			<div class="dot-area">
+				<div class="dot on"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+			</div>
+		</div>
+		<section class="header" style="position:inherit">
+			<h2 class="title">介陌短外套女2017秋冬装新款韩版女装休闲短款宽松加厚保暖棉衣夹克学生棉服外套女棒球服女潮 奶白色(拉链款) 2XL</h2>
+			<div class="price ">
+				<div class="current-price">
+					<span class="current-price"><small>￥</small>399.00</span>
+				</div>
+				<span class="express">¥20.00</span>
+			</div>
+			<div class="sales">
+				已经领取: 200 剩余: 1800
+			</div>
+		</section>
+		<section class="sku">
+			<dl class="sku-group">
+				<dt>
+					颜色:
+				</dt>
+				<dd>
+					浅蓝色
+				</dd>
+			</dl>
+		</section>
+		<section class="content">
+			<div class="nav">
+				<a class="active">商品详细</a>
+				<a>商品评论</a>
+			</div>
+			<div class="desc" style="margin-top: 0.5rem;">
+				<img src="../res/p1.jpg" width="100%">
+				<img src="../res/p2.jpg" width="100%">
+				<img src="../res/p3.jpg" width="100%">
+				<img src="../res/p4.jpg" width="100%">
+				<img src="../res/p5.jpg" width="100%">
+				<img src="../res/p6.jpg" width="100%">
+				<img src="../res/p7.jpg" width="100%">
+				<img src="../res/p8.jpg" width="100%">
+				<img src="../res/p9.jpg" width="100%">
+				<img src="../res/p10.jpg" width="100%">
+			</div>
+		</section>
+		<footer class="footer t-line">
+			<div class="aui-car-ear">
+				<div class="aui-car-ear-cell">
+					<div class="aui-li">
+						<a class="aui-icon-gz"></a>
+						<a ></a>
+						<a class="aui-icon-gw"></a>
+					</div>
+				</div>
+				<div>
+					<a class="aui-car-all">加入购物车</a>
+				</div>
+				<div>
+					<a class="aui-car-lli">立即购买</a>
+				</div>
+			</div>
+		</footer>
+	</body>
+	<script src="../script/api.js"></script>
+	<script src="../script/jquery.js"></script>
+	<script src="../script/swipe.js"></script>
+	<script>
+		//兼容性：字体大小，全局尺寸(rem)
+		(function(doc, win) {
+			var docEl = doc.documentElement, resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize', recalc = function() {
+				var clientWidth = docEl.clientWidth;
+				if (!clientWidth)
+					return;
+				var docElWidth = 100 * (clientWidth / 640);
+				if (docElWidth > 100)
+					docElWidth = 100;
+				docEl.style.fontSize = docElWidth + 'px';
+			};
+			if (!doc.addEventListener)
+				return;
+			win.addEventListener(resizeEvt, recalc, false);
+			doc.addEventListener('DOMContentLoaded', recalc, false);
+		})(document, window);
+	</script>
+	<script type="text/javascript">
+		apiready = function() {
+			$api.fixStatusBar($api.dom('.header'));
+			/*banner首页轮播*/
+			var dots = document.getElementsByClassName('dot');
+			var slider = new Swipe(document.getElementById('slider'), {
+				startSlide : 0,
+				speed : 400,
+				auto : 3000,
+				continuous : true,
+				disableScroll : false,
+				stopPropagation : false,
+				callback : function(pos) {
+					document.getElementsByClassName('on')[0].className = 'dot';
+					dots[pos].className = 'dot on';
+				}
+			});
+			$('.nav a').click(function() {
+				$('.nav a').removeClass('active');
+				$(this).addClass('active');
+			})
+			//sku
+			$('.sku,.buy').click(function() {
+				$('.layer').addClass('acitve');
+			})
+			$('.close').click(function() {
+				$('.layer').removeClass('acitve');
+			});
+			//却动
+			$('#sku a').click(function() {
+				console.log(this);
+				$('#sku a').removeClass('active');
+				$(this).addClass('active');
+				$('.next').attr('href', path + $(this).data('sku'));
+				$('.sku-group dd').text($(this).text());
+			});
+		};
+		function back() {
+			api.closeWin({
+			});
+		}
+	</script>
+</html>

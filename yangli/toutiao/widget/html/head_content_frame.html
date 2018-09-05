@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>headcontent</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+            font-family: helvetica;
+        }
+
+        .toutiaoBar {
+            height: 40px;
+            background-color: #fff;
+        }
+
+        .toutiaoBar img {
+            margin: 0 15px;
+            display: block;
+            height: 40px;
+        }
+
+        .title {
+            margin: 0 15px;
+            padding: 10px 0;
+            display: block;
+        }
+
+        .title h1 {
+            display: block;
+            font-size: 21px;
+            font-weight: bolder;
+            color: #000;
+            margin: 0 0 5px;
+            line-height: 26px;
+            word-wrap: break-word;
+        }
+
+        .title .subtitle {
+            position: relative;
+            font-size: 11px;
+            color: #747474;
+        }
+
+        .subtitle>div {
+            display: inline-block;
+        }
+
+        .title .time {
+            padding-left: 6px;
+        }
+
+        .article {
+            margin: 0 15px;
+            line-height: 1.5em;
+            word-wrap: break-word;
+            text-align: justify;
+            overflow: hidden;
+            color: #303030;
+        }
+
+        .p {
+            word-wrap: break-word;
+            margin-top: 0;
+            text-align: justify;
+            margin-bottom: 14px;
+        }
+
+        .collect {
+            width: 90px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            border-radius: 23px;
+            line-height: 45px;
+            padding: 0 20px;
+        }
+
+        .collect-img {
+            width: 45px;
+            height: 45px;
+            display: inline-block;
+            float: left;
+            background: url('../image/shouye/collect.png') center no-repeat;
+        }
+
+        .num {
+            display: inline-block;
+            float: left;
+            line-height: 45px;
+        }
+
+        .guanzhu {
+            font-size: 11px;
+            color: #747474;
+            line-height: 35px;
+            margin: 0 16px;
+        }
+
+        .section {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+
+        .section .title {
+            font-size: 11px;
+            color: #747474;
+        }
+
+        .section .message {
+            font-size: 15px;
+            line-height: 45px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .message.last {
+            border-bottom: none;
+        }
+
+        .comment {
+            line-height: 46px;
+        }
+
+        .comment .tit {
+            width: 40px;
+            text-align: center;
+            border-bottom: 1px solid red;
+        }
+
+        .comment .comment_content {
+            text-align: center;
+            height: 100px;
+            line-height: 100px;
+            border: 1px solid #ddd;
+            margin-bottom: 30px;
+        }
+
+        .pic img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        <h1>女老师关门棒打学生致1死3伤受害者父亲：她曾是我老师</h1>
+        <div class="subtitle">
+            <div id="source">人民网-环球时报</div>
+            <div class="time">2016-05-17 00:13:51</div>
+        </div>
+    </div>
+    <div class="article">
+        <div id="list"></div>
+        <div class="collect">
+            <div class="collect-img"></div>
+            <div class="num">2225</div>
+        </div>
+    </div>
+    <div class="guanzhu">关注这篇文章，会推荐更多此类内容</div>
+    <div class="section">
+        <div class="title">相关阅读</div>
+        <div class="message">•&nbsp;重温历史：《关于建国以来党...</div>
+        <div class="message">•&nbsp;关于中国历史的8条谣言</div>
+        <div class="message">•&nbsp;"观察新疆安不安全？"听听客人怎么说!</div>
+        <div class="message last">•&nbsp;点击进入历史频道&gt;</div>
+    </div>
+    <div class="comment">
+        <div class="tit">评论</div>
+        <div class="comment_content">
+            暂无评论，点击抢沙发
+        </div>
+    </div>
+</body>
+<script type="text/template" id="template">
+    {{~ it:data }}
+     {{? null != data.text}}
+    <div class="p">
+        {{= data.text}}
+    </div>
+    {{?}} {{? null != data.image }}
+    <div class="pic">
+        <img src="{{= data.image.url }}">
+    </div>
+    {{?}} {{~}}
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/APICloud-rest.js"></script>
+<script type="text/javascript" src="../script/SHA1.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        fnInit();
+        fnGetDate();
+    };
+    var list,dot;
+    function fnInit() {
+        list = $api.byId('list');
+        var template = $api.byId('template');
+        dot = doT.template(template.innerHTML);
+    }
+
+    function fnGetDate() {
+        var client = new Resource("A6918573369588", "20C93719-0DE5-8C9B-2F05-36D9BB835C02");
+        var headList = client.Factory("headlist");
+
+        headList.query({
+           "filter": {
+            "include": ["content"],
+            "where": {"type":2},
+            "skip": 0,
+            "limit": 20
+        }
+    }, function(ret, err) {
+        list.innerHTML= dot(ret[1].content);
+    });
+    }
+
+</script>
+
+</html>

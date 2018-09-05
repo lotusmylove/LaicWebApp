@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <title>title</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style>
+            html,
+            body {
+                
+                background-color: #fafafa;
+            }
+            .cont {
+            	margin-top: 12px;
+            	border-top:1px solid #e0e0e0;
+                background-color: #fff;
+               
+            }
+            
+            .t1, .t2, .t3 {
+                height: 49px;
+                line-height: 49px;
+                width: 100%;
+                font-size: 15px;
+                color: #222;
+                position: relative;
+                border-bottom: 1px solid #f3f3f3;
+                background-repeat: no-repeat;
+                background-size: 30px 30px;
+                background-position: 15px center;
+                padding-left:60px;
+                box-sizing: border-box;
+            }
+			.t1 {
+				background-image: url(../image/my/t1.png)
+			}
+			.t2 {
+				background-image: url(../image/my/t2.png)
+			}
+			.t3 {
+				background-image: url(../image/my/t3.png)
+			}
+
+            
+            .r {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                box-sizing: border-box;
+                padding-right: 16px;
+                color: #999;
+                font-size: 13px;
+                line-height: 49px;
+                text-align: center;
+            }
+            .arrow {
+                width: 40px;
+                height: 49px;
+                background-image: url(../image/my/arrow.png);
+                background-repeat: no-repeat;
+                background-size: 6px 12px;
+                background-position: center center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="cont">
+            <div class="t1">今日特卖
+                <div class="r arrow"></div>
+            </div>
+            <div class="t2">今日电影
+                <div class="r arrow"></div>
+            </div>
+            <div class="t3">今日金融
+                <div class="r arrow"></div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/common.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+            fnReady();
+        };
+    </script>
+
+</html>

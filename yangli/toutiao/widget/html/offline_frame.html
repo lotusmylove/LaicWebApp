@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <title>title</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style>
+            html,
+            body {
+                height: 100%;
+                background-color: #fafafa;
+            }
+            
+            .content {
+                height: 44px;
+                line-height: 44px;
+                font-size: 16px;
+                color: #444;
+                box-sizing: border-box;
+                padding-left: 26px;
+                padding-right: 34px;
+                border-bottom: 1px solid #d8d8d8;
+                position: relative;
+            }
+            
+            .content.active .check {
+                width: 44px;
+                height: 44px;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                background-image: url(../image/my/icn1.png);
+                background-repeat: no-repeat;
+                background-size: 20px 20px;
+                background-position: center center;
+            }
+            
+            .content .check {
+                width: 44px;
+                height: 44px;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                background-image: url(../image/my/icn2.png);
+                background-repeat: no-repeat;
+                background-size: 20px 20px;
+                background-position: center center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="content">
+            <div class="content active" tapmode>推荐
+                <div class="check"></div>
+            </div>
+            <div class="content active" tapmode>热点
+                <div class="check"></div>
+            </div>
+            <div class="content active" tapmode>北京
+                <div class="check"></div>
+            </div>
+            <div class="content active" tapmode>社会
+                <div class="check"></div>
+            </div>
+            <div class="content active" tapmode>订阅
+                <div class="check"></div>
+            </div>
+            <div class="content" tapmode>娱乐
+                <div class="check"></div>
+            </div>
+            <div class="content" tapmode>科技
+                <div class="check"></div>
+            </div>
+            <div class="content" tapmode>汽车
+                <div class="check"></div>
+            </div>
+            <div class="content" tapmode>体育
+                <div class="check"></div>
+            </div>
+            <div class="content" tapmode>财经
+                <div class="check"></div>
+            </div>
+            <div class="content" tapmode>军事
+                <div class="check "></div>
+            </div>
+            <div class="content" tapmode>国际
+                <div class="check"></div>
+            </div>
+            <div class="content" tapmode>趣图
+                <div class="check"></div>
+            </div>
+            <div class="content" tapmode>健康
+                <div class="check"></div>
+            </div>
+            <div class="content" tapmode>美女
+                <div class="check"></div>
+            </div>
+            <div class="content" tapmode>正能量
+                <div class="check"></div>
+            </div>
+            <div class="content" tapmode>特卖
+                <div class="check"></div>
+            </div>
+            <div class="content" tapmode>段子
+                <div class="check"></div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/common.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+            fnReady();
+        };
+        window.onload = function(){
+            var content = document.getElementById('content');
+            var contents=content.getElementsByClassName('content');
+          
+             for(var i=0;i<contents.length;i++){
+                contents[i].onclick=function(){
+                    if(this.className=="content"){
+                        this.className="content active";
+                    }else{
+                        this.className="content";
+                    }
+                }
+            }
+        }
+    </script>
+
+</html>

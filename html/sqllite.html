@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>Hello APP</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<style>
+		#con{
+			margin: 10px;
+			font-size: 24px;
+		}
+		ul{
+			margin-bottom: 10px;
+		}
+		ul li{
+			margin: 5px 10px;
+			padding: 5px;
+			color: #000;
+			word-wrap: break-word;
+		}
+	</style>
+</head>
+<body>
+    <label id="con">Hello APP</label>
+	<div id='sys-info'></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+      var fs = api.require('fs');
+       //先检查fs 有无数据库文件
+      fs.exist({
+           path: 'fs://res/LaicWebData.db3'
+       },function(ret,err){
+           if(ret.exist){
+                       //找到数据库了 并查询看能用不
+                      db = api.require('db');
+                       db.openDatabase({
+                               name : "LaicWebData",
+                               path : 'fs://res/LaicWebData.db3'
+                       }, function(ret, err) {
+                               api.alert({msg:JSON.stringify(ret)+'111'});
+                               if (ret.status) {
+                                       //数据库可以打开
+                                      db.selectSql({
+                                               name : "LaicWebData",
+                                               sql : "select * FROM fr_TaskInfo"
+                                       }, function(ret, err) {
+                                               api.alert({msg:JSON.stringify(ret)});
+                                               if (ret.status) {
+                                                       api.alert({
+                                                               msg : '查询成功'
+                                                       });
+                                               } else {
+                                                       api.alert({
+                                                               msg : '查询失败'
+                                                       });
+                                               }
+                                       });
+
+                               } else {
+                                       api.alert({
+                                               msg : '数据库不存在'
+                                       });
+                                       //没有找到数据库 就拷贝一份到fs 目录
+                                      var fs = api.require('fs');
+                                       fs.copyTo({
+                                           oldPath: 'widget://res/db/LaicWebData.db3',
+                                           newPath: 'fs://res'
+                                       },function(ret,err){
+                                           if (ret.status) {
+                                               api.alert({msg:'拷贝文件成功'});
+                                           }else {
+                                               api.alert({msg:err.msg});
+                                           }
+                                       });
+
+                               }
+                       });
+           }else{
+               api.alert({msg:'该路径不存在任何文件1'});
+               fs = api.require('fs');
+                       fs.copyTo({
+                           oldPath: 'widget://res/LaicWebData.db3',
+                           newPath: 'fs://res'
+                       },function(ret,err){
+                           if (ret.status) {
+                               api.alert({msg:'拷贝文件成功'});
+                           }else {
+                               api.alert({msg:"Error:"+err.msg});
+                           }
+                       });
+           }
+       });
+
+    };
+</script>
+</html>

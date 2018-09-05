@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../css/ui.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/login.css"/>
+		<style>
+			.aui-login-ba {
+				min-height: 12rem
+			}
+			.aui-logon-con {
+				padding: 2rem;
+			}
+			.aui-logon-con input {
+				font-size: 0.9rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="aui-login-ba" style="position:relative; overflow:hidden">
+			<span class="aui-login-logo"><img src="../res/logo.png"></span>
+			<canvas id="waves" class="waves" style="position:absolute; bottom:-60px; left:-210px;"></canvas>
+		</div>
+		<div class="aui-logon-con">
+			<div class="b-line">
+				<input type="text" placeholder="手机号/邮箱/用户名">
+			</div>
+			<div class="b-line">
+				<input type="password" placeholder="密码">
+				<img class="icon_eye" src="../res/bkj.png"/>
+			</div>
+			<div class="aui-login-l">
+				<a>登  录</a>
+			</div>
+			<div class="aui-login-wen">
+				<div class="aui-login-wen-a">
+					<a >注册</a>
+				</div>
+				<div>
+					<a >忘记密码?</a>
+				</div>
+			</div>
+			<div class="aui-login-san">
+				<div class="aui-login-qq"></div>
+				<div class="aui-login-wb"></div>
+				<div class="aui-login-wx"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script src="../script/vendors.js"></script>
+	<script src="../script/index.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			$api.fixStatusBar($api.dom('.aui-login-ba'));
+		};
+	</script>
+</html>

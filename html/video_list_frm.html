@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+  <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+  <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+  <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+  <link rel="stylesheet" type="text/css" href="../css/aui-flex.css" />
+  <style type="text/css">
+    body {
+      background: #EEE;
+    }
+    .bg-dark {
+        background: #333333 !important;
+    }
+    .aui-slide-node img {
+        width: auto;
+        height: 100%;
+    }
+
+    #aui-slide div label {
+      white-space: nowrap;
+      text-overflow:ellipsis;
+      overflow: hidden;
+      background-image: -webkit-linear-gradient(top, rgba(59,59,59,.6), rgba(27,27,27,.6), rgba(50,50,50,.4), rgba(31,31,31,.4));
+      background-image: linear-gradient(top, rgba(59,59,59,.6), rgba(27,27,27,.6), rgba(50,50,50,.4), rgba(31,31,31,.4));
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      padding-left: 20px;
+      display:block;
+      color:#fff;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    .summre {
+      white-space: nowrap;
+      text-overflow:ellipsis;
+      overflow: hidden;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 20px;
+      line-height: 20px;
+      padding-left: 0px;
+      display:block;
+      color:#818680;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <script id="j-template" type="text/template">
+    {{ if(it && it.length > 0){ }}
+      {{ for(var i=0; i<it.length;i++){ }}
+        <div class="aui-slide-node bg-dark" tapmode onclick="fnPlay('{{=it[i].videoUrl}}');">
+            <img src="{{=it[i].imgUrl}}" />
+            <label><div class="blur"></div>{{=it[i].name}}</label>
+        </div>
+      {{ } }}
+    {{ } }}
+  </script>
+    <div id="aui-slide">
+        <div id="divAuiSlide" class="aui-slide-wrap">
+        </div>
+        <div class="aui-slide-page-wrap"><!--分页容器--></div>
+    </div>
+    <script id="today-template" type="text/template">
+      {{ if(it && it.length > 0){ }}
+        {{ for(var i=0; i<it.length;i++){ }}
+        <div class="aui-flex-item-6 aui-flex-row aui-flex-middle" style="padding:0px 2px;">
+            <img src="{{=it[i].imgUrl}}">
+            <h3>{{=it[i].name}}</h3>
+            <p class="summre">{{=it[i].summary}}</p>
+        </div>
+        {{ } }}
+      {{ } }}
+    </script>
+    <ul class="aui-list">
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title aui-text-primary">今日精选</div>
+                <div class="aui-list-item-right">更多...</div>
+            </div>
+        </li>
+    </ul>
+    <div id="divTodayBest" class="aui-flex-col aui-flex-center aui-border-tb"></div>
+    <ul class="aui-list">
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title aui-text-primary">电视剧</div>
+                <div class="aui-list-item-right">更多...</div>
+            </div>
+        </li>
+    </ul>
+    <div id="divSyncTv" class="aui-flex-col aui-flex-center aui-border-tb"></div>
+    <ul class="aui-list">
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-title aui-text-primary">电影</div>
+                <div class="aui-list-item-right">更多...</div>
+            </div>
+        </li>
+    </ul>
+    <div id="divMovie" class="aui-flex-col aui-flex-center aui-border-tb"></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../script/sha1.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/aui-popup-new.js" ></script>
+<script type="text/javascript">
+  var videoPlayer;
+  apiready = function() {
+    //alert(api.winName + "---" + api.frameName);
+    //var pageParam = api.pageParam;
+    //$api.html($api.byId('aui-slide'), JSON.stringify(pageParam));
+    fnInitPull();
+    fnLoadData();
+    videoPlayer = api.require('videoPlayer');
+    //fninit();
+    //headList(progress, isPull);
+    //fnInitPushRefresh();
+  };
+
+  function fnLoadData() {
+    var pageParam = api.pageParam;
+    var now = Date.now();
+    //$api.byId('divTitle').innerHTML = $api.byId('divTitle').innerHTML + "<br>"+JSON.stringify(pageParam) + "&nbsp;&nbsp;" + now;
+    fnGetDataFromCloud(pageParam.childType,'j-template','divAuiSlide');
+    fnGetDataFromCloud('今日精选','today-template','divTodayBest');
+    fnGetDataFromCloud('同步剧场','today-template','divSyncTv');
+    fnGetDataFromCloud('电影','today-template','divMovie');
+    api.refreshHeaderLoadDone();
+    api.toast({
+      msg: '加载完毕',
+      duration: 2000,
+      location: 'top'
+    });
+  }
+
+  function fnGetDataFromCloud(strKey,strTemplateId,strDomId) {
+    var now = Date.now();
+    var appID = "A6058340878951";
+    var appKey = SHA1(appID+"UZ"+"796C1E15-5EAE-8E40-88B2-F5ED7BCA61A0"+"UZ"+now)+"."+now;
+    //alert($api.dom("#account").value);
+    var strUrl = "https://d.apicloud.com/mcm/api/videoInfo";
+    strUrl = strUrl + '?filter={"where":{"cate":{"like":"'+strKey+'"}},"skip":0,"limit":5}';
+    var strMethod = "GET";
+    api.ajax({
+        url: strUrl,
+        method: strMethod,
+        "headers": {
+          "X-APICloud-AppId": appID,
+          "X-APICloud-AppKey": appKey
+        }
+    },function(ret, err){
+        if (ret) {
+            console.log( JSON.stringify( ret ) );
+            var tmpl = document.getElementById(strTemplateId).innerHTML;
+            var doTtmpl = doT.template(tmpl);
+            $api.html($api.byId(strDomId), doTtmpl(ret));
+            fnInitAuiSlide();
+        } else {
+            alert( JSON.stringify( err ) );
+            api.toast({
+                msg: JSON.stringify( err ),
+                duration: 2000,
+                location: 'middle'
+            });
+        }
+    });
+  }
+
+  function fnPlay(videoUrl) {
+    if(videoUrl == ""){
+      videoUrl = 'http://resource.apicloud.com/video/apicloud3.mp4';
+    }
+    videoPlayer.play({
+        texts: {
+            head: {
+                title: '视频'
+            }
+        },
+        styles: {
+            head: {
+                bg: 'rgba(0.5,0.5,0.5,0.7)',
+                height: 44,
+                titleSize: 16,
+                titleColor: '#fff',
+                backSize: 20,
+                backImg: 'fs://img/back.png',
+                setSize: 20,
+                setImg: 'fs://img/set.png'
+            },
+
+        },
+        //path: 'http://resource.apicloud.com/video/apicloud3.mp4',
+        path: videoUrl,
+        autoPlay: true
+    });
+  }
+
+  //初始化图片轮播
+  function fnInitAuiSlide() {
+    var slide = new auiSlide({
+        container:document.getElementById("aui-slide"),
+        // "width":300,
+        "height":240,
+        "speed":500,
+        "autoPlay": 3000, //自动播放
+        "loop":true,
+        "pageShow":true,
+        "pageStyle":'line',
+        'dotPosition':'center'
+    })
+  }
+  // 刷新
+  function fnInitPull() {
+    api.setRefreshHeaderInfo({
+      visible: true,
+      loadingImg: 'widget://image/refresh.png',
+      bgColor: '#f0f0f0',
+      textColor: '#888',
+      textDown: '下拉刷新...',
+      textUp: '松开刷新...',
+      showTime: true
+    }, function(ret, err) {
+      api.refreshHeaderLoading();
+      setTimeout(fnLoadData,2000);
+      //headList(progress, true);
+    });
+  };
+
+  var popup = new auiPopup();
+  function showPopup(location){
+      popup.init({
+          frameBounces:true,//当前页面是否弹动，（主要针对安卓端）
+          location:location,//位置，top(默认：顶部中间),top-left top-right,bottom,bottom-left,bottom-right
+          buttons:[{
+              image:'../image/share/wx.png',
+              text:'微信',
+              value:'wx'//可选
+          },{
+              image:'../image/share/wx-circle.png',
+              text:'朋友圈',
+              value:'wx-circle'
+          },{
+              image:'../image/share/qq.png',
+              text:'QQ好友',
+              value:'qq'
+          },{
+              image:'../image/share/qzone.png',
+              text:'QQ空间',
+              value:'qq-qzone'
+          },{
+              image:'../image/share/sina-weibo.png',
+              text:'新浪微博'
+          }],
+      },function(ret){
+        console.log(JSON.stringify(ret));
+          if(ret){
+
+              //document.getElementById("button-index").textContent = ret.buttonIndex;
+              //document.getElementById("button-value").textContent = ret.buttonValue;
+          }
+      })
+  }
+</script>
+</html>
